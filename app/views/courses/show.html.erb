@@ -11,7 +11,7 @@
 
   <% @course_elements.each do |element| %>
       <tr>
-        <td><%= link_to element.theme, course_element_path(course)  %></td>
+        <td><%= link_to element.theme, course_element_path(element)  %></td>
         <td><%= element.element_type %></td>
         <td>
           <%= link_to 'Edit', edit_course_element_path(element) %>
