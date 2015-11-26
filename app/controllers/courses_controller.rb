@@ -3,6 +3,10 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
+  def show
+    redirect_to root_url
+  end
+
   def new
     @course = Course.new
   end
@@ -20,6 +24,21 @@ class CoursesController < ApplicationController
 
   def destroy
     @course = Course.destroy(params[:id])
+    redirect_to root_url
+  end
+
+  def edit
+    @course = Course.find(params[:id])
+  end
+
+  def update
+    @course = Course.find(params[:id])
+
+    if @course.update(course_params)
+
+    else
+      render 'edit'
+    end
     redirect_to root_url
   end
 
