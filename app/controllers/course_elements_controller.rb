@@ -18,6 +18,22 @@ class CourseElementsController < ApplicationController
     end
   end
 
+  def edit
+    @course = Course.find(params[:course_id])
+    @course_element = CourseElement.find(params[:id])
+  end
+
+  def update
+    @course = Course.find(params[:course_id])
+    @course_element = CourseElement.find(params[:id])
+    if @course_element.update(course_element_params)
+
+    else
+      render 'edit'
+    end
+    redirect_to course_path(@course)
+  end
+
   def destroy
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.destroy(params[:id])
@@ -27,6 +43,6 @@ class CourseElementsController < ApplicationController
   private
 
   def course_element_params
-    params.require(:course_element).permit( :theme, :element_type)
+    params.require(:course_element).permit( :course_id, :theme, :element_type,)
   end
 end
