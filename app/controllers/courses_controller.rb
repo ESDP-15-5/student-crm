@@ -4,7 +4,8 @@ class CoursesController < ApplicationController
   end
 
   def show
-    redirect_to root_url
+    course_id = params[:id]
+    @course_elements = CourseElement.where("id = ?", course_id)
   end
 
   def new
