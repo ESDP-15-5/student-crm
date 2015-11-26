@@ -4,8 +4,8 @@ class CoursesController < ApplicationController
   end
 
   def show
-    course_id = params[:id]
-    @course_elements = CourseElement.where("id = ?", course_id)
+    @course = Course.find(params[:id])
+    @course_elements = @course.course_elements
   end
 
   def new
