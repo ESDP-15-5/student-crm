@@ -18,6 +18,12 @@ class CourseElementsController < ApplicationController
     end
   end
 
+  def destroy
+    @course = Course.find(params[:course_id])
+    @course_element = CourseElement.destroy(params[:id])
+    redirect_to course_path(@course)
+  end
+
   private
 
   def course_element_params
