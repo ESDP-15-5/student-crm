@@ -18,6 +18,11 @@ class CoursesController < ApplicationController
     end
   end
 
+  def destroy
+    @course = Course.destroy(params[:id])
+    redirect_to root_url
+  end
+
   private
 
   def course_params
