@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  get 'course_elements/show'
+
   root 'courses#index'
 
-  resources :courses
+  resources :courses, :course_elements
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
