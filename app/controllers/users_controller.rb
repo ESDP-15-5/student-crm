@@ -4,4 +4,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def destroy
+    User.destroy(params[:id])
+    redirect_to users_path
+  end
+
 end
