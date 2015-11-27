@@ -1,0 +1,19 @@
+<table class="table">
+  <tr>
+    <th>email</th>
+    <th> Действия </th>
+  </tr>
+
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.email, user_path(user)  %></td>
+        <td>
+          <%= link_to 'Edit', edit_user_path(user) %>
+          <%= link_to 'Delete', user_path(user),
+                      method: :delete,
+                      data: {confirm: 'Do you want to remove this product?'} %>
+        </td>
+      </tr>
+  <% end %>
+
+</table>
