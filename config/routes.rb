@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'course_elements/show'
 
-  #root 'courses#index'
+  root 'courses#index'
 
 
   resources :courses do
@@ -11,9 +11,9 @@ Rails.application.routes.draw do
 
 
   devise_for :users
-  devise_scope :user do
-    root :to => 'devise/sessions#new'
-  end
+  # devise_scope :user do
+  #   root :to => 'devise/sessions#new'
+  # end
 
    resources :users
 
