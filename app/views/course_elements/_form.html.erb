@@ -26,6 +26,7 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10 margin-top20">
         <%= f.submit 'Создать элемент курса', class: 'btn btn-primary' %>
+        <%= link_to 'Отмена', course_path(@course_element.course_id), class: 'btn btn-primary' %>
       </div>
     </div>
 <% end %>
