@@ -49,6 +49,6 @@ gem 'devise'
 
 gem 'bootstrap-sass'
 
-gem "paranoia", "~> 2.0"gem 'bootstrap-sass'
+gem "paranoia", "~> 2.0"
 
 gem "audited-activerecord", "~> 4.0"
