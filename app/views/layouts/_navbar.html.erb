@@ -1,0 +1,26 @@
+<% if user_signed_in? %>
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <ul class="nav navbar-nav">
+          <li role="presentation" class="active">
+            <%= link_to "Курсы", courses_path %>
+          </li>
+          <li role="presentation">
+            <%= link_to "Пользователи", users_path %>
+          </li>
+        </ul>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <p class="navbar-text">
+            Hello, <%= link_to current_user.email, edit_user_registration_path(current_user) %>
+          </p>
+          <li>
+            <%= link_to 'Sign out', destroy_user_session_path,  method: :delete %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+<% else %>
+    <%= link_to 'Log in', new_user_session_path, class: 'btn btn-default navbar-btn' %>
+<% end %>
