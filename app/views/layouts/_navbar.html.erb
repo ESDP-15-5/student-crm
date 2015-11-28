@@ -13,14 +13,14 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <p class="navbar-text">
-            Hello, <%= link_to current_user.email, edit_user_registration_path(current_user) %>
+            Привет, <%= link_to current_user.email, edit_user_registration_path(current_user) %>
           </p>
           <li>
-            <%= link_to 'Sign out', destroy_user_session_path,  method: :delete %>
+            <%= link_to 'Выйти', destroy_user_session_path,  method: :delete %>
           </li>
         </ul>
       </div>
     </nav>
 <% else %>
-    <%= link_to 'Log in', new_user_session_path, class: 'btn btn-default navbar-btn' %>
+    <%= link_to 'Войти', new_user_session_path, class: 'btn btn-default navbar-btn' %>
 <% end %>

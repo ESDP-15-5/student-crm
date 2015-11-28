@@ -51,4 +51,8 @@ gem 'bootstrap-sass'
 
 gem "paranoia", "~> 2.0"
 
+gem 'devise-i18n'
+
+gem 'bootstrap-sass'
+
 gem "audited-activerecord", "~> 4.0"

@@ -1,4 +1,4 @@
-<%= link_to 'Создать user', new_user_path %>
+<%= link_to 'Создать пользователя', new_user_path %>
 
 <table class="table">
   <tr>
@@ -10,10 +10,10 @@
       <tr>
         <td><%= link_to user.email, user_path(user)  %></td>
         <td>
-          <%= link_to 'Edit', edit_user_path(user) %>
-          <%= link_to 'Delete', user_path(user),
+          <%= link_to 'Редактировать', edit_user_path(user) %>
+          <%= link_to 'Удалить', user_path(user),
                       method: :delete,
-                      data: {confirm: 'Do you want to remove this product?'} %>
+                      data: {confirm: 'Вы действительно хотите удалить пользователя?'} %>
         </td>
       </tr>
   <% end %>
