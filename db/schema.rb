@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128104806) do
+ActiveRecord::Schema.define(version: 20151130131201) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "student_id"
@@ -46,6 +46,24 @@ ActiveRecord::Schema.define(version: 20151128104806) do
   add_index "audits", ["created_at"], name: "index_audits_on_created_at"
   add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid"
   add_index "audits", ["user_id", "user_type"], name: "user_index"
+
+  create_table "course_element_files", force: :cascade do |t|
+    t.integer  "course_element_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "course_element_files", ["course_element_id"], name: "index_course_element_files_on_course_element_id"
+
+  create_table "course_element_materials", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "course_element_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "course_element_materials", ["course_element_id"], name: "index_course_element_materials_on_course_element_id"
 
   create_table "course_elements", force: :cascade do |t|
     t.integer  "course_id"
