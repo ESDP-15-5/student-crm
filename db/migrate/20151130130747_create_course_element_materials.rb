@@ -3,7 +3,7 @@ class CreateCourseElementMaterials < ActiveRecord::Migration
     create_table :course_element_materials do |t|
       t.string :title
       t.text :content
-      t.references :course_element_id, index: true, foreign_key: true
+      t.references :course_element, index: true, foreign_key: true
 
       t.timestamps null: false
     end
