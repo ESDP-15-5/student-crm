@@ -1,24 +1,21 @@
-<% if user_signed_in? %>
-    <%= link_to 'Создать новый курс', new_course_path, class: 'btn btn-primary' %>
 
-    <table class="table">
+<%= link_to 'Создать новый курс', new_course_path, class: 'btn btn-primary' %>
+
+<table class="table">
+  <tr>
+    <th>Название курса</th>
+    <th> Действия </th>
+  </tr>
+
+  <% @courses.each do |course| %>
       <tr>
-        <th>Название курса</th>
-        <th> Действия </th>
+        <td><%= link_to course.name, course_path(course)  %></td>
+        <td>
+          <%= link_to 'Редактировать', edit_course_path(course) %>
+          <%= link_to 'Удалить', course_path(course),
+                      method: :delete,
+                      data: {confirm: 'Вы действительно хотите удалить этот курс?'} %>
+        </td>
       </tr>
-
-      <% @courses.each do |course| %>
-          <tr>
-            <td><%= link_to course.name, course_path(course)  %></td>
-            <td>
-              <%= link_to 'Редактировать', edit_course_path(course) %>
-              <%= link_to 'Удалить', course_path(course),
-                          method: :delete,
-                          data: {confirm: 'Вы действительно хотите удалить этот курс?'} %>
-            </td>
-          </tr>
-      <% end %>
-    </table>
-<% else %>
-
-<% end %>
+  <% end %>
+</table>
