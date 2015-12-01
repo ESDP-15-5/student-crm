@@ -2,6 +2,7 @@ class CourseElementsController < ApplicationController
   def show
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
+    @course_element_file = CourseElementFile.where("course_element_id = ?", params[:id])
   end
 
   def new
