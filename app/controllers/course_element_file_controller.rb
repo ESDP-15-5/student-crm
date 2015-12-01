@@ -1,2 +1,0 @@
-class CourseElementFileController < ApplicationController
-end

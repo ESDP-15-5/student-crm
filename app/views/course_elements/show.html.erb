@@ -1,4 +1,7 @@
-<h1>Элемент курса</h1>
 
+<h1>Элемент курса "<%= @course_element.theme %>"</h1>
 
 <%= link_to 'Назад', course_path(@course.id) %>
+<br/>
+
+<%= link_to 'Создать материал элемента курса',  new_course_course_element_course_element_file_path(@course, @course_element.id), class: 'btn btn-primary' %>

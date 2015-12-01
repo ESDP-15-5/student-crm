@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'course_element_material/index'
-
   get 'course_elements/show'
 
   root 'courses#index'
@@ -8,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :course_elements do
-      resources :course_element_file
+      resources :course_element_files
     end
   end
 
