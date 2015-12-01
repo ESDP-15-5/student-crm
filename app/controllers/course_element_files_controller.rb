@@ -19,8 +19,8 @@ class CourseElementFilesController < ApplicationController
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_file = @course_element.course_element_files.build(course_element_file_params)
 
-    if @course_element.save
-      redirect_to course_course_element_path(@course_element)
+    if @course_element_file.save
+      redirect_to course_course_element_path(@course, @course_element)
     else
       render 'new'
     end
@@ -54,7 +54,7 @@ class CourseElementFilesController < ApplicationController
   private
 
   def course_element_file_params
-    params.require(:course_element_files).permit(:course_id, :course_element_id, :file)
+    params.require(:course_element_file).permit(:course_id, :course_element_id, :file)
   end
 
 
