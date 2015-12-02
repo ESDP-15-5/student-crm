@@ -25,7 +25,7 @@ class CourseElementFilesController < ApplicationController
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_file = CourseElementFile.destroy(params[:id])
-    redirect_to course_course_element_path(@course_element)
+    redirect_to course_course_element_path(@course, @course_element)
   end
 
   private
