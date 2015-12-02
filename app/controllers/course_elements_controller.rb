@@ -43,6 +43,15 @@ class CourseElementsController < ApplicationController
     redirect_to course_path(@course)
   end
 
+  def download
+    upload = CourseElementFile.find(params[:id])
+    send_file upload.file.path,
+              :filename => upload.file_file_name,
+              :type => upload.file_content_type,
+              :disposition => 'attachment'
+    flash[:notice] = "Your file has been downloaded"
+  end
+
   private
 
   def course_element_params

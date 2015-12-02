@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :course_elements do
+      get 'download/:id' =>  'course_elements#download', :as => :download
       resources :course_element_files
     end
   end

@@ -2,11 +2,6 @@ class CourseElementFilesController < ApplicationController
 
 
 
-  def show
-    @course = Course.find(params[:course_id])
-    @course_element = CourseElement.find(params[:course_element_id])
-    @course_element_files = @course_element.course_element_files
-  end
 
   def new
     @course = Course.find(params[:course_id])
@@ -24,24 +19,6 @@ class CourseElementFilesController < ApplicationController
     else
       render 'new'
     end
-  end
-
-  def edit
-    @course = Course.find(params[:course_id])
-    @course_element = CourseElement.find(params[:course_element_id])
-    @course_element_file = CourseElementFile.find(params[:id])
-  end
-
-  def update
-    @course = Course.find(params[:course_id])
-    @course_element = CourseElement.find(params[:course_element_id])
-    @course_element_file = CourseElementFile.find(params[:id])
-    if @course_element_file.update(course_element_file_params)
-
-    else
-      render 'edit'
-    end
-    redirect_to course_path(@course)
   end
 
   def destroy
