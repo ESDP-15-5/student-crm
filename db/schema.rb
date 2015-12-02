@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130135406) do
+ActiveRecord::Schema.define(version: 20151202105918) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "student_id"
@@ -55,9 +55,11 @@ ActiveRecord::Schema.define(version: 20151130135406) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.datetime "deleted_at"
   end
 
   add_index "course_element_files", ["course_element_id"], name: "index_course_element_files_on_course_element_id"
+  add_index "course_element_files", ["deleted_at"], name: "index_course_element_files_on_deleted_at"
 
   create_table "course_element_materials", force: :cascade do |t|
     t.string   "title"
