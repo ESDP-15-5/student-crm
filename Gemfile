@@ -56,3 +56,10 @@ gem 'devise-i18n'
 gem 'audited-activerecord', '~> 4.0'
 
 gem 'paperclip', '~> 4.3'
+
+gem 'ranked-model'
+
+gem 'jquery-ui-rails'
+
+
+

@@ -1,4 +1,9 @@
 class CourseElementsController < ApplicationController
+
+  def index
+    @course_elements = CourseElement.rank(:row_order).all
+  end
+
   def show
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
@@ -43,6 +48,15 @@ class CourseElementsController < ApplicationController
     redirect_to course_path(@course)
   end
 
+  def update_row_order
+    puts params[:course_element]
+    @course_element = CourseElement.find(params[:course_element][:course_element_id])
+    @course_element.update_attribute :row_order_position, params[:course_element][:row_order_position]
+
+    render nothing: true # this is a POST action, updates sent via AJAX, no view rendered
+  end
+
+
   def download
     upload = CourseElementFile.find(params[:id])
     send_file upload.file.path,
@@ -54,7 +68,12 @@ class CourseElementsController < ApplicationController
 
   private
 
+  def set_course_element
+    @course_element = CourseElement.find(params[:id])
+  end
+
+
   def course_element_params
-    params.require(:course_element).permit( :course_id, :theme, :element_type,)
+    params.require(:course_element).permit( :course_id, :theme, :element_type, :row_order_position )
   end
 end

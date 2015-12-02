@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @course_elements = @course.course_elements
+    @course_elements = @course.course_elements.rank(:row_order)
   end
 
   def new

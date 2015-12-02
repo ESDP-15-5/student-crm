@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20151202105918) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.datetime "deleted_at"
+    t.integer  "row_order"
   end
 
   add_index "course_elements", ["course_id"], name: "index_course_elements_on_course_id"

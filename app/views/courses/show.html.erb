@@ -1,7 +1,7 @@
 <h1>Курс "<%= @course.name %>"</h1>
 
 <%= link_to 'Создать элемент курса', new_course_course_element_path(@course.id), class: 'btn btn-primary' %>
-<table class="table table-striped">
+<table data-action="elements-table" data-update-position-url="<%= update_row_order_course_course_elements_path(@course.id) %>" class="table table-bordered table-striped" id="sortable">
   <tr>
     <th>Название элемента курса</th>
     <th> Тип элемента </th>
@@ -9,14 +9,14 @@
   </tr>
 
   <% @course_elements.each do |element| %>
-      <tr>
+      <tr data-item-id=<%= "#{element.id}" %> class="item">
         <td><%= link_to element.theme, course_course_element_path(@course.id, element.id)  %></td>
         <td><%= element.element_type %></td>
         <td>
-          <%= link_to 'Edit', edit_course_course_element_path(@course.id, element.id) %>
+          <%= link_to 'Edit', edit_course_course_element_path(@course.id, element.id), :class => 'btn btn-default pull-right' %>
           <%= link_to 'Delete', course_course_element_path(@course.id, element.id),
                       method: :delete,
-                      data: {confirm: 'Do you want to remove this product?'} %>
+                      data: {confirm: 'Do you want to remove this product?'}, :class => 'btn btn-default pull-right' %>
         </td>
       </tr>
   <% end %>
