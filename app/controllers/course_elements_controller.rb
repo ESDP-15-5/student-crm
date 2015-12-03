@@ -46,8 +46,8 @@ class CourseElementsController < ApplicationController
   end
 
   def update_row_order
-    @course_element = CourseElement.find(params[:course_element][:course_element_id])
-    @course_element.update_attribute :row_order_position, params[:course_element][:row_order_position]
+    @course_element = CourseElement.find(params[:course_element_id])
+    @course_element.update_attribute :row_order_position, params[:row_order_position]
 
     render nothing: true # this is a POST action, updates sent via AJAX, no view rendered
   end

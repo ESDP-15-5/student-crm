@@ -9,7 +9,7 @@
   </tr>
 
   <% @course_elements.each do |element| %>
-      <tr data-item-id=<%= "#{element.id}" %> class="item">
+      <tr data-item-id="<%= element.id %>" class="item">
         <td><%= link_to element.theme, course_course_element_path(@course.id, element.id)  %></td>
         <td><%= element.element_type %></td>
         <td>
