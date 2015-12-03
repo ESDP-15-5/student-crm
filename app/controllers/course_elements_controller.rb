@@ -45,7 +45,6 @@ class CourseElementsController < ApplicationController
   end
 
   def update_row_order
-    puts params[:course_element]
     @course_element = CourseElement.find(params[:course_element][:course_element_id])
     @course_element.update_attribute :row_order_position, params[:course_element][:row_order_position]
 
