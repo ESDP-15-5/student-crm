@@ -1,5 +1,11 @@
 class CourseElementMaterialsController < ApplicationController
 
+  def show
+    @course = Course.find(params[:course_id])
+    @course_element = CourseElement.find(params[:course_element_id])
+    @course_element_material = CourseElementMaterial.find(params[:id])
+  end
+
   def new
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:course_element_id])

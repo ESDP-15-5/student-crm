@@ -46,6 +46,7 @@
         <td><%=link_to material.title, course_course_element_course_element_material_path( Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id) %></td>
        <td><%= material.content.html_safe %></td>
         <td>
+          <%= link_to 'Изменить', edit_course_course_element_course_element_material_path(Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id) %>
           <%= link_to 'Удалить', course_course_element_course_element_material_path( Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id),
                       method: :delete,
                       data: {confirm: 'Вы действительно хотите удалить этот файл?'} %>

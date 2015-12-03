@@ -1,0 +1,8 @@
+<h1>Материал "<%= @course_element_material.title %>"</h1>
+
+
+<%= link_to 'Добавить материал',  new_course_course_element_course_element_material_path(@course, @course_element.id), class: 'btn btn-primary' %>
+
+<div class='content'>
+  <%= @course_element_material.content.html_safe %>
+</div>
