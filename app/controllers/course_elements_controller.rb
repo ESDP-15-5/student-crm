@@ -3,7 +3,8 @@ class CourseElementsController < ApplicationController
   def show
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
-    @course_element_file = CourseElementFile.where("course_element_id = ?", params[:id])
+    @course_element_file = CourseElementFile.where('course_element_id = ?', params[:id])
+    @course_element_material = CourseElementMaterial.where('course_element_id = ?', params[:id])
   end
 
   def new
@@ -59,7 +60,7 @@ class CourseElementsController < ApplicationController
               :filename => upload.file_file_name,
               :type => upload.file_content_type,
               :disposition => 'attachment'
-    flash[:notice] = "Your file has been downloaded"
+    flash[:notice] = 'Your file has been downloaded'
   end
 
   private

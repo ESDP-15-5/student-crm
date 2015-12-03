@@ -58,6 +58,8 @@ gem 'audited-activerecord', '~> 4.0'
 gem 'paperclip', '~> 4.3'
 
 gem 'ckeditor'
+
+gem 'jquery-turbolinks', '~> 2.1'
 gem 'ranked-model'
 
 gem 'jquery-ui-rails'
