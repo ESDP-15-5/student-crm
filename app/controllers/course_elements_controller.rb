@@ -1,9 +1,5 @@
 class CourseElementsController < ApplicationController
 
-  def index
-    @course_elements = CourseElement.rank(:row_order).all
-  end
-
   def show
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
