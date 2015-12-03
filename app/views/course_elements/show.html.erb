@@ -27,3 +27,29 @@
       </tr>
   <% end %>
 </table>
+
+
+
+<%= link_to 'Добавить материал',  new_course_course_element_course_element_material_path(@course, @course_element.id), class: 'btn btn-primary' %>
+
+
+
+<table class="table">
+  <tr>
+    <th> Заголовок</th>
+    <th>Содержание</th>
+    <th> Действия </th>
+  </tr>
+
+  <% @course_element_material.each do |material| %>
+      <tr>
+        <td><%=link_to material.title, course_course_element_course_element_material_path( Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id) %></td>
+       <td><%= material.content.html_safe %></td>
+        <td>
+          <%= link_to 'Удалить', course_course_element_course_element_material_path( Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id),
+                      method: :delete,
+                      data: {confirm: 'Вы действительно хотите удалить этот файл?'} %>
+        </td>
+      </tr>
+  <% end %>
+</table>

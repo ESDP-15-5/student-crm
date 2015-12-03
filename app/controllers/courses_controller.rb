@@ -36,11 +36,10 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
 
     if @course.update(course_params)
-
+      redirect_to root_url
     else
       render 'edit'
     end
-    redirect_to root_url
   end
 
   private
