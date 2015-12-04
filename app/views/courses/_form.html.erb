@@ -1,8 +1,9 @@
 <%= form_for @course do |f| %>
-    <div class="form-group">
-      <%= f.label 'Название курса', class: 'col-sm-2 control-label' %>
+    <div class="form-group <%= 'has-error' if @course.errors[:name].any? %>">
+      <%= f.label :name, class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
         <%= f.text_field :name, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @course, field_name: :name %>
       </div>
     </div>
 
