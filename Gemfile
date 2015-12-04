@@ -64,5 +64,7 @@ gem 'ranked-model'
 
 gem 'jquery-ui-rails'
 
+gem 'magic-paperclip'
+
 
 
