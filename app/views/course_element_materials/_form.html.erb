@@ -13,7 +13,7 @@
     <div class="form-group" <%= 'has-error' if @course_element_material.errors[:content].any? %>">
       <%= form.label :content, class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
-        <%= form.cktext_area :content, class: 'ckeditor' %>
+        <%= form.text_area :content, class: 'ckeditor' %>
         <%= render 'shared/field_errors', object: @course_element_material, field_name: :content %>
       </div>
     </div>
