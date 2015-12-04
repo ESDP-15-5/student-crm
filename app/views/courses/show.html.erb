@@ -7,7 +7,7 @@
 
 <h1>Курс "<%= @course.name %>"</h1>
 
-<%= link_to 'Создать элемент курса', new_course_course_element_path(@course.id), class: 'btn btn-primary' %>
+<%= link_to 'Создать элемент курса', new_course_course_element_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
 <table data-action="elements-table" data-update-position-url="<%= update_row_order_course_course_elements_path(@course.id) %>" class="table table-bordered table-striped" id="sortable">
   <tr>
     <th>Название элемента курса</th>
