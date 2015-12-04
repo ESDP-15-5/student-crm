@@ -22,7 +22,7 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10 margin-top20">
-        <%= f.submit 'Сохранить изменения', class: 'btn btn-primary' %>
+        <%= f.submit yield(:button_text), class: 'btn btn-primary' %>
       </div>
     </div>
 <%end%>
