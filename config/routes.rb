@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'course_elements/show'
-
   root 'courses#index'
 
 
@@ -14,14 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
-
-
   devise_for :users
-  # devise_scope :user do
-  #   root :to => 'devise/sessions#new'
-  # end
-
-   # resources :users
 
   scope :manage do
     resources :users
