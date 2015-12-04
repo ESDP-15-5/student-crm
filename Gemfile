@@ -51,6 +51,8 @@ gem 'bootstrap-sass'
 
 gem 'paranoia', '~> 2.0'
 
+gem 'devise-i18n'
+
 gem 'audited-activerecord', '~> 4.0'
 
 gem 'paperclip', '~> 4.3'
@@ -62,6 +64,7 @@ gem 'jquery-turbolinks', '~> 2.1'
 gem 'ranked-model'
 
 gem 'jquery-ui-rails'
+
 
 
 

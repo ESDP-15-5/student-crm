@@ -1,0 +1,23 @@
+---
+ru:
+ activerecord:
+      models:
+        course:
+          one: Курс
+          other: Курсы
+        course_element:
+          one: Элемент курса
+          other: Элементы курса
+      attributes:
+        course:
+          name: Название курса
+        course_element:
+          theme: Тема курса
+        course_element_material:
+          theme: Тема материала
+          content: Контент
+        course_element_file:
+          file: Файл
+        user:
+          password: Пароль
+          password_confirmation: Подтверждающий пароль
