@@ -1,2 +1,9 @@
-Обновить курс
+<div class="row">
+  <div class="col-md-4">
+    <%= link_to 'Курсы', courses_path %> >
+    <%= 'Обновление курса ' + @course.name %>
+  </div>
+</div>
+
+<%= provide :button_text, 'Обновить курс' %>
 <%=	 render 'courses/form' %>

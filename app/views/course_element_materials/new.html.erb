@@ -1,3 +1,11 @@
-<h1>Добавить новый материал к элементу курса</h1>
+<div class="row">
+  <div class="col-md-8">
+    <%= link_to 'Курсы', courses_path %> >
+    <%= link_to @course.name, course_path(@course.id) %> >
+    <%= @course_element.theme %> >
+    <%= 'Добавление материала' %>
+  </div>
+</div>
 
+<%= provide :button_text, 'Добавить Материал' %>
 <%= render 'form' %>

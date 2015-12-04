@@ -1,3 +1,10 @@
-Добавить новый элемент курса
+<div class="row">
+  <div class="col-md-4">
+    <%= link_to 'Курсы', courses_path %> >
+    <%= link_to @course.name, course_path(@course.id) %> >
+    <%= 'Создание нового элемента курса' %>
+  </div>
+</div>
 
+<%= provide :button_text, 'Создать элемент курса' %>
 <%= render 'form'  %>

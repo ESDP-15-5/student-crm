@@ -1,2 +1,10 @@
+<div class="row">
+  <div class="col-md-8">
+    <%= link_to 'Пользователи', users_path %> >
+    <%= link_to @user.email, user_path(@user.id) %> >
+    <%= 'Обновление пользователя ' + @user.email %>
+  </div>
+</div>
+
 <h3>Изменить Пользователя</h3>
 <%= render 'form' %>

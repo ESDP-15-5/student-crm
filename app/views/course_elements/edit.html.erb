@@ -1,3 +1,10 @@
-Обновление элемента курса
+<div class="row">
+  <div class="col-md-8">
+    <%= link_to 'Курсы', courses_path %> >
+    <%= link_to @course.name, course_path(@course.id) %> >
+    <%= 'Обновление элемента курса ' + @course_element.theme %>
+  </div>
+</div>
 
+<%= provide :button_text, 'Обновить элемент курса' %>
 <%= render 'form'  %>
