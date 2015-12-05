@@ -3,6 +3,7 @@
 
 <%= link_to 'Добавить материал',  new_course_course_element_course_element_material_path(@course, @course_element.id), class: 'btn btn-primary' %>
 
-<div class='content'>
+<div class='content margin-top20'>
   <%= @course_element_material.content.html_safe %>
+  <%= link_to "PRINT", '#', onclick: "printpage()" %>
 </div>

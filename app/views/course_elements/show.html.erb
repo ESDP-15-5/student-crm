@@ -18,7 +18,7 @@
       <tr>
         <th>Файл</th>
         <th>Размер файла</th>
-        <th> Действия </th>
+        <th  style="width: 220px;"> Действия </th>
       </tr>
 
       <% @course_element_file.each do |file| %>
@@ -29,7 +29,7 @@
 
               <%= link_to 'Удалить', course_course_element_course_element_file_path( Course.find(CourseElement.find(file.course_element_id).course_id),file.course_element_id,file.id),
                           method: :delete,
-                          data: {confirm: 'Вы действительно хотите удалить этот файл?'} %>
+                          data: {confirm: 'Вы действительно хотите удалить этот файл?'}, :class => 'btn btn-default pull-right' %>
             </td>
           </tr>
       <% end %>
@@ -42,17 +42,19 @@
     <table class="table table-bordered table-striped">
       <tr>
         <th> Заголовок</th>
-        <th> Действия </th>
+        <th  class="action"> Действия </th>
       </tr>
 
       <% @course_element_material.each do |material| %>
           <tr>
             <td><%=link_to material.title, course_course_element_course_element_material_path( Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id) %></td>
             <td>
-              <%= link_to 'Изменить', edit_course_course_element_course_element_material_path(Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id) %>
               <%= link_to 'Удалить', course_course_element_course_element_material_path( Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id),
                           method: :delete,
-                          data: {confirm: 'Вы действительно хотите удалить этот раздаточный материал?'} %>
+                          data: {confirm: 'Вы действительно хотите удалить этот раздаточный материал?'}, :class => 'btn btn-default pull-right' %>
+
+              <%= link_to 'Изменить', edit_course_course_element_course_element_material_path(Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id) ,:class => 'btn btn-default pull-right' %>
+
             </td>
           </tr>
       <% end %>

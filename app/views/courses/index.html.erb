@@ -6,20 +6,20 @@
 
 <%= link_to 'Создать новый курс', new_course_path, class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
 
-<table class="table">
+<table class="table table-bordered table-striped" >
   <tr>
     <th>Название курса</th>
-    <th> Действия </th>
+    <th style="width:250px;"> Действия </th>
   </tr>
 
   <% @courses.each do |course| %>
       <tr>
         <td><%= link_to course.name, course_path(course)  %></td>
         <td>
-          <%= link_to 'Редактировать', edit_course_path(course) %>
           <%= link_to 'Удалить', course_path(course),
                       method: :delete,
-                      data: {confirm: 'Вы действительно хотите удалить этот курс?'} %>
+                      data: {confirm: 'Вы действительно хотите удалить этот курс?'}, :class => 'btn btn-default pull-right'  %>
+          <%= link_to 'Редактировать', edit_course_path(course), :class => 'btn btn-default pull-right'  %>
         </td>
       </tr>
   <% end %>
