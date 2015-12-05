@@ -13,7 +13,7 @@
     <th style="width: 30px;"></th>
     <th>Название элемента курса</th>
     <th>Тип элемента</th>
-    <th style="width: 140px;">Действие</th>
+    <th style="width: 220px;">Действие</th>
   </tr>
 
   <% @course_elements.each.with_index(1) do |element, index| %>
@@ -23,10 +23,10 @@
         <td><%= link_to element.theme, course_course_element_path(@course.id, element.id)  %></td>
         <td><%= element.element_type %></td>
         <td>
-          <%= link_to 'Edit', edit_course_course_element_path(@course.id, element.id), :class => 'btn btn-default pull-right' %>
-          <%= link_to 'Delete', course_course_element_path(@course.id, element.id),
+          <%= link_to 'Обновить', edit_course_course_element_path(@course.id, element.id), :class => 'btn btn-default pull-right' %>
+          <%= link_to 'Удалить', course_course_element_path(@course.id, element.id),
                       method: :delete,
-                      data: {confirm: 'Do you want to remove this product?'}, :class => 'btn btn-default pull-right' %>
+                      data: {confirm: 'Вы действительно хотите удалить этот элемент курса?'}, :class => 'btn btn-default pull-right'%>
         </td>
       </tr>
   <% end %>
