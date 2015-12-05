@@ -15,7 +15,7 @@ courses = []
 courses.push Course.create(name: "HTML", starts_at: nil, ends_at: nil)
 courses.push Course.create(name: "Ruby on Rails", starts_at: nil, ends_at: nil)
 
-element_type = ['laboratory', 'lecture', 'cw', 'webinar']
+element_type = CourseElement::ELEMENT_TYPES
 
 course_elements = []
 
