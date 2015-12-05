@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <%= link_to 'Курсы', courses_path %> >
     <%= link_to @course.name, course_path(@course.id) %> >
-    <%= @course_element.theme %> >
+    <%= link_to @course_element.theme, course_course_element_path(@course.id, @course_element.id) %> >
     <%= 'Добавление файла' %>
   </div>
 </div>
