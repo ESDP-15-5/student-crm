@@ -10,12 +10,11 @@
 <table data-action="elements-table" data-update-position-url="<%= update_row_order_course_course_elements_path(@course.id) %>" class="table table-bordered table-striped" id="sortable">
   <tr>
     <th style="width: 40px; text-align: center;">#</th>
-    <th style="width: 30px;"></th>
+    <th style="width: 30px;" ><span class="elements-table-handle"><i class="glyphicon glyphicon-sort"></i></span></th>
     <th>Название элемента курса</th>
     <th>Тип элемента</th>
     <th class="action">Действие</th>
   </tr>
-
   <% @course_elements.each.with_index(1) do |element, index| %>
       <tr data-item-id="<%= element.id %>" class="item">
         <td class="elements-table-position" data-display="position"><%= index %></td>

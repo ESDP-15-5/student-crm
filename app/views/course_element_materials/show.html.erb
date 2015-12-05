@@ -10,9 +10,11 @@
 <h1>Материал "<%= @course_element_material.title %>"</h1>
 
 
-<%= link_to 'Добавить материал',  new_course_course_element_course_element_material_path(@course, @course_element.id), class: 'btn btn-primary' %>
+<%= link_to 'Добавить материал',  new_course_course_element_course_element_material_path(@course, @course_element.id), class: 'btn btn-primary print' %>
 
-<div class='content margin-top20'>
+
+<%= link_to 'print', ' ' , onclick: "printpage()", class: 'btn btn-default print pull-right' %>
+
+<div class='content margin-top20 no-border'>
   <%= @course_element_material.content.html_safe %>
-  <%= link_to "PRINT", '#', onclick: "printpage()" %>
 </div>
