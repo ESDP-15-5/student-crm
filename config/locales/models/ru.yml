@@ -14,9 +14,10 @@ ru:
         course_element:
           theme: Тема курса
         course_element_material:
-          theme: Тема материала
-          content: Контент
+          title: Заголовок материала
+          content: Содержимое
         course_element_file:
+          file_file_name: Название файла
           file: Файл
         user:
           password: Пароль
