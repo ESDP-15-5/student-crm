@@ -6,20 +6,20 @@
 
 <%= link_to 'Создать пользователя', new_user_path, class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
 
-<table class="table">
+<table class="table table-bordered table-striped">
   <tr>
     <th>email</th>
-    <th> Действия </th>
+    <th style="width:250px;"> Действия </th>
   </tr>
 
   <% @users.each do |user| %>
       <tr>
-        <td><%= link_to user.email, user_path(user)  %></td>
+        <td><%=  user.email  %></td>
         <td>
-          <%= link_to 'Редактировать', edit_user_path(user) %>
           <%= link_to 'Удалить', user_path(user),
                       method: :delete,
-                      data: {confirm: 'Вы действительно хотите удалить пользователя?'} %>
+                      data: {confirm: 'Вы действительно хотите удалить пользователя?'},  :class => 'btn btn-default pull-right'  %>
+          <%= link_to 'Редактировать', edit_user_path(user), :class => 'btn btn-default pull-right'  %>
         </td>
       </tr>
   <% end %>
