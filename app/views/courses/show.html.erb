@@ -4,19 +4,22 @@
     <%= 'Элементы курса ' + @course.name %>
   </div>
 </div>
-
 <h1>Курс "<%= @course.name %>"</h1>
 
 <%= link_to 'Создать элемент курса', new_course_course_element_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
 <table data-action="elements-table" data-update-position-url="<%= update_row_order_course_course_elements_path(@course.id) %>" class="table table-bordered table-striped" id="sortable">
   <tr>
+    <th style="width: 40px; text-align: center;">#</th>
+    <th style="width: 30px;"></th>
     <th>Название элемента курса</th>
-    <th> Тип элемента </th>
-    <th> Действие </th>
+    <th>Тип элемента</th>
+    <th style="width: 140px;">Действие</th>
   </tr>
 
-  <% @course_elements.each do |element| %>
+  <% @course_elements.each.with_index(1) do |element, index| %>
       <tr data-item-id="<%= element.id %>" class="item">
+        <td class="elements-table-position" data-display="position"><%= index %></td>
+        <td><span class="elements-table-handle"><i class="glyphicon glyphicon-menu-hamburger"></i></span></td>
         <td><%= link_to element.theme, course_course_element_path(@course.id, element.id)  %></td>
         <td><%= element.element_type %></td>
         <td>
