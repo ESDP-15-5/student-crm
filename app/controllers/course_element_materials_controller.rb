@@ -1,15 +1,36 @@
 class CourseElementMaterialsController < ApplicationController
 
+  def get_initial_crums()
+    {
+        "Курсы"=> courses_path
+    }
+  end
+
   def show
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_material = CourseElementMaterial.find(params[:id])
+    hash_crums = {
+        @course.name => course_path(@course.id),
+        @course_element.theme => course_course_element_path(@course.id, @course_element.id),
+        @course_element_material.title => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def new
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_material = @course_element.course_element_materials.build
+
+    hash_crums = {
+        @course.name => course_path(@course.id),
+        @course_element.theme => course_course_element_path(@course.id, @course_element.id),
+        "Добавление материала" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def create
@@ -28,6 +49,14 @@ class CourseElementMaterialsController < ApplicationController
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
     @course_element_material = CourseElementMaterial.find(params[:id])
+
+    hash_crums = {
+        @course.name => course_path(@course.id),
+        @course_element.theme => course_course_element_path(@course.id, @course_element.id),
+        "Обновление материала" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def update

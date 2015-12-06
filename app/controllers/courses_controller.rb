@@ -1,4 +1,10 @@
 class CoursesController < ApplicationController
+  def get_initial_crums()
+    {
+        "Курсы"=> courses_path
+    }
+  end
+
   def index
     @courses = Course.all
   end
@@ -6,10 +12,23 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @course_elements = @course.course_elements.rank(:row_order)
+
+    hash_crums = {
+        "Элементы курса #{@course.name}"=> {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def new
     @course = Course.new
+
+    hash_crums = {
+        "Создание нового курса" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
+
   end
 
   def create
@@ -30,6 +49,11 @@ class CoursesController < ApplicationController
 
   def edit
     @course = Course.find(params[:id])
+    hash_crums = {
+        "Обновление курса #{@course.name}" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def update

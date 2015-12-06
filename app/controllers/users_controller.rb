@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  def get_initial_crums()
+    {
+        "Пользователи"=> users_path
+    }
+  end
 
   def index
     @users = User.all
@@ -11,6 +16,11 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    hash_crums = {
+       "Создание нового пользователя" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def create
@@ -24,7 +34,13 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    hash_crums = {
+        "Обновление пользователя #{@user.email}" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)

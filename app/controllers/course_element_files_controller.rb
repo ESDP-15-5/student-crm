@@ -1,12 +1,22 @@
 class CourseElementFilesController < ApplicationController
-
-
-
+  def get_initial_crums()
+    {
+        "Курсы"=> courses_path
+    }
+  end
 
   def new
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_file = @course_element.course_element_files.build
+
+    hash_crums = {
+        @course.name => course_path(@course.id),
+        @course_element.theme => course_course_element_path(@course.id, @course_element.id),
+        "Добавление файла" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def create

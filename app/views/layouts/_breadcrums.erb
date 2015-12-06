@@ -1,0 +1,12 @@
+<% if @bread_crums.nil? %>
+<%else%>
+<div class="crums">
+  <% @bread_crums.each do |name, path| %>
+      <% if  path.empty? %>
+          <%= name %>
+      <% else %>
+          <%= link_to name, path %> >
+      <% end %>
+  <% end %>
+</div>
+<%end%>

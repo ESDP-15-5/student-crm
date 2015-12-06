@@ -1,15 +1,35 @@
 class CourseElementsController < ApplicationController
 
+  def get_initial_crums()
+    {
+        "Курсы"=> courses_path
+    }
+  end
+
   def show
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
     @course_element_file = CourseElementFile.where('course_element_id = ?', params[:id])
     @course_element_material = CourseElementMaterial.where('course_element_id = ?', params[:id])
+
+    hash_crums = {
+        @course.name => course_path(@course.id),
+        @course_element.theme => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def new
     @course = Course.find(params[:course_id])
     @course_element = @course.course_elements.build
+
+    hash_crums = {
+        @course.name => course_path(@course.id),
+        "Создание нового элемента курса" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def create
@@ -26,6 +46,13 @@ class CourseElementsController < ApplicationController
   def edit
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
+
+    hash_crums = {
+        @course.name => course_path(@course.id),
+        "Обновление элемента курса #{@course_element.theme}" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def update
@@ -67,7 +94,6 @@ class CourseElementsController < ApplicationController
   def set_course_element
     @course_element = CourseElement.find(params[:id])
   end
-
 
   def course_element_params
     params.require(:course_element).permit( :course_id, :theme, :element_type, :row_order_position )
