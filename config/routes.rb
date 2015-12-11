@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
 
   mount Ckeditor::Engine => '/ckeditor'
+
   resources :courses do
     resources :course_elements do
       post :update_row_order, on: :collection
@@ -17,5 +18,7 @@ Rails.application.routes.draw do
   scope :manage do
     resources :users
   end
+
+  resources :periods
 
 end

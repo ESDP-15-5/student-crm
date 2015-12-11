@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-4">
+    <h1>Таблица Курсов</h1>
+  </div>
+</div></br>
+
+<%= link_to 'Создать новый курс', new_period_path, class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
+
+<table class="table table-bordered table-striped" >
+  <tr>
+    <th>Название курса</th>
+    <th style="width:250px;"> Действия </th>
+  </tr>
+
+  <% @periods.each do |period| %>
+      <tr>
+        <td><%= link_to period.title, period_path(period)  %></td>
+        <td>
+          <%= link_to 'Удалить', period_path(period),
+                      method: :delete,
+                      data: {confirm: 'Вы действительно хотите удалить этот курс?'}, :class => 'btn btn-default pull-right'  %>
+          <%= link_to 'Редактировать', edit_period_path(period), :class => 'btn btn-default pull-right'  %>
+        </td>
+      </tr>
+  <% end %>
+</table>

@@ -86,3 +86,4 @@ course_elements.push CourseElement.create(course: courses.sample,
 course_elements.push CourseElement.create(course: courses.sample,
                                           theme: "Система заголовков",
                                           element_type: element_type.sample)
+
