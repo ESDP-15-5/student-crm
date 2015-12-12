@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202184546) do
+ActiveRecord::Schema.define(version: 20151212113848) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "student_id"
@@ -137,9 +137,11 @@ ActiveRecord::Schema.define(version: 20151202184546) do
     t.datetime "commence_datetime"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.datetime "deleted_at"
   end
 
   add_index "periods", ["course_element_id"], name: "index_periods_on_course_element_id"
+  add_index "periods", ["deleted_at"], name: "index_periods_on_deleted_at"
 
   create_table "students", force: :cascade do |t|
     t.string   "name"

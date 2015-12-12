@@ -1,7 +1,7 @@
 class PeriodsController < ApplicationController
   def get_initial_crums()
     {
-        "Занятия"=> courses_path
+        "Занятия"=> periods_path
     }
   end
 
@@ -9,8 +9,18 @@ class PeriodsController < ApplicationController
     @periods = Period.all
   end
 
+  def show
+    @period = Period.find(params[:id])
+
+    hash_crums = {
+        "Занятие #{@period.title}"=> {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
+  end
+
   def new
-    @periods = Period.new
+    @period = Period.new
 
     hash_crums = {
         "Создание нового Занятия" => {}
@@ -21,13 +31,37 @@ class PeriodsController < ApplicationController
   end
 
   def create
-    @period = Period.new(course_params)
+    @period = Period.new(period_params)
 
-    if @course.save
+    if @period.save
 
-      redirect_to @course
+      redirect_to @period
     else
       render 'new'
+    end
+  end
+
+  def destroy
+    @period = Period.destroy(params[:id])
+    redirect_to periods_path
+  end
+
+  def edit
+    @period = Period.find(params[:id])
+    hash_crums = {
+        "Обновление занятия #{@period.title}" => {}
+    }
+
+    @bread_crums = add_bread_crums(hash_crums)
+  end
+
+  def update
+    @period = Period.find(params[:id])
+
+    if @period.update(period_params)
+      redirect_to periods_path
+    else
+      render 'edit'
     end
   end
 
