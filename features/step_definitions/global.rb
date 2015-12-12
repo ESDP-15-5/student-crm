@@ -18,7 +18,7 @@ end
 
 When(/^"([^"]*)" появляется в списке курсов$/) do |course_name|
   visit('/courses')
-  page.has_content?(course_name)
+  expect(page).to have_content(course_name)
 end
 
 When(/^пользователь удаляет курс с названием "([^"]*)"$/) do |course_name|
@@ -26,11 +26,10 @@ When(/^пользователь удаляет курс с названием "(
   element = "//td//*[contains(text(), '" + course_name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
   find(:xpath, element).click
   page.driver.browser.switch_to.alert.accept
-  sleep(2)
 end
 
 When(/^в списке пропал курс с названием "([^"]*)"$/) do |course_name|
-  page.has_no_content?(course_name)
+   page.should have_no_content(course_name)
 end
 
 When(/^Пользователь редактирует курс с названием "([^"]*)" на "([^"]*)"$/) do |course_name_old, course_name_new|
@@ -40,7 +39,40 @@ When(/^Пользователь редактирует курс с назван�
   within('.edit_course') do
     fill_in 'course[name]', :with => course_name_new
   end
-  sleep(5)
   click_button('Обновить курс')
-  sleep(2)
+end
+# --------------------------------------
+When(/^я не залогиненный пользователь$/) do
+  visit(root_path)
+  expect(page).to have_css('form')
+  expect(page).to have_content('Войти')
+  find_button('Войти').click
+end
+
+When(/^пользователь, зайдя на страницу "([^"]*)", увидет таблицу с курсами$/) do |name_page|
+  visit("/#{name_page}")
+  expect(page).to have_content('Курсы')
+  expect(page).to have_selector('table')
+  find_link('Выйти', :visible => :all).visible?
+end
+
+When(/^меня редиректит на страницу с авторизацией$/) do
+  expect(page).to have_css('form')
+  expect(page).to have_content('Войти')
+  find_button('Войти').click
+end
+
+When(/^пользователь зашел на главную страницу$/) do
+  visit(root_path)
+end
+
+When(/^я зашел на страницы (.*)$/) do |pages_path|
+  visit(eval(pages_path))
+end
+
+
+When(/^меня редиректит на страницу с авторизацией (.*)$/) do |redirect_path|
+  expect(page).to have_css('form')
+  expect(page).to have_content('Войти')
+  find_button('Войти').click
 end
