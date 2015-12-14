@@ -14,3 +14,8 @@ CourseElement.create(course: courses[2],
 CourseElement.create(course: courses[2],
                      theme: "Начало работы",
                      element_type: element_type.sample)
+
+CourseElementFile.create(course_element_id: 1,
+                         file_file_name: 'test_file.jpg',
+                         file_content_type:'image/jpeg'
+)
