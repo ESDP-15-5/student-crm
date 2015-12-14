@@ -135,3 +135,52 @@ When(/^пользователь редактирует элемент курса
   click_button('Обновить элемент курса')
 end
 # --------------------------------------
+When(/^пользователь переходит в курс (.*)$/) do |course|
+  click_link(course)
+end
+
+When(/^пользователь переходит в элемент курса (.*)$/) do |course_element|
+  click_link(course_element)
+end
+
+When(/^пользователь заходит в элемент курса "([^"]*)"$/) do |course_element|
+  click_link(course_element)
+end
+
+When(/^он видит кнопку "([^"]*)"$/) do |button_name|
+  find_link(button_name, :visible => :all).visible?
+end
+
+When(/^его перекидывает на форму загрузки файла$/) do
+  expect(page).to have_content('Добавление файла')
+  element = "//*[contains(@class, 'new_course_element_file')]"
+  find(:xpath, element)
+  find_button('Добавить файл')
+end
+
+When(/^выбирает файл с локального ПК$/) do
+  sleep(2)
+  attach_file('course_element_file_file', Rails.root.join('features', 'upload-files', 'test_file.jpg'))
+  sleep(2)
+end
+
+
+When(/^файл появляется в списке "([^"]*)"$/) do |file_name|
+  expect(page).to have_content(file_name)
+end
+
+When(/^пользователь нажимает на кнопку "([^"]*)" у файла$/) do |arg|
+
+  pending
+end
+
+
+When(/^пользователь удаляет файл с названием "([^"]*)"$/) do |file_name|
+  element = "//td//*[contains(text(), '" + file_name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
+  find(:xpath, element).click
+  page.driver.browser.switch_to.alert.accept
+end
+
+When(/^файл "([^"]*)" пропадает из списка$/) do |file_name|
+  page.should have_no_content(file_name)
+end
