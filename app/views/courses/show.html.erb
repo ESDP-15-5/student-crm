@@ -1,5 +1,34 @@
 <h1>Курс "<%= @course.name %>"</h1>
 
+<%= link_to 'Создать группу', new_course_group_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
+
+
+<% if @groups.empty? %>
+<%else%>
+
+    <table data-action="elements-table" class="table table-bordered table-striped">
+      <tr>
+        <th>Группа</th>
+        <th class="action">Действие</th>
+      </tr>
+      <% @groups.each do |element| %>
+          <tr data-item-id="<%= element.id %>" class="item">
+            <td><%= link_to element.name, course_group_path(@course.id, element.id)  %></td>
+            <td>
+              <%= link_to 'Удалить', course_group_path(@course.id, element.id),
+                          method: :delete,
+                          data: {confirm: 'Вы действительно хотите удалить этот элемент курса?'}, :class => 'btn btn-default pull-right'%>
+              <%= link_to 'Обновить', edit_course_group_path(@course.id, element.id), :class => 'btn btn-default pull-right' %>
+            </td>
+          </tr>
+      <% end %>
+
+    </table>
+
+<% end %>
+
+
+
 <%= link_to 'Создать элемент курса', new_course_course_element_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
 <table data-action="elements-table" data-update-position-url="<%= update_row_order_course_course_elements_path(@course.id) %>" class="table table-bordered table-striped" id="sortable">
   <tr>

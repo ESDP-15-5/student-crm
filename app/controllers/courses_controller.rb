@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @course_elements = @course.course_elements.rank(:row_order)
+    @groups = @course.groups
 
     hash_crums = {
         "Элементы курса #{@course.name}"=> {}

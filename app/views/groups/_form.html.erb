@@ -1,0 +1,25 @@
+<%= form_for [@course, @group] do |f| %>
+    <div class="form-group <%= 'has-error' if @course.errors[:name].any? %>">
+      <%= f.label :course_id, 'Курс', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :course_id, class: 'form-control', value: @course.name, :disabled => true %>
+        <%= render 'shared/field_errors', object: @course, field_name: :name %>
+      </div>
+    </div>
+    <br/>
+    <div class="form-group margin-top20 <%= 'has-error' if @group.errors[:name].any? %>">
+      <%= f.label :name, 'Название', class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_field :name, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @group, field_name: :name %>
+      </div>
+    </div>
+    <br/>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10 margin-top20">
+        <%= f.submit yield(:button_text), class: 'btn btn-primary' %>
+        <%= link_to 'Отмена', course_path(@group.course_id), class: 'btn btn-primary' %>
+      </div>
+    </div>
+<% end %>

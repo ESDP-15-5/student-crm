@@ -47,7 +47,7 @@ class GroupsController < ApplicationController
 
       hash_crums = {
           @course.name => course_path(@course.id),
-          "Редактирование группы #{@group.theme}" => {}
+          "Редактирование группы #{@group.name}" => {}
       }
 
       @bread_crums = add_bread_crums(hash_crums)

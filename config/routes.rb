@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :courses do
+    resources :groups
     resources :course_elements do
       post :update_row_order, on: :collection
       get 'download/:id' =>  'course_elements#download', :as => :download
