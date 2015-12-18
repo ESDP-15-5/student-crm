@@ -4,7 +4,7 @@
   </div>
 </div></br>
 
-<%= link_to 'Создать новое занятие', new_period_path, class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
+<%= link_to 'Создать новое занятие', new_course_period_path, class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
 
 <table class="table table-bordered table-striped" >
   <tr>
@@ -14,12 +14,12 @@
 
   <% @periods.each do |period| %>
       <tr>
-        <td><%= link_to period.title, period_path(period)  %></td>
+        <td><%= link_to period.title, course_period_path(period)  %></td>
         <td>
-          <%= link_to 'Удалить', period_path(period),
+          <%= link_to 'Удалить', course_period_path(period),
                       method: :delete,
                       data: {confirm: 'Вы действительно хотите удалить этот курс?'}, :class => 'btn btn-default pull-right'  %>
-          <%= link_to 'Редактировать', edit_period_path(period), :class => 'btn btn-default pull-right'  %>
+          <%= link_to 'Редактировать', edit_course_period_path(period), :class => 'btn btn-default pull-right'  %>
         </td>
       </tr>
   <% end %>

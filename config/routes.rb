@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :groups
+    resources :periods
     resources :course_elements do
       post :update_row_order, on: :collection
       get 'download/:id' =>  'course_elements#download', :as => :download
@@ -19,7 +20,5 @@ Rails.application.routes.draw do
   scope :manage do
     resources :users
   end
-
-  resources :periods
 
 end

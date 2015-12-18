@@ -1,7 +1,7 @@
 class PeriodsController < ApplicationController
   def get_initial_crums()
     {
-        "Занятия"=> periods_path
+        "Курсы"=> courses_path
     }
   end
 
@@ -20,9 +20,13 @@ class PeriodsController < ApplicationController
   end
 
   def new
+    @course = Course.find(params[:course_id])
+    @course_element = CourseElement.where('course_id = ?', params[:course_id])
+    @group = Group.where('course_id = ?', params[:course_id])
     @period = Period.new
 
     hash_crums = {
+        @course.name => course_path(@course.id),
         "Создание нового Занятия" => {}
     }
 
@@ -35,7 +39,7 @@ class PeriodsController < ApplicationController
 
     if @period.save
 
-      redirect_to @period
+      redirect_to root_path
     else
       render 'new'
     end
@@ -43,7 +47,7 @@ class PeriodsController < ApplicationController
 
   def destroy
     @period = Period.destroy(params[:id])
-    redirect_to periods_path
+    redirect_to root_path
   end
 
   def edit
@@ -59,7 +63,7 @@ class PeriodsController < ApplicationController
     @period = Period.find(params[:id])
 
     if @period.update(period_params)
-      redirect_to periods_path
+      redirect_to course_periods_path
     else
       render 'edit'
     end
@@ -69,7 +73,7 @@ class PeriodsController < ApplicationController
   private
 
   def period_params
-    params.require(:period).permit(:title, :commence_datetime)
+    params.require(:period).permit(:group_id,:course_element_id,:title, :commence_datetime)
   end
 
 end
