@@ -87,3 +87,12 @@ course_elements.push CourseElement.create(course: courses.sample,
                                           theme: "Система заголовков",
                                           element_type: element_type.sample)
 
+groups = []
+groups.push Group.create(name: 'Группа13', course: courses.sample)
+
+
+periods = []
+periods.push Period.create(title: "Занятие 13",
+                           commence_datetime: 1450375200000,
+                           course_element_id: course_elements.sample,
+                           group_id: groups.sample)
