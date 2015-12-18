@@ -137,10 +137,12 @@ end
 # --------------------------------------
 When(/^пользователь переходит в курс (.*)$/) do |course|
   click_link(course)
+  sleep(3)
 end
 
 When(/^пользователь переходит в элемент курса (.*)$/) do |course_element|
   click_link(course_element)
+  sleep(3)
 end
 
 When(/^пользователь заходит в элемент курса "([^"]*)"$/) do |course_element|
@@ -149,6 +151,7 @@ end
 
 When(/^он видит кнопку "([^"]*)"$/) do |button_name|
   find_link(button_name, :visible => :all).visible?
+  sleep(3)
 end
 
 When(/^его перекидывает на форму загрузки файла$/) do
@@ -183,4 +186,119 @@ end
 
 When(/^файл "([^"]*)" пропадает из списка$/) do |file_name|
   page.should have_no_content(file_name)
+end
+
+# --------------------------------------course_material.feature
+
+When(/^заполняет поле Заголовок материала "([^"]*)"$/) do |title|
+  within('#new_course_element_material') do
+    fill_in 'course_element_material[title]', :with => title
+  end
+  sleep(2)
+end
+
+
+When(/^его перекидывает на форму добавления материала$/) do
+  expect(page).to have_css('#new_course_element_material')
+end
+
+
+When(/^отображается список с добавленным материалом$/) do
+  expect(page).to have_content(title)
+end
+
+When(/^отображается список с добавленным материалом "([^"]*)"$/) do |title|
+  expect(page).to have_content(title)
+  sleep(3)
+end
+
+
+When(/^пользователь находится на странице элемента курса "([^"]*)"$/) do |arg|
+  visit('/courses/3/course_elements/2')
+end
+
+When(/^заполняет поле "([^"]*)"$/) do |text|
+
+  def fill_in_ckeditor(locator, opts)
+    content = opts.fetch(:with).to_json
+    page.execute_script <<-SCRIPT
+    CKEDITOR.instances['course_element_material_content'].setData(#{content});
+    $('textarea#course_element_material_content').text(#{content});
+    SCRIPT
+  end
+
+# Example:
+  fill_in_ckeditor 'email_body', :with => 'This is my message!'
+
+  sleep(2)
+end
+
+When(/^пользователь нажимает на button "([^"]*)"$/) do |button|
+  click_button('Добавить Материал')
+end
+
+When(/^пользователь на странице редактирования материала "([^"]*)"$/) do |title|
+  visit('/courses/3/course_elements/1/course_element_materials/1/edit')
+  sleep(5)
+end
+
+When(/^он меняет содержимое поля "([^"]*)" => с "([^"]*)" на "([^"]*)"$/) do |title1, title2, title3|
+  within('#edit_course_element_material_1') do
+    fill_in 'course_element_material[title]', :with => title3
+  end
+end
+
+When(/^содержимое поля "([^"]*)" => с "([^"]*)" на "([^"]*)"$/) do |title, content1, content2|
+
+  def fill_in_ckeditor(locator, opts)
+    content = opts.fetch(:with).to_json
+    page.execute_script <<-SCRIPT
+    CKEDITOR.instances['course_element_material_content'].setData(#{content});
+    $('textarea#course_element_material_content').text(#{content});
+    SCRIPT
+  end
+
+# Example:
+  fill_in_ckeditor 'email_body', :with => content2
+
+end
+
+When(/^нажимает кнопку "([^"]*)"$/) do |button_name|
+  click_button(button_name)
+end
+
+When(/^пользователь находится на странице отображения материалов у элемента курса "([^"]*)"$/) do |arg|
+  visit('/courses/3/course_elements/1')
+end
+
+When(/^пользователь удаляет материал с названием "([^"]*)"$/) do |material_name|
+  element = "//td//*[contains(text(), '" + material_name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
+  find(:xpath, element).click
+  page.driver.browser.switch_to.alert.accept
+end
+
+
+When(/^материал элемента курса "([^"]*)" пропадет из списка$/) do |material_name|
+  expect(page).not_to have_content(material_name)
+end
+
+When(/^он находится на странице элемента курса "([^"]*)"$/) do |course_element_name|
+  visit('/courses/3/course_elements/1/')
+  sleep(5)
+end
+
+When(/^пользователь нажал на кнопку "([^"]*)" материала "([^"]*)"$/) do |button_name, material_name|
+  element = "//td//*[contains(text(), '" + material_name + "')]/ancestor::tr//*[contains(text(), '#{button_name}')]"
+  find(:xpath, element).click
+  sleep(5)
+end
+
+When(/^его перекидывает на форму изменения материала$/) do
+  expect(page).to have_css('.edit_course_element_material')
+  sleep(2)
+end
+
+When(/^пользователь видит измененное имя материала в таблице$/) do
+  visit('/courses/3/course_elements/1')
+  sleep(5)
 end

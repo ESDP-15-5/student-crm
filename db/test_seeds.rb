@@ -19,3 +19,8 @@ CourseElementFile.create(course_element_id: 1,
                          file_file_name: 'test_file.jpg',
                          file_content_type:'image/jpeg'
 )
+
+CourseElementMaterial.create(course_element_id: 1,
+                             title: 'Раздатка-1',
+                             content:'Содержимое раздатки 1'
+)
