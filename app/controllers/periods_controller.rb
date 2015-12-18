@@ -35,11 +35,12 @@ class PeriodsController < ApplicationController
   end
 
   def create
+    @course = Course.find(params[:course_id])
     @period = Period.new(period_params)
 
     if @period.save
 
-      redirect_to root_path
+      redirect_to @course
     else
       render 'new'
     end
