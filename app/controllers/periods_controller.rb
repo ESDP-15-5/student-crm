@@ -8,8 +8,16 @@ def get_initial_crums()
   end
 
   def index
-    @periods = Period.all
     @course = Course.find(params[:course_id])
+    @course_elements = @course.course_elements
+    @groups = @course.groups
+    @period = Period.new
+    @button_text = 'Создать занятие'
+
+    # @periods = @course.course_elements.periods
+    # @periods = Period.where('group_id = ?', @groups)
+    #TODO не работает поиск периодов исходя из группы. Не работает JS сейчас там стоит course_id = 2
+    @periods = Period.all
   end
 
   def show
@@ -18,23 +26,21 @@ def get_initial_crums()
     hash_crums = {
         "Занятие #{@period.title}"=> {}
     }
-
     @bread_crums = add_bread_crums(hash_crums)
   end
 
   def new
     @course = Course.find(params[:course_id])
-    @course_element = CourseElement.where('course_id = ?', params[:course_id])
-    @group = Group.where('course_id = ?', params[:course_id])
+    @course_elements = @course.course_elements
+    @groups = @course.groups
     @period = Period.new
+    @button_text = 'Создать занятие'
 
     hash_crums = {
         @course.name => course_path(@course.id),
         "Создание нового Занятия" => {}
     }
-
     @bread_crums = add_bread_crums(hash_crums)
-
   end
 
   def create
@@ -42,8 +48,7 @@ def get_initial_crums()
     @period = Period.new(period_params)
 
     if @period.save
-
-      redirect_to @course
+      redirect_to :back
     else
       render 'new'
     end
@@ -55,11 +60,16 @@ def get_initial_crums()
   end
 
   def edit
+    @course = Course.find(params[:course_id])
     @period = Period.find(params[:id])
+    @course_elements = @course.course_elements
+    @groups = @course.groups
+    @button_text = 'Обновить занятие'
+    render 'index'
+
     hash_crums = {
         "Обновление занятия #{@period.title}" => {}
     }
-
     @bread_crums = add_bread_crums(hash_crums)
   end
 
@@ -67,7 +77,7 @@ def get_initial_crums()
     @period = Period.find(params[:id])
 
     if @period.update(period_params)
-      redirect_to course_periods_path
+      redirect_to :back
     else
       render 'edit'
     end

@@ -3,9 +3,12 @@
     <h1>Таблица занятий</h1>
   </div>
 </div></br>
-
-<%= link_to 'Создать новое занятие', new_course_period_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
-
-<div id="calendar"> </div>
-
 <%= p params %>
+<div class="row">
+  <div id="calendar" class="col-md-7"> </div>
+  <div class="col-md-5">
+    <%= provide :button_text, @button_text %>
+    <%=	 render 'periods/form' %>
+  </div>
+</div>
+
