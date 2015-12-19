@@ -3,6 +3,8 @@ class Period < ActiveRecord::Base
 
   audited
 
+  belongs_to :course
+
   belongs_to :course_element
   has_many :attendances
   has_many :students, through: :attendances
