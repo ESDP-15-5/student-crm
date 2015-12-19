@@ -73,6 +73,8 @@ gem 'ranked-model'
 
 gem 'jquery-ui-rails'
 
+gem 'momentjs-rails'
+gem 'fullcalendar-rails'
 
 
 

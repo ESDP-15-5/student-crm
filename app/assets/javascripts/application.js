@@ -18,6 +18,8 @@
 //= require bootstrap
 //= require turbolinks
 //= require ckeditor/init
+//= require moment
+//= require fullcalendar
 //= require_tree .
 
 function printpage()

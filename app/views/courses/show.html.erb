@@ -1,6 +1,6 @@
 <h1>Курс "<%= @course.name %>"</h1>
 
-<%= link_to 'Создать занятие', new_course_period_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
+<%= link_to 'Открыть календарь', course_periods_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
 
 
 <%= link_to 'Создать группу', new_course_group_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>

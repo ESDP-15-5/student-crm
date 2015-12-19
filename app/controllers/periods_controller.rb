@@ -1,5 +1,7 @@
 class PeriodsController < ApplicationController
-  def get_initial_crums()
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
+
+def get_initial_crums()
     {
         "Курсы"=> courses_path
     }
@@ -7,6 +9,7 @@ class PeriodsController < ApplicationController
 
   def index
     @periods = Period.all
+    @course = Course.find(params[:course_id])
   end
 
   def show
@@ -75,6 +78,11 @@ class PeriodsController < ApplicationController
 
   def period_params
     params.require(:period).permit(:group_id,:course_element_id,:title, :commence_datetime)
+  end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @period = Period.find(params[:id])
   end
 
 end
