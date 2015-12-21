@@ -10,14 +10,11 @@ def get_initial_crums()
   def index
     @course = Course.find(params[:course_id])
     @course_elements = @course.course_elements
-    @groups = @course.groups
+    @groups = Group.where(course_id: @course)
     @period = Period.new
     @button_text = 'Создать занятие'
 
-    @periods = Period.where('course_id = ?', @course)
-    # @periods = Period.where('group_id = ?', @groups)
-    #TODO не работает поиск периодов исходя из группы. Не работает JS сейчас там стоит course_id = 2
-    # @periods = Period.where('course_element_id = ?', @course_elements)
+    @periods = Period.where(course_element_id: @course_elements)
   end
 
   def show
