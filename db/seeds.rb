@@ -88,11 +88,17 @@ course_elements.push CourseElement.create(course: courses.sample,
                                           element_type: element_type.sample)
 
 groups = []
-groups.push Group.create(name: 'Группа13', course: courses.sample)
-
+groups.push Group.create(name: 'RoR1', course: courses[1])
+groups.push Group.create(name: 'RoR2', course: courses[1])
 
 periods = []
-periods.push Period.create(title: "Занятие 13",
-                           commence_datetime: 1450375200000,
-                           course_element_id: course_elements.sample,
-                           group_id: groups.sample)
+periods.push Period.create(title: "1# Вводное",
+                           commence_datetime: "19/Dec/2015 16:29:30 +0100".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[0],
+                           course: courses[1])
+periods.push Period.create(title: "2# Основы",
+                           commence_datetime: "20/Dec/2015 16:30:30 +0100".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[0],
+                           course: courses[1])

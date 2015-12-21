@@ -5,6 +5,8 @@ class Period < ActiveRecord::Base
 
   belongs_to :course
 
+  belongs_to :group
+
   belongs_to :course_element
   has_many :attendances
   has_many :students, through: :attendances
