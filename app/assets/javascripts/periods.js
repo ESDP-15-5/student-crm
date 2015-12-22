@@ -1,8 +1,8 @@
 
 $(document).bind('page:change', function() {
 
-    var url = location.pathname
-    console.log(url)
+    var url = $("#calendar").attr('data-request-url');
+    console.log(url);
 
     $('#calendar').fullCalendar({
         events: url + '.json',
@@ -12,29 +12,49 @@ $(document).bind('page:change', function() {
             right: 'month,agendaWeek,agendaDay'
         },
         eventRender: function(event, element) {
-            element.html(event.title + '<span class="removeEvent glyphicon glyphicon-trash pull-right" id="Delete" data-item-id='+ event.id +'></span>');
+            var full_time = new Date(Date.parse(event.start));
+            var hours = full_time.getHours();
+            var minutes = full_time.getMinutes();
+            if (minutes < 10){
+                var time = hours+':0'+minutes;
+            }else{
+                var time = hours+':'+minutes;
+            }
+            console.log(event);
+
+            element.html(time +
+                '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+
+                '<br>'+' '+event.name +'<br>' +
+                event.title
+            );
 
             element.popover({
                 title: 'Занятие ' + event.title,
-                content: event.name,
+                content: event.theme + ' | ' + event.element_type,
                 trigger: 'manual'
             });
         },
         eventClick: function(calEvent, jsEvent, view) {
-            if (jsEvent.target.id === 'Delete') {
-                console.log(calEvent.id);
-                var source = url +'/' + calEvent.id;
 
-                $('#calendar').fullCalendar('removeEvents', calEvent._id);
+            if ($(jsEvent.target).attr('data-action') == 'delete') {
 
-                $.ajax({
-                    url: source,
-                    type: "POST",
-                    data: { _method:'DELETE' },
-                    success: function(msg) {
-                        'Удаление прошло успешно'
-                    }
-                });
+                var doDelete = confirm('Вы действительно хотите удалить?');
+
+                if (doDelete) {
+                    var source = url +'/' + calEvent.id;
+
+                    $('#calendar').fullCalendar('removeEvents', calEvent._id);
+
+                    $.ajax({
+                        url: source,
+                        type: "POST",
+                        data: { _method:'DELETE' },
+                        success: function(msg) {
+                            console.log('ajax request completed');
+                        }
+                    });
+                }
+
             }
         },
         eventMouseover: function(calEvent, jsEvent, view) {

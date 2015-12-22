@@ -4,7 +4,7 @@
   </div>
 </div></br>
 <div class="row">
-  <div id="calendar" class="col-md-7"> </div>
+  <div id="calendar" data-request-url="<%=course_periods_path(@course) %>" class="col-md-7"> </div>
   <div class="col-md-5">
     <%= provide :button_text, @button_text %>
     <%=	 render 'periods/form' %>
