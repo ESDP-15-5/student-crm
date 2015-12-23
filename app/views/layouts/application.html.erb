@@ -11,15 +11,15 @@
 
 <div class="container">
   <%=	 render 'layouts/navbar' %>
-</div>
 
-<div class="container">
-  <div class="row">
     <div class="col-md-12">
       <%= render 'layouts/breadcrums' %>
     </div>
-  </div>
-  <%= yield %>
+  <br>
+    <%= flash_messages %>
+
+    <%= yield %>
+
 </div>
 
 </body>

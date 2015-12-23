@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
+
   def get_initial_crums()
     {
         "Пользователи"=> users_path
@@ -6,12 +9,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
-  end
-
-  def destroy
-    User.destroy(params[:id])
-    redirect_to users_path
+    @users = User.paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -51,10 +49,49 @@ class UsersController < ApplicationController
 
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def students
+    student_role = Role.find_by(name: 'student')
+
+    @students = student_role.users.paginate(page: params[:page], per_page: 10)
+  end
+
+  def tutors
+    tutor_role = Role.find_by(name: :tutor)
+    @tutors = tutor_role.users.paginate(page: params[:page], per_page: 10)
+  end
+
+  def changes
+    @user = User.find(params[:id])
+    @audit = @user.audits
+  end
+
+  def destroy
+    User.destroy(params[:id])
+    redirect_to users_path
+  end
+
+
+
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation )
+    params.require(:user).permit(:name,
+                                 :surname,
+                                 :middlename,
+                                 :gender,
+                                 :birthdate,
+                                 :phone1,
+                                 :phone2,
+                                 :skype,
+                                 :passportdetails,
+                                 :email,
+                                 :image,
+                                 :password ,
+                                 {:role_ids => []})
   end
 
 

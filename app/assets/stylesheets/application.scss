@@ -8,3 +8,305 @@
 @import "courses";
 
 @import "fullcalendar";
+
+
+/* Navbar fixed top - по умолчанию будет закрывать контент, поэтому ставим отступ */
+body{
+  margin-top: 50px;
+}
+/* Конец  */
+/* Image upload */
+#pbox_user_image{
+  display:inline;
+  margin-right:2px;
+  width:100px;
+}
+.btn-img{
+  display:inline;
+}
+.usr-img-form{
+  margin-bottom:5px;
+}
+/* Alert classes for devise */
+.alert-notice {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.alert-alert {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+  text-align: left;
+}
+
+/* End of alert classes for devise */
+
+/* Login page and form styles */
+#login_page{
+  background-size:cover;
+  background-image:url('login-bg1.jpg');
+  /*
+  background-image:url('login-bg.png');
+  */
+  min-width: 0;
+  color: #444;
+  font-family: "Open Sans",sans-serif;
+  font-size: 13px;
+  line-height: 1.4em;
+}
+#login_page .btn-primary{
+  color: #fff;
+  background-color: #22415A;
+  border-color: #1D374E;
+}
+#login_page .btn-primary:hover{
+  color: #fff;
+  background-color: #172B3C;
+  border-color: #1D374E;
+}
+
+#login_page .alert-alert{
+  background-color: transparent;
+  border-color: transparent;
+  width:250px;
+  margin: auto;
+  color: #D83065;
+  z-index: 7000;
+  position: absolute;
+  text-align: center;
+  left: 300px;
+  right: 300px;
+}
+
+#login_page .form-control:focus {
+  border-color: #FF0000;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+#login{
+  width: 320px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+#login_form{
+  margin-top: 20px;
+  margin-left: 0;
+  margin-bottom: 10px;
+  padding: 26px 24px 20px;
+  font-weight: 400;
+  overflow: hidden;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+  box-shadow: 0 3px 5px rgba(0,0,0,.13);
+}
+
+#login_form label{
+  color: #777;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+#login a{
+  text-decoration: none;
+  color: #E1E3E4;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+#login a:hover{
+  color: #00a0d2;
+}
+
+/* End of login page and form styles */
+
+/* Pagination */
+.digg_pagination {
+  cursor: default;
+  /* self-clearing method: */ }
+.digg_pagination a, .digg_pagination span, .digg_pagination em {
+  padding: 0.2em 0.5em;
+  display: block;
+  float: left;
+  margin-right: 1px; }
+.digg_pagination .disabled {
+  color: #999999;
+  border: 1px solid #dddddd; }
+.digg_pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  background: #2e6ab1;
+  color: white;
+  border: 1px solid #2e6ab1; }
+.digg_pagination a {
+  text-decoration: none;
+  color: #105cb6;
+  border: 1px solid #9aafe5; }
+.digg_pagination a:hover, .digg_pagination a:focus {
+  color: #000033;
+  border-color: #000033; }
+.digg_pagination .page_info {
+  background: #2e6ab1;
+  color: white;
+  padding: 0.4em 0.6em;
+  width: 22em;
+  margin-bottom: 0.3em;
+  text-align: center; }
+.digg_pagination .page_info b {
+  color: #000033;
+  background: #6aa6ed;
+  padding: 0.1em 0.25em; }
+.digg_pagination:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; }
+* html .digg_pagination {
+  height: 1%; }
+*:first-child + html .digg_pagination {
+  overflow: hidden; }
+/* End of pagination */
+
+
+/* Sidebar css */
+.navbar{
+  margin-bottom: 0px;
+}
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  border-right: 1px solid #e7e7e7;
+  background-color: #f8f8f8;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.glyphicon {
+  height: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+  padding-left: 250px;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #2f2f2f;
+  background: #E0E0E0;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
+/* End of sidebar css */

@@ -26,3 +26,26 @@ function printpage()
 {
     window.print();
 }
+
+//this function calls alert close method to close an alert
+function clearFlash() {
+    $(".alert").alert('close');
+}
+//this function calls clearFlash method after 3 seconds
+var clearFlashOnReady = function () {
+    setTimeout(clearFlash, 3000);
+};
+
+//this function hides and shows avatars of users
+function hideshow(which){
+    if (!document.getElementsByClassName)
+        return
+    for(var i = 0; i < which.length; i++){
+
+        if (which[i].style.display=="none")
+            which[i].style.display="block";
+        else
+            which[i].style.display="none"
+    }
+}
+
