@@ -2,6 +2,7 @@
 
 
 <%= link_to 'Добавить материал',  new_course_course_element_course_element_material_path(@course, @course_element.id), class: 'btn btn-primary print' %>
+<%= link_to 'Отредактирвать материал',  edit_course_course_element_course_element_material_path(@course, @course_element.id, @course_element_material.id), class: 'btn btn-primary print' %>
 
 
 <%= link_to 'print', ' ' , onclick: "printpage()", class: 'btn btn-default print pull-right' %>

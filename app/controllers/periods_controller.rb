@@ -15,6 +15,11 @@ def get_initial_crums()
     @button_text = 'Создать занятие'
 
     @periods = Period.where(course_element_id: @course_elements)
+    hash_crums = {
+        @course.name => course_path(@course),
+        'Календарь'=>{}
+    }
+    @bread_crums = add_bread_crums(hash_crums)
   end
 
   def show
