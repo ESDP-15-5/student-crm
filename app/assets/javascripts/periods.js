@@ -20,18 +20,27 @@ $(document).bind('page:change', function() {
             }else{
                 var time = hours+':'+minutes;
             }
-            console.log(event);
+            var content = '<a href="'+'/courses/'+event.course_id+'/course_elements/'+event.course_element_id+'">'+
+                event.theme + '</a>' +
+                '<br> Тип занятия: ' +
+                event.element_type ;
 
+            console.log(event);
             element.html(time +
                 '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+
                 '<br>'+' '+event.name +'<br>' +
-                event.title
+                'Занятие '+event.title
             );
 
             element.popover({
-                title: 'Занятие ' + event.title,
-                content: event.theme + ' | ' + event.element_type,
-                trigger: 'manual'
+                title: time + '|Занятие ' + event.title,
+                content: content,
+                html: true,
+                trigger: 'hover',
+                delay: {
+                    show: "1000",
+                    hide: "2000"
+                }
             });
         },
         eventClick: function(calEvent, jsEvent, view) {
@@ -60,15 +69,12 @@ $(document).bind('page:change', function() {
         eventMouseover: function(calEvent, jsEvent, view) {
             //console.log(calEvent);
 
-            $(this).popover('toggle');
-            return false;
+            $(this).popover(
+                {}
+            );
+            return true;
         },
-        eventMouseout: function(calEvent, jsEvent, view) {
-            //console.log(calEvent);
 
-            $(this).popover('hide');
-            return false;
-        },
     });
 });
 
