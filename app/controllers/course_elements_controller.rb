@@ -12,11 +12,12 @@ class CourseElementsController < ApplicationController
     @course_element_file = CourseElementFile.where('course_element_id = ?', params[:id])
     @course_element_material = CourseElementMaterial.where('course_element_id = ?', params[:id])
 
+    @course_element_file_new = CourseElementFile.new
+
     hash_crums = {
         @course.name => course_path(@course.id),
         @course_element.theme => {}
     }
-
     @bread_crums = add_bread_crums(hash_crums)
   end
 
