@@ -90,15 +90,118 @@ course_elements.push CourseElement.create(course: courses.sample,
 groups = []
 groups.push Group.create(name: 'RoR1', course: courses[1])
 groups.push Group.create(name: 'RoR2', course: courses[1])
+groups.push Group.create(name: 'HTML1', course: courses[0])
+groups.push Group.create(name: 'HTML2', course: courses[0])
 
 periods = []
 periods.push Period.create(title: "1# Вводное",
                            commence_datetime: "19/Dec/2015 16:29:30 +0100".to_datetime,
                            course_element: course_elements.sample,
-                           group: groups[0],
+                           group: groups[2],
                            course: courses[1])
 periods.push Period.create(title: "2# Основы",
                            commence_datetime: "20/Dec/2015 16:30:30 +0100".to_datetime,
                            course_element: course_elements.sample,
-                           group: groups[0],
+                           group: groups[2],
                            course: courses[1])
+
+
+############# Занятия HTML для группы HTML1
+periods.push Period.create(title: "Введение в HTML",
+                           commence_datetime: "24/Dec/2015 18:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[2],
+                           course: courses[0])
+periods.push Period.create(title: "Обычный текст или абзац",
+                           commence_datetime: "28/Dec/2015 18:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[2],
+                           course: courses[0])
+periods.push Period.create(title: "Ссылки",
+                           commence_datetime: "31/Dec/2015 18:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[2],
+                           course: courses[0])
+periods.push Period.create(title: "Списки",
+                           commence_datetime: "04/Jan/2015 18:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[2],
+                           course: courses[0])
+periods.push Period.create(title: "Адpеса",
+                           commence_datetime: "07/Jan/2015 18:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[2],
+                           course: courses[0])
+periods.push Period.create(title: "Логические стили",
+                           commence_datetime: "11/Jan/2015 18:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[2],
+                           course: courses[0])
+periods.push Period.create(title: "Физические стили",
+                           commence_datetime: "14/Jan/2015 18:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[2],
+                           course: courses[0])
+periods.push Period.create(title: "Специальные символы",
+                           commence_datetime: "18/Jan/2015 18:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[2],
+                           course: courses[0])
+periods.push Period.create(title: "Рисунки",
+                           commence_datetime: "21/Jan/2015 18:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[2],
+                           course: courses[0])
+
+
+############# Занятия HTML для группы HTML2
+periods.push Period.create(title: "Введение в HTML",
+                           commence_datetime: "24/Dec/2015 20:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[3],
+                           course: courses[0])
+periods.push Period.create(title: "Обычный текст или абзац",
+                           commence_datetime: "28/Dec/2015 20:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[3],
+                           course: courses[0])
+periods.push Period.create(title: "Ссылки",
+                           commence_datetime: "31/Dec/2015 20:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[3],
+                           course: courses[0])
+periods.push Period.create(title: "Списки",
+                           commence_datetime: "04/Jan/2016 20:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[3],
+                           course: courses[0])
+periods.push Period.create(title: "Адpеса",
+                           commence_datetime: "07/Jan/2016 20:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[3],
+                           course: courses[0])
+periods.push Period.create(title: "Логические стили",
+                           commence_datetime: "11/Jan/2016 20:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[3],
+                           course: courses[0])
+periods.push Period.create(title: "Физические стили",
+                           commence_datetime: "14/Jan/2016 20:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[3],
+                           course: courses[0])
+periods.push Period.create(title: "Специальные символы",
+                           commence_datetime: "18/Jan/2016 20:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[3],
+                           course: courses[0])
+periods.push Period.create(title: "Рисунки",
+                           commence_datetime: "21/Jan/2016 20:00:30 +0600".to_datetime,
+                           course_element: course_elements.sample,
+                           group: groups[3],
+                           course: courses[0])
+
+
+
+
+
