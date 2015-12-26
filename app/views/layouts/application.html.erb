@@ -19,8 +19,15 @@
       <%= render 'layouts/breadcrums' %>
     </div>
   </div>
+  <%= flash_messages %>
+
   <%= yield %>
 </div>
 
 </body>
+
+<script>
+  clearFlashOnReady();
+</script>
 </html>
+
