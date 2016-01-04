@@ -25,7 +25,8 @@ class CourseElementFilesController < ApplicationController
 
     if @course_element_file.save
       # redirect_to course_course_element_path(@course, @course_element)
-       redirect_to :back
+      flash[:notice] = 'Файл успешно загружен!'
+      redirect_to :back
     else
       render 'new'
     end
@@ -35,6 +36,7 @@ class CourseElementFilesController < ApplicationController
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_file = CourseElementFile.destroy(params[:id])
+    flash[:notice] = 'Файл успешно удален!'
     redirect_to course_course_element_path(@course, @course_element)
   end
 

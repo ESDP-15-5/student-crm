@@ -17,7 +17,6 @@ class CoursesController < ApplicationController
     hash_crums = {
         "Элементы курса #{@course.name}"=> {}
     }
-
     @bread_crums = add_bread_crums(hash_crums)
   end
 
@@ -27,7 +26,6 @@ class CoursesController < ApplicationController
     hash_crums = {
         "Создание нового курса" => {}
     }
-
     @bread_crums = add_bread_crums(hash_crums)
 
   end
@@ -36,7 +34,7 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
 
     if @course.save
-
+      flash[:notice] = "Курс #{@course.name} успешно создан!"
       redirect_to @course
     else
       render 'new'
@@ -45,6 +43,7 @@ class CoursesController < ApplicationController
 
   def destroy
     @course = Course.destroy(params[:id])
+    flash[:notice] = 'Курс успешно удален!'
     redirect_to root_url
   end
 
@@ -61,6 +60,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
 
     if @course.update(course_params)
+      flash[:notice] = "Курс #{@course.name} успешно обновлен!"
       redirect_to root_url
     else
       render 'edit'

@@ -9,8 +9,8 @@ class CourseElementsController < ApplicationController
   def show
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
-    @course_element_file = CourseElementFile.where('course_element_id = ?', params[:id])
-    @course_element_material = CourseElementMaterial.where('course_element_id = ?', params[:id])
+    @course_element_file = @course_element.course_element_files
+    @course_element_material = @course_element.course_element_materials
 
     @course_element_file_new = CourseElementFile.new
 
@@ -38,6 +38,7 @@ class CourseElementsController < ApplicationController
     @course_element = @course.course_elements.build(course_element_params)
 
     if @course_element.save
+      flash[:notice] = 'Элемент курса успешно создан!'
       redirect_to course_path(@course)
     else
       render 'new'
@@ -60,16 +61,17 @@ class CourseElementsController < ApplicationController
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
     if @course_element.update(course_element_params)
-
+      flash[:notice] = 'Элемент курса успешно обновлен!'
+      redirect_to course_path(@course)
     else
       render 'edit'
     end
-    redirect_to course_path(@course)
   end
 
   def destroy
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.destroy(params[:id])
+    flash[:notice] = 'Элемент курса успешно удален!'
     redirect_to course_path(@course)
   end
 

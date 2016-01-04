@@ -39,6 +39,7 @@ class CourseElementMaterialsController < ApplicationController
     @course_element_material = @course_element.course_element_materials.build(course_element_material_params)
 
     if @course_element_material.save
+      flash[:notice] = "Раздаточный материал #{@course_element_material.title} успешно создан!"
       redirect_to course_course_element_path(@course, @course_element)
     else
       render 'new'
@@ -47,8 +48,8 @@ class CourseElementMaterialsController < ApplicationController
 
   def edit
     @course = Course.find(params[:course_id])
-    @course_element = CourseElement.find(params[:id])
-    @course_element_material = CourseElementMaterial.find(params[:id])
+    @course_element = CourseElement.find(params[:course_element_id])
+    @course_element_material = CourseElementMaterial.find(params[:course_element_id])
 
     hash_crums = {
         @course.name => course_path(@course.id),
@@ -65,6 +66,7 @@ class CourseElementMaterialsController < ApplicationController
     @course_element_material = CourseElementMaterial.find(params[:id])
 
     if @course_element_material.update(course_element_material_params)
+      flash[:notice] = 'Материал успешно обновлен!'
       redirect_to course_course_element_path(@course, @course_element)
     else
       render 'edit'
@@ -75,6 +77,7 @@ class CourseElementMaterialsController < ApplicationController
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_material = CourseElementMaterial.destroy(params[:id])
+    flash[:notice] = 'Материал успешно удален!'
     redirect_to course_course_element_path(@course, @course_element)
   end
 

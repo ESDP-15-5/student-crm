@@ -35,6 +35,7 @@ class GroupsController < ApplicationController
       @group = @course.groups.build(group_params)
 
       if @group.save
+        flash[:notice] = "Группа #{@group.name} успешно создана!"
         redirect_to course_path(@course)
       else
         render 'new'
@@ -57,16 +58,17 @@ class GroupsController < ApplicationController
       @course = Course.find(params[:course_id])
       @group = Group.find(params[:id])
       if @group.update(group_params)
-
+        flash[:notice] = 'Группа успешно обновлена!'
+        redirect_to course_path(@course)
       else
         render 'edit'
       end
-      redirect_to course_path(@course)
     end
 
     def destroy
       @course = Course.find(params[:course_id])
       @group = Group.destroy(params[:id])
+      flash[:notice] = 'Группа успешно удалена!'
       redirect_to course_path(@course)
     end
 

@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.destroy(params[:id])
+    flash[:notice] = 'Пользователь успешно удален!'
     redirect_to users_path
   end
 
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      flash[:notice] = "Пользователь #{@user.name} успешно создан!"
       redirect_to users_path
     else
       render 'new'

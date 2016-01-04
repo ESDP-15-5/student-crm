@@ -50,6 +50,7 @@ def get_initial_crums()
     @period = @course.periods.build(period_params)
 
     if @period.save
+      flash[:notice] = 'Занятие успешно создано!'
       redirect_to :back
     else
       render 'new'
@@ -58,6 +59,7 @@ def get_initial_crums()
 
   def destroy
     @period = Period.destroy(params[:id])
+    flash[:notice] = 'Занятие успешно удалено!'
     redirect_to root_path
   end
 
@@ -79,6 +81,7 @@ def get_initial_crums()
     @period = Period.find(params[:id])
 
     if @period.update(period_params)
+      flash[:notice] = 'Занятие успешно обновлено!'
       redirect_to :back
     else
       render 'edit'
