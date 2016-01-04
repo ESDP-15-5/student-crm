@@ -5,7 +5,7 @@
 <%= link_to 'Отредактирвать материал',  edit_course_course_element_course_element_material_path(@course, @course_element.id, @course_element_material.id), class: 'btn btn-primary print' %>
 
 
-<%= link_to 'print', ' ' , onclick: "printpage()", class: 'btn btn-default print pull-right' %>
+<%= link_to 'Распечатать', ' ' , onclick: "printpage()", class: 'btn btn-default print pull-right' %>
 
 <div class='content margin-top20 no-border'>
   <%= @course_element_material.content.html_safe %>
