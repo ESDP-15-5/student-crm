@@ -29,7 +29,8 @@ $(document).bind('page:change', function() {
             element.html(time +
                 '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+
                 '<br>'+' '+event.name +'<br>' +
-                'Занятие '+event.title
+                 '<a href="'+url+'/'+event.id+'/edit'+'" class="without_underline">'+
+                'Занятие '+event.title+'</a>'
             );
 
             element.popover({
