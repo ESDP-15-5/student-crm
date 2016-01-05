@@ -255,3 +255,14 @@ ru:
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
     pm: вечера
+
+
+  unauthorized:
+    default: "У вас нет доступа для данного действия"
+
+
+  will_paginate:
+    previous_label: "&#8592; Пред."
+    next_label: "След. &#8594;"
+    page_gap: "&hellip;"
+

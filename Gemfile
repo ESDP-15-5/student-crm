@@ -76,5 +76,12 @@ gem 'jquery-ui-rails'
 gem 'momentjs-rails'
 gem 'fullcalendar-rails'
 
+gem 'faker'
 
+gem 'cancancan'
 
+gem 'rolify'
+
+gem 'will_paginate', '~> 3.0.6'
+
+gem 'simple_form'

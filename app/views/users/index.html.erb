@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 <div class="row">
@@ -5,27 +6,46 @@
     <h1>Таблица пользователей</h1>
   </div>
 </div></br>
+=======
+<h3> Все пользователи </h3>
+>>>>>>> origin/users
 
-<%= link_to 'Создать пользователя', new_user_path, class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
+<div class="digg_pagination" style="margin:auto">
+  <%= will_paginate @users %>
+</div>
 
-<table class="table table-bordered table-striped">
+<div class="row">
+  <%= link_to 'Добавить пользователя', new_user_path, class:'btn btn-primary' %>
+</div>
+<br />
+<table class="table table-condensed">
   <tr>
-    <th>email</th>
-    <th style="width:250px;"> Действия </th>
+    <th>Пользователь</th>
+    <th>Роли</th>
+    <th>Действия</th>
   </tr>
 
   <% @users.each do |user| %>
       <tr>
-        <td><%=  user.email  %></td>
+        <td><%= link_to user.full_name, user_path(user) %></td>
         <td>
+          <% user.roles.each do |role| %>
+              <p><%= role.name %></p>
+          <% end %>
+        </td>
+        <td>
+<<<<<<< HEAD
           <% if current_user.email == user.email %>
           <%= link_to 'Удалить', user_path(user),
                       method: :delete,
                       data: {confirm: 'Вы действительно хотите удалить пользователя?'},  :class => 'btn btn-default pull-right'  %>
           <%= link_to 'Редактировать', edit_user_path(user), :class => 'btn btn-default pull-right'  %>
           <% end %>
+=======
+          <%= link_to '', edit_user_path(user), class: 'glyphicon glyphicon-pencil' %>
+>>>>>>> origin/users
         </td>
       </tr>
   <% end %>
-
 </table>
+
