@@ -35,8 +35,6 @@ function clearFlash() {
 var clearFlashOnReady = function () {
     setTimeout(clearFlash, 3000);
 };
-<<<<<<< HEAD
-=======
 
 //this function hides and shows avatars of users
 function hideshow(which){
@@ -50,5 +48,3 @@ function hideshow(which){
             which[i].style.display="none"
     }
 }
-
->>>>>>> origin/users

@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-
-
-<div class="row">
-  <div class="col-md-6">
-    <h1>Таблица пользователей</h1>
-  </div>
-</div></br>
-=======
 <h3> Все пользователи </h3>
->>>>>>> origin/users
 
 <div class="digg_pagination" style="margin:auto">
   <%= will_paginate @users %>
@@ -34,18 +24,8 @@
           <% end %>
         </td>
         <td>
-<<<<<<< HEAD
-          <% if current_user.email == user.email %>
-          <%= link_to 'Удалить', user_path(user),
-                      method: :delete,
-                      data: {confirm: 'Вы действительно хотите удалить пользователя?'},  :class => 'btn btn-default pull-right'  %>
-          <%= link_to 'Редактировать', edit_user_path(user), :class => 'btn btn-default pull-right'  %>
-          <% end %>
-=======
           <%= link_to '', edit_user_path(user), class: 'glyphicon glyphicon-pencil' %>
->>>>>>> origin/users
         </td>
       </tr>
   <% end %>
 </table>
-

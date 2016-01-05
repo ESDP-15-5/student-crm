@@ -8,10 +8,6 @@
 @import "courses";
 
 @import "fullcalendar";
-<<<<<<< HEAD
-@import "periods";
-
-=======
 
 
 /* Navbar fixed top - по умолчанию будет закрывать контент, поэтому ставим отступ */
@@ -31,7 +27,6 @@ body{
 .usr-img-form{
   margin-bottom:5px;
 }
->>>>>>> origin/users
 /* Alert classes for devise */
 .alert-notice {
   color: #31708f;
@@ -47,8 +42,6 @@ body{
 }
 
 /* End of alert classes for devise */
-<<<<<<< HEAD
-=======
 
 /* Login page and form styles */
 #login_page{
@@ -317,4 +310,3 @@ body{
 }
 
 /* End of sidebar css */
->>>>>>> origin/users
