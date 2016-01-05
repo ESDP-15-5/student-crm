@@ -10,24 +10,17 @@
 <body>
 
 <div class="container">
-  <%=	 render 'shared/navbar' %>
-</div>
+  <%=	 render 'layouts/navbar' %>
 
-<div class="container">
-  <div class="row">
     <div class="col-md-12">
-      <%= render 'shared/breadcrums' %>
+      <%= render 'layouts/breadcrums' %>
     </div>
-  </div>
-  <%= flash_messages %>
+  <br>
+    <%= flash_messages %>
 
-  <%= yield %>
+    <%= yield %>
+
 </div>
 
 </body>
-
-<script>
-  clearFlashOnReady();
-</script>
 </html>
-
