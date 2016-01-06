@@ -22,3 +22,6 @@ ru:
         user:
           password: Пароль
           password_confirmation: Подтверждающий пароль
+        period:
+          title: Название занятия
+          commence_datetime: Время начала

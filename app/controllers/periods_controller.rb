@@ -9,12 +9,12 @@ def get_initial_crums()
 
   def index
     @course = Course.find(params[:course_id])
-    @course_elements = @course.course_elements
+    @course_elements = CourseElement.where(course_id: @course)
     @groups = Group.where(course_id: @course)
     @period = Period.new
     @button_text = 'Создать занятие'
 
-    @periods = Period.where(course_element_id: @course_elements)
+    @periods = Period.where(group_id: @groups)
     hash_crums = {
         @course.name => course_path(@course),
         'Календарь'=>{}
@@ -53,7 +53,7 @@ def get_initial_crums()
       flash[:notice] = 'Занятие успешно создано!'
       redirect_to :back
     else
-      render 'new'
+      redirect_to :back
     end
   end
 

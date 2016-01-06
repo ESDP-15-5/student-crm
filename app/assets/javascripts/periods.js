@@ -5,6 +5,7 @@ $(document).bind('page:change', function() {
     console.log(url);
 
     $('#calendar').fullCalendar({
+        firstDay: 1,
         events: url + '.json',
         header: {
             left: 'prev,next today',
@@ -26,15 +27,19 @@ $(document).bind('page:change', function() {
                 event.element_type ;
 
             console.log(event);
-            element.html(time +
-                '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+
-                '<br>'+' '+event.name +'<br>' +
-                 '<a href="'+url+'/'+event.id+'/edit'+'" class="without_underline">'+
-                'Занятие '+event.title+'</a>'
+            var icon_element_type = (event.element_type == 'Лекция') ? '<span class="glyphicon glyphicon-book"></span>' :
+                (event.element_type == 'Вебинар') ? '<span class="glyphicon glyphicon-facetime-video"></span>' :
+                    (event.element_type == 'Лабораторная') ? '<span class="glyphicon glyphicon-blackboard"></span>' :
+                        '<span class="glyphicon glyphicon-fire cw"></span>';
+
+            element.html(
+                icon_element_type +' '+ event.name + '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+
+                '<br>'+ '<a href="'+url+'/'+event.id+'/edit'+'" class="without_underline">'+
+                event.title+'</a>'
             );
 
             element.popover({
-                title: time + '|Занятие ' + event.title,
+                title: time + '|Занятие: ' + event.title,
                 content: content,
                 html: true,
                 trigger: 'hover',
@@ -75,6 +80,19 @@ $(document).bind('page:change', function() {
             );
             return true;
         },
+
+        monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        monthNamesShort: ['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.'],
+        dayNames: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"],
+        dayNamesShort: ["ВС","ПН","ВТ","СР","ЧТ","ПТ","СБ"],
+        buttonText: {
+            prevYear: "&nbsp;&lt;&lt;&nbsp;",
+            nextYear: "&nbsp;&gt;&gt;&nbsp;",
+            today: "Сегодня",
+            month: "Месяц",
+            week: "Неделя",
+            day: "День"
+        }
 
     });
 });
