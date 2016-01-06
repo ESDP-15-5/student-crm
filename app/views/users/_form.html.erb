@@ -1,5 +1,5 @@
 <% if current_user.has_any_role? :admin, :manager %>
-    <%= simple_form_for(@user, html: {class: 'form-horizontal'},
+    <%= simple_form_for(@user, html: {class: 'form-horizontal', autocomplete: 'off'},
                         wrapper: :horizontal_form,
                         wrapper_mappings: {
                             check_boxes: :horizontal_radio_and_checkboxes,
@@ -36,9 +36,9 @@
           </div>
           <div class="col-md-6 col-xs-12">
             <%= f.input :email, label: 'Эл.почта', placeholder: 'Только @gmail.com',
-                        input_html: {style: 'width:200px;'} %>
+                        input_html: {style: 'width:200px;', autocomplete: 'false'} %>
             <%= f.input :password, label: 'Password', placeholder: 'Password',
-                        input_html: {style: 'width:200px;' } %>
+                        input_html: {style: 'width:200px;', autocomplete: 'false' } %>
             <%= f.input :phone1, as: :tel, label: 'Тел.1', placeholder: 'Мобильный номер 1',
                         input_html: {style: 'width:200px;', maxlength: 13} %>
             <%= f.input :phone2, label: 'Тел.2', placeholder: 'Мобильный номер 2',
@@ -58,21 +58,21 @@
     <% end %>
     <!-- Если пользователь студент, препод, или суппорт, то разрешить изменять только эти данные -->
 <% else %>
-    <%= simple_form_for(@user, html: {class: 'form-horizontal'},
+    <%= simple_form_for(@user, html: {class: 'form-horizontal', autocomplete: 'off', dataSomething: 'lkjlkj' },
                         wrapper: :horizontal_form,
                         wrapper_mappings: {
                             check_boxes: :horizontal_radio_and_checkboxes,
                             radio_buttons: :horizontal_radio_and_checkboxes,
                             file: :horizontal_file_input,
                             boolean: :horizontal_boolean
-                        }) do |f| %>
+                        }, ) do |f| %>
 
         <div class="row">
           <div class="col-md-6 col-xs-12">
             <%= f.input :email, label: 'Эл.почта', placeholder: 'Только @gmail.com',
                         input_html: {style: 'width:200px;'} %>
             <%= f.input :password, label: 'Password', placeholder: 'Password',
-                        input_html: {style: 'width:200px;'} %>
+                        input_html: {autocomplete: 'off', style: 'width:200px;'} %>
             <%= f.input :phone1, as: :tel, label: 'Тел.1', placeholder: 'Мобильный номер 1',
                         input_html: {style: 'width:200px;', maxlength: 13} %>
             <%= f.input :phone2, label: 'Тел.2', placeholder: 'Мобильный номер 2',
