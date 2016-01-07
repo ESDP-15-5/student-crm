@@ -12,6 +12,7 @@ $(document).bind('page:change', function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
+        height: 'auto',
         eventRender: function(event, element) {
             var full_time = new Date(Date.parse(event.start));
             var hours = full_time.getHours();
