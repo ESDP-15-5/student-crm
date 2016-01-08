@@ -1,4 +1,3 @@
-
 $(document).bind('page:change', function() {
 
     var url = $("#calendar").attr('data-request-url');
@@ -32,6 +31,46 @@ $(document).bind('page:change', function() {
                 (event.element_type == 'Вебинар') ? '<span class="glyphicon glyphicon-facetime-video"></span>' :
                     (event.element_type == 'Лабораторная') ? '<span class="glyphicon glyphicon-blackboard"></span>' :
                         '<span class="glyphicon glyphicon-fire cw"></span>';
+
+            var last_index_of_name = (event.name.slice(-1));
+            switch (last_index_of_name) {
+                case '1':
+                    element.css({
+                        'color': 'black',
+                        'background': 'red'
+                    });
+                    break;
+                case '2':
+                    element.css({
+                        'color': 'black',
+                        'background': 'orange'
+                    });
+                    break;
+                case '3':
+                    element.css({
+                        'color': 'black',
+                        'background': 'yellow'
+                    });
+                    break;
+                case '4':
+                    element.css({
+                        'color': 'black',
+                        'background': 'green'
+                    });
+                    break;
+                case '5':
+                    element.css({
+                        'color': 'black',
+                        'background': 'blue'
+                    });
+                    break;
+                case '6':
+                    element.css({
+                        'color': 'black',
+                        'background': 'violet'
+                    });
+                    break;
+            }
 
             element.html(
                 icon_element_type +' '+ event.name + '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+

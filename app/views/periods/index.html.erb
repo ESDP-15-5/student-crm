@@ -1,6 +1,14 @@
+<% @Groups = [1,2,3,4,5,6] %>
+<% @Colors = ['red','orange', 'yellow', 'green', 'blue', 'violet'] %>
 <div class="row">
   <div class="col-md-4">
     <h1>Календарь занятий</h1>
+  </div>
+  <div class="col-md-8">
+    <h3 style="margin-bottom: 0px">примеры групп по цветам</h3>
+    <% for i in @Groups do %>
+      <div class="color_examples" style=" background-color: <%= @Colors[i-1] %>;">Гр<%= i %></div>
+    <% end %>
   </div>
 </div></br>
 <div class="row">

@@ -147,15 +147,6 @@ ActiveRecord::Schema.define(version: 20151222133816) do
   add_index "periods", ["course_element_id"], name: "index_periods_on_course_element_id"
   add_index "periods", ["deleted_at"], name: "index_periods_on_deleted_at"
 
-<<<<<<< HEAD
-  create_table "sms_service_accounts", force: :cascade do |t|
-    t.string   "login"
-    t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-=======
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -167,7 +158,6 @@ ActiveRecord::Schema.define(version: 20151222133816) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
 
->>>>>>> origin/users
   create_table "students", force: :cascade do |t|
     t.string   "name"
     t.string   "phone"
