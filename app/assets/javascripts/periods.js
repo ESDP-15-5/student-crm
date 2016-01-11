@@ -75,8 +75,8 @@ $(document).bind('page:change', function() {
             element.html(
                 '<div id="'+event.id+'" data-type="period">'+
                 icon_element_type +' '+ event.name +
-                '<br>'+ '<a href="'+url+'/'+event.id+'/edit'+'" class="without_underline">'+
-                event.title+'</a>'+
+                '<br>'+
+                event.title+
                 '</div>'
             );
 
@@ -109,7 +109,8 @@ $(document).bind('page:change', function() {
             });
         },
         eventClick: function(calEvent, jsEvent, view) {
-
+                        var redirect_url = url+'/'+calEvent.id+'/edit';
+                        $(location).attr('href',redirect_url);
         },
         eventMouseover: function(calEvent, jsEvent, view) {
             //console.log(calEvent);
