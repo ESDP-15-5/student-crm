@@ -1,7 +1,7 @@
 $(document).bind('page:change', function() {
 
     var url = $("#calendar").attr('data-request-url');
-    console.log(url);
+    //console.log(url);
 
     $('#calendar').fullCalendar({
         firstDay: 1,
@@ -26,7 +26,7 @@ $(document).bind('page:change', function() {
                 '<br> Тип занятия: ' +
                 event.element_type ;
 
-            console.log(event);
+            //console.log(event);
             var icon_element_type = (event.element_type == 'Лекция') ? '<span class="glyphicon glyphicon-book"></span>' :
                 (event.element_type == 'Вебинар') ? '<span class="glyphicon glyphicon-facetime-video"></span>' :
                     (event.element_type == 'Лабораторная') ? '<span class="glyphicon glyphicon-blackboard"></span>' :
@@ -73,9 +73,11 @@ $(document).bind('page:change', function() {
             }
 
             element.html(
-                icon_element_type +' '+ event.name + '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+
+                '<div id="'+event.id+'" data-type="period">'+
+                icon_element_type +' '+ event.name +
                 '<br>'+ '<a href="'+url+'/'+event.id+'/edit'+'" class="without_underline">'+
-                event.title+'</a>'
+                event.title+'</a>'+
+                '</div>'
             );
 
             element.popover({
@@ -88,18 +90,13 @@ $(document).bind('page:change', function() {
                     hide: "2000"
                 }
             });
-        },
-        eventClick: function(calEvent, jsEvent, view) {
 
-            if ($(jsEvent.target).attr('data-action') == 'delete') {
-
+            element.dblclick(function(){
                 var doDelete = confirm('Вы действительно хотите удалить?');
-
                 if (doDelete) {
-                    var source = url +'/' + calEvent.id;
-
-                    $('#calendar').fullCalendar('removeEvents', calEvent._id);
-
+                    var source = url +'/' + event.id;
+                    console.log(event);
+                    $('#calendar').fullCalendar('removeEvents', event.id);
                     $.ajax({
                         url: source,
                         type: "POST",
@@ -109,8 +106,10 @@ $(document).bind('page:change', function() {
                         }
                     });
                 }
+            });
+        },
+        eventClick: function(calEvent, jsEvent, view) {
 
-            }
         },
         eventMouseover: function(calEvent, jsEvent, view) {
             //console.log(calEvent);
