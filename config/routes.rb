@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :courses do
-    resources :groups
+    resources :groups do
+      resources :group_memberships
+    end
     resources :periods
     resources :course_elements do
       post :update_row_order, on: :collection

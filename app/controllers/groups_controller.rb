@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
     def show
       @course = Course.find(params[:course_id])
       @group = Group.find(params[:id])
+      @students = @group.students
 
       hash_crums = {
           @course.name => course_path(@course.id),
@@ -75,7 +76,7 @@ class GroupsController < ApplicationController
     private
 
     def group_params
-      params.require(:group).permit( :course_id, :name)
+      params.require(:group).permit(:name, :id, :course_id, {:student_ids => []})
     end
 
 

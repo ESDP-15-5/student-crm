@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
+  helper_method :sort_column, :sort_direction, :role_sort_column
 
   def get_initial_crums()
     {
@@ -9,8 +10,10 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 10)
+    scoped_users = User.all
+    @users = User.search(params[:search], scoped_users).joins(:roles).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10).uniq
   end
+
 
   def new
     @user = User.new
@@ -93,6 +96,20 @@ class UsersController < ApplicationController
                                  :image,
                                  :password ,
                                  {:role_ids => []})
+  end
+
+  def sort_column
+    # params[:sort] || "name"
+    User.column_names.include?(params[:sort]) ? params[:sort] : 'role_id'
+  end
+
+  def role_sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+  end
+
+  def sort_direction
+    # params[:direction] || 'asc'
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
 

@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :periods, through: :attendances
+  has_and_belongs_to_many :roles, join_table: :users_roles
 
   has_attached_file :image,
                     styles: {medium: '300x300>', thumb: '100x100>'},
@@ -54,14 +55,12 @@ class User < ActiveRecord::Base
     students.where.not(id: student_ids).order(created_at: :desc)
   end
 
-  # before_save :set_default_password
-  #
-  #
-  # private
-  #
-  # def set_default_password
-  #   self.password = self.name
-  # end
-
+  def self.search(search, scoped_users)
+    if search
+      where('users.name || users.surname || users.middlename LIKE ?', "%#{search}%")
+    else
+      scoped_users
+    end
+  end
 
 end

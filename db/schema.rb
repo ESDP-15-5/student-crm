@@ -113,14 +113,14 @@ ActiveRecord::Schema.define(version: 20151222133816) do
 
   create_table "group_memberships", force: :cascade do |t|
     t.integer  "group_id"
-    t.integer  "student_id"
+    t.integer  "user_id"
     t.boolean  "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "group_memberships", ["group_id"], name: "index_group_memberships_on_group_id"
-  add_index "group_memberships", ["student_id"], name: "index_group_memberships_on_student_id"
+  add_index "group_memberships", ["user_id"], name: "index_group_memberships_on_user_id"
 
   create_table "groups", force: :cascade do |t|
     t.integer  "course_id"

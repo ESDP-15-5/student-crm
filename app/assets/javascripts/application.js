@@ -48,3 +48,16 @@ function hideshow(which){
             which[i].style.display="none"
     }
 }
+
+// this is for live search/sort for users
+$(function() {
+    $(document).delegate("#users th a, #users .pagination a","click", function() {
+        $.getScript(this.href);
+        return false;
+    });
+    $("#users_search input").keyup(function() {
+        $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
+        return false;
+    });
+});
+
