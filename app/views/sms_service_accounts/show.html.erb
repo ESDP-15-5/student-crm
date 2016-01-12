@@ -1,0 +1,29 @@
+<div class="col-sm-6">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table">
+        <tr>
+          <td>Логин</td>
+          <td><%= @sms_service_account.login %></td>
+        </tr>
+        <tr>
+          <td>Пароль</td>
+          <td><%= @sms_service_account.password %></td>
+        </tr>
+
+        <tr>
+          <td>Отправители</td>
+          <td>
+          <% if @sms_service_account.senders.size == 0 %>
+            Не созданы
+          <% else %>
+            <% @sms_service_account.senders.each do |sender| %>
+              <p><%= sender.name %></p>
+            <% end %>
+          <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
