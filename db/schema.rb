@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112100005) do
+ActiveRecord::Schema.define(version: 20160112101944) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "student_id"
@@ -157,6 +157,20 @@ ActiveRecord::Schema.define(version: 20160112100005) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "sms_deliveries", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "sender_id"
+    t.integer  "contact_list_id"
+    t.boolean  "status",          default: false
+    t.datetime "delivery_time"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "sms_deliveries", ["contact_list_id"], name: "index_sms_deliveries_on_contact_list_id"
+  add_index "sms_deliveries", ["sender_id"], name: "index_sms_deliveries_on_sender_id"
 
   create_table "sms_service_accounts", force: :cascade do |t|
     t.string   "login"
