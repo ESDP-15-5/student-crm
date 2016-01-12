@@ -282,4 +282,6 @@ periods.push Period.create(title: "Рисунки",
 
 
 
+# Sms Service Accounts
+login_nikita = SmsServiceAccount.create!(login: 'faridbabazov', password: 'eAswyztN')
 
