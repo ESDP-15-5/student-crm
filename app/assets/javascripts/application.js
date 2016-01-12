@@ -20,6 +20,7 @@
 //= require ckeditor/init
 //= require moment
 //= require fullcalendar
+//= require dropzone
 //= require_tree .
 
 function printpage()

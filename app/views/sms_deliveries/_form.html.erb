@@ -1,0 +1,50 @@
+<%= form_for @sms_delivery, html: {class: 'form-horizontal'} do |f| %>
+
+    <div class="form-group col-sm-12">
+      <%= f.label :content, value: 'Текст*', class: 'col-sm-3 control-label' %>
+      <div class="col-sm-6">
+        <span>количество символов: </span><span id="char-num"></span>
+        <span>количество сообщений: </span><span id="sms-count"></span>
+        <%= f.text_area :content, rows: 10, class: 'form-control', id: 'text-field' %>
+        <%= render 'shared/field_errors', object: @sms_delivery, field_name: :content %>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12">
+      <%= f.label :senders, value: 'Отправитель*', class: 'col-sm-3 control-label' %>
+
+      <div class="col-sm-6">
+        <%= f.collection_select :sender_id, Sender.all.order(created_at: :desc), :id, :name, {}, class: 'form-control'  %>
+      </div>
+      <%= render 'shared/field_errors', object: @sms_delivery, field_name: :sender %>
+    </div>
+
+		<div class="form-group col-sm-12">
+			<%= f.label :contact_list, value: 'Лист получателей*', class: 'col-sm-3 control-label'  %>
+			<div class="col-sm-6">
+				<%= f.collection_select :contact_list_id, ContactList.all.where(temp: false).order(created_at: :desc), :id, :title, {}, class: 'form-control'  %>
+			</div>
+			<%= render 'shared/field_errors', object: @sms_delivery, field_name: :contact_list %>
+		</div>
+
+		<div class="form-group col-sm-12">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="dropzone" id="my-awesome-dropzone" data-url="<%= import_custom_lists_path %>">
+				</div>
+			</div>
+		</div>
+
+    <div class="form-group col-sm-12">
+      <%= f.label :title, value: 'Название*', class: 'col-sm-3 control-label' %>
+      <div class="col-sm-6">
+        <%= f.text_field :title, autofocus: true, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @sms_delivery, field_name: :title %>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12">
+      <div class="col-sm-offset-3 col-sm-6">
+        <%= f.submit 'Сохранить', class: 'btn btn-default' %>
+      </div>
+    </div>
+<% end %>

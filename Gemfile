@@ -85,3 +85,6 @@ gem 'rolify'
 gem 'will_paginate', '~> 3.0.6'
 
 gem 'simple_form'
+
+gem 'roo', '~> 2.1.0'
+gem 'dropzonejs-rails'
