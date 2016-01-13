@@ -43,8 +43,8 @@ class SmsDelivery < ActiveRecord::Base
   def build_report
     Nokogiri::XML::Builder.new do |xml|
       xml.dr {
-        xml.login('aisma')
-        xml.pwd('kiminitodoke')
+        xml.login(sender.sms_service_account.login)
+        xml.pwd(sender.sms_service_account.password)
         xml.id(id.to_s + 'Mesp1502')
       }
     end
