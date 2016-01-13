@@ -21,16 +21,18 @@ phonecodes.flatten!
 password = 'password'
 
 #creating students
-50.times do
+20.times do
   User.create!(
       name: Faker::Name.first_name,
       surname: Faker::Name.last_name,
       middlename: Faker::Name.first_name,
       gender: ['Мужчина', 'Женщина'].sample,
       birthdate: Faker::Date.backward,
-      phone1: ('+996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
-      phone2: ('+996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
-      skype: ((Faker::Name.name.downcase!).split(' ')).join('_'),
+      contact_attributes: {
+          phone:('996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
+          additional_phone:('996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
+          skype:((Faker::Name.name.downcase!).split(' ')).join('_')
+      },
       passportdetails: Faker::Lorem.word,
       email: "#{Faker::Name.first_name}.#{Faker::Name.last_name}@gmail.com",
       password: password,
@@ -43,9 +45,10 @@ manager = User.create!(name: 'manager',
                        surname: 'manager',
                        gender: 'Мужчина',
                        birthdate: '02.09.1992',
-                       phone1: '+996772180825',
-                       phone2: '+996772180825',
-                       skype: 'skype.daniyar',
+                       contact_attributes: {
+                           phone:'996559250209',
+                           additional_phone:'',
+                           skype:'skype.daniyar'},
                        passportdetails:'abijjljlk',
                        email: 'manager@gmail.com', password: password, password_confirmation: password)
 
@@ -55,21 +58,22 @@ student = User.create!(name: 'Student',
                        surname: 'Lastname',
                        gender: 'Мужчина',
                        birthdate: '02.09.1992',
-                       phone1: '+996772180825',
-                       phone2: '+996772180825',
-                       skype: 'skype.daniyar',
+                       contact_attributes: {
+                           phone:'996559250209',
+                           additional_phone:'',
+                           skype:'skype.daniyar'},
                        passportdetails:'abijjljlk',
                        email: 'student@gmail.com', password: password, password_confirmation: password)
 
 student.add_role 'student'
-
-admin = User.create!(name: 'Admin',
-                     surname: 'Lastname',
+admin = User.create!(name: 'Farid',
+                     surname: 'Babazov',
                      gender: 'Мужчина',
-                     birthdate: '02.09.1992',
-                     phone1: '+996772180825',
-                     phone2: '+996772180825',
-                     skype: 'skype.admin',
+                     birthdate: '06.11.1992',
+                     contact_attributes: {
+                         phone:'996772183644',
+                         additional_phone:'',
+                         skype:'skype.admin'},
                      passportdetails:'MVD 50-01',
                      email: 'admin@gmail.com', password: password, password_confirmation: password)
 
@@ -79,14 +83,14 @@ tutor = User.create!(name: 'Tutor',
                      surname: 'Lastname',
                      gender: 'Мужчина',
                      birthdate: '02.09.1992',
-                     phone1: '+996772180825',
-                     phone2: '+996772180825',
-                     skype: 'skype.tutor',
+                     contact_attributes: {
+                         phone:'996772183644',
+                         additional_phone:'',
+                         skype:'skype.tutor'},
                      passportdetails:'MVD 50-01',
                      email: 'tutor@gmail.com', password: password, password_confirmation: password)
 
-tutor.add_role 'tutor'
-
+tutor.add_role 'manager'
 
 courses = []
 
