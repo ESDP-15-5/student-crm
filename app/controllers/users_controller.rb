@@ -95,7 +95,8 @@ class UsersController < ApplicationController
                                  :email,
                                  :image,
                                  :password ,
-                                 {:role_ids => []})
+                                 :role_ids => [],
+                                 contact_attributes: [:id, :phone, :additional_phone, :skype])
   end
 
   def sort_column
