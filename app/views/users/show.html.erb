@@ -32,7 +32,7 @@
               </tr>
               <tr>
                 <td>Skype</td>
-                <td><%= @user.skype %></td>
+                <td><%= @user.contact.skype %></td>
               </tr>
               <tr>
                 <td>Email:</td>
@@ -40,8 +40,8 @@
               </tr>
               <td>Phones:</td>
               <td>
-                <%= @user.phone1 %> <br/>
-                <%= @user.phone2 %>
+                <%= @user.contact.phone %> <br/>
+                <%= @user.contact.additional_phone %>
               </td>
               </tr>
               <tr>
