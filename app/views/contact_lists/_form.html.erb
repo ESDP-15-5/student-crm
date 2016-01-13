@@ -1,0 +1,54 @@
+<%= form_for @contact_list, html: {class: 'form-horizontal'} do |f| %>
+
+    <div class="form-group col-sm-12">
+      <%= f.label 'Название*', class: 'col-sm-3 control-label' %>
+      <div class="col-sm-6">
+        <%= f.text_field :title, autofocus: true, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @contact_list, field_name: :title %>
+      </div>
+    </div>
+
+	<div class="form-group col-sm-12">
+      <%= f.label 'Контакты*', class: 'col-sm-3 control-label' %>
+      <div class="col-sm-6">
+	    <%= f.collection_check_boxes(:user_ids, User.all, :id, :name) do |student| %>
+    	  <ul class="checkbox">
+	        <li>
+		      <%= student.check_box %>
+			  <%= student.label %><br/>
+		    </li>
+		  </ul>
+	    <% end %>
+	  </div>
+    </div>
+
+    <!--<div class="form-group col-sm-12">-->
+      <!--<%= f.label 'Курс', class: 'col-sm-2 control-label' %>-->
+      <!--<div class="col-sm-8">-->
+        <!--<%= f.collection_select(:users, Course.all, :id, :name, {:include_blank => "Выберите курс"}, {:id=>'select-course-id'}) %>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group col-sm-12">-->
+      <!--<%= f.label 'Группа', class: 'col-sm-2 control-label' %>-->
+      <!--<div class="col-sm-8">-->
+        <!--<%= f.collection_select(:users, [], :id, :name,  {:include_blank => "Выберите группу"}, {:id=>'select-group-id'}) %>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group col-sm-12">-->
+      <!--<%= f.label 'Контакты', class: 'col-sm-2 control-label' %>-->
+      <!--<div class="col-sm-6">-->
+        <!--<ul class="checkbox" id="student-list">-->
+          <!--<li>Нет данных для отображения</li>-->
+        <!--</ul>-->
+        <!--<%= render 'shared/field_errors', object: @contact_list, field_name: :students %>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="form-group col-sm-12">
+      <div class="col-sm-offset-3 col-sm-6">
+        <%= f.submit 'Сохранить', class: 'btn btn-default' %>
+      </div>
+    </div>
+<% end %>

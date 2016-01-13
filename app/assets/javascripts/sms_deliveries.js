@@ -1,7 +1,8 @@
 $(window).on('page:change', function() {
-    if ($(".sms_deliveries.new").length == 0) {
+    if (($(".sms_deliveries.new").length == 0)) {
         return;
     }
+// скрипт не работает при переходе из contact_lists надо сделать проверку на страницу
 
     var messageTextField = $('#text-field');
 
