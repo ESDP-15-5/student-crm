@@ -81,22 +81,49 @@ $(document).bind('page:change', function() {
             );
 
             element.popover({
-                title: time + '|Занятие: ' + event.title,
+                title: '<div class="raw">'+
+                '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+
+                time +
+                '|Занятие: ' +
+                event.title +
+                '</div>',
                 content: content,
                 html: true,
-                trigger: 'hover',
-                delay: {
-                    show: "1000",
-                    hide: "2000"
-                }
+                trigger: 'manual'
             });
 
-            element.dblclick(function(){
+            element.on('click', function(){
+                var redirect_url = url+'/'+event.id+'/edit';
+                $(location).attr('href',redirect_url);
+            })
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+
+        },
+        dayClick: function(date, jsEvent, view) {
+            date = date.format();
+            var date_array = date.split("-");
+            var day =  parseInt(date_array[2]);
+            var month = parseInt(date_array[1]);
+            var year = parseInt(date_array[0]);
+            var hours = 19;
+            var minutes = '00';
+            $("#period_commence_datetime_3i").val(day);
+            $("#period_commence_datetime_2i").val(month);
+            $("#period_commence_datetime_1i").val(year);
+            $("#period_commence_datetime_4i").val(hours);
+            $("#period_commence_datetime_5i").val(minutes);
+
+        },
+        eventMouseover: function(calEvent, jsEvent, view) {
+            var _this = this;
+            $('.popover').hide();
+            $(this).popover('show');
+            $('.removeEvent').on('click',function(){
                 var doDelete = confirm('Вы действительно хотите удалить?');
                 if (doDelete) {
-                    var source = url +'/' + event.id;
-                    console.log(event);
-                    $('#calendar').fullCalendar('removeEvents', event.id);
+                    var source = url +'/' + calEvent.id;
+                    $('#calendar').fullCalendar('removeEvents', calEvent._id);
                     $.ajax({
                         url: source,
                         type: "POST",
@@ -105,20 +132,19 @@ $(document).bind('page:change', function() {
                             console.log('ajax request completed');
                         }
                     });
+                    var redirect_url = url+'/';
+                    $(location).attr('href',redirect_url);
                 }
             });
-        },
-        eventClick: function(calEvent, jsEvent, view) {
-                        var redirect_url = url+'/'+calEvent.id+'/edit';
-                        $(location).attr('href',redirect_url);
-        },
-        eventMouseover: function(calEvent, jsEvent, view) {
-            //console.log(calEvent);
+            $(".popover").on("mouseleave", function () {
+                $(this).popover('hide');
+            });
+            $(this).on('mouseleave', function(){
+                    if (!$(".popover:hover").length) {
+                        $(this).popover("hide")
+                    }
+            });
 
-            $(this).popover(
-                {}
-            );
-            return true;
         },
 
         monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],

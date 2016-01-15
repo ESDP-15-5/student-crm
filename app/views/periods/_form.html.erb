@@ -41,8 +41,8 @@
 
     <div class="form-group  <%= 'has-error' if @period.errors[:commence_datetime].any? %>">
       <%= f.label :commence_datetime, class: 'col-sm-2 control-label' %>
-      <div class="col-sm-10 ">
-        <%= f.datetime_select :commence_datetime, class: 'col-sm-2 form-control' %>
+      <div class="col-sm-10 form-inline time-picker">
+        <%= f.datetime_select :commence_datetime, {minute_step: 30}, {class: 'form-control'} %>
         <%= render 'shared/field_errors', object: @period, field_name: :commence_datetime %>
       </div>
     </div>
