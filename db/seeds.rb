@@ -108,12 +108,12 @@ periods = []
 periods.push Period.create(title: "1# Вводное",
                            commence_datetime: "19/Dec/2015 16:29:30 +0100".to_datetime,
                            course_element: course_elements.sample,
-                           group: groups[2],
+                           group: groups[1],
                            course: courses[1])
 periods.push Period.create(title: "2# Основы",
                            commence_datetime: "20/Dec/2015 16:30:30 +0100".to_datetime,
                            course_element: course_elements.sample,
-                           group: groups[2],
+                           group: groups[1],
                            course: courses[1])
 
 
