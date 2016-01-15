@@ -73,8 +73,9 @@ $(document).bind('page:change', function() {
             }
 
             element.html(
-                '<div id="'+event.id+'" data-type="period">'+
-                icon_element_type +' '+ event.name +
+                '<div id="'+event.id+'">'+
+                icon_element_type +
+                ' '+ event.name +' |'+ time +
                 '<br>'+
                 event.title+
                 '</div>'
@@ -83,13 +84,13 @@ $(document).bind('page:change', function() {
             element.popover({
                 title: '<div class="raw">'+
                 '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+
-                time +
-                '|Занятие: ' +
+               'Занятие: ' +
                 event.title +
                 '</div>',
                 content: content,
                 html: true,
-                trigger: 'manual'
+                trigger: 'manual',
+                container: 'body'
             });
 
             element.on('click', function(){
