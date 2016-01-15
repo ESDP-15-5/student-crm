@@ -7,12 +7,12 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= controller_name %> <%= action_name %>">
 
 <div class="container">
   <%=	 render 'shared/navbar' %>
 
-    <div class="col-md-12">
+    <div class="col-md-12 margin-bottom20 ">
       <%= render 'shared/breadcrums' %>
     </div>
   <br>

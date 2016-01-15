@@ -1,0 +1,39 @@
+<div class="col-sm-6">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table">
+        <tr>
+          <td>Название</td>
+          <td><%= @sms_delivery.title %></td>
+        </tr>
+        <tr>
+          <td>Отправитель</td>
+          <td><%= @sms_delivery.sender.name %></td>
+        </tr>
+        <tr>
+          <td>Лист получателей</td>
+          <td><%= @sms_delivery.contact_list.title %></td>
+        </tr>
+        <tr>
+          <td>Текст смс</td>
+          <td><%= @sms_delivery.content %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <%= form_for @sms_delivery, url: sms_send_message_path, method: :post do |f| %>
+              <%= f.submit 'Отправить', class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Редактировать'.html_safe, edit_sms_delivery_path(@sms_delivery), class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Удалить'.html_safe, sms_delivery_path(@sms_delivery), method: :delete, class: 'btn btn-danger btn-xs',
+                            data: {confirm: 'Вы действительно хотите удалить эту рассылку?'} %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+

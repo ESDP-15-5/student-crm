@@ -7,13 +7,15 @@
 
 @import "courses";
 
+@import "dropzone/dropzone";
+
 @import "fullcalendar";
 @import "periods";
 
 
 /* Navbar fixed top - по умолчанию будет закрывать контент, поэтому ставим отступ */
 body{
-  margin-top: 50px;
+  margin-top: 70px;
 }
 /* Конец  */
 

@@ -1,0 +1,24 @@
+<%= form_for @sender, html: {class: 'form-horizontal'} do |f| %>
+
+    <div class="form-group col-sm-12">
+      <%= f.label :login, value: 'Логин*', class: 'col-sm-3 control-label'  %>
+      <div class="col-sm-6">
+        <%= f.collection_select :sms_service_account_id, SmsServiceAccount.all.order(login: :asc), :id, :login, {}, class: 'form-control'  %>
+      </div>
+      <%= render 'shared/field_errors', object: @sender, field_name: :login %>
+    </div>
+
+    <div class="form-group col-sm-12">
+      <%= f.label :name,  value: 'Имя отправителя*', class: 'col-sm-3 control-label' %>
+      <div class="col-sm-6">
+        <%= f.text_field :name, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @sender, field_name: :name %>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12">
+      <div class="col-sm-offset-3 col-sm-6">
+        <%= f.submit 'Сохранить', class: 'btn btn-default' %>
+      </div>
+    </div>
+<% end %>

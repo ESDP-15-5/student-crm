@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222133816) do
+ActiveRecord::Schema.define(version: 20160113110154) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "student_id"
@@ -63,6 +63,24 @@ ActiveRecord::Schema.define(version: 20151222133816) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
 
+  create_table "contact_lists", force: :cascade do |t|
+    t.string   "title"
+    t.boolean  "temp",       default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "phone"
+    t.string   "additional_phone"
+    t.string   "skype"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "contacts", ["user_id"], name: "index_contacts_on_user_id"
+
   create_table "course_element_files", force: :cascade do |t|
     t.integer  "course_element_id"
     t.datetime "created_at",        null: false
@@ -104,12 +122,24 @@ ActiveRecord::Schema.define(version: 20151222133816) do
     t.string   "name"
     t.date     "starts_at"
     t.date     "ends_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.datetime "deleted_at"
+    t.integer  "theoretical_time"
+    t.integer  "practical_time"
+    t.integer  "educational_cost"
   end
 
   add_index "courses", ["deleted_at"], name: "index_courses_on_deleted_at"
+
+  create_table "custom_lists", force: :cascade do |t|
+    t.string   "phone"
+    t.integer  "contact_list_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "custom_lists", ["contact_list_id"], name: "index_custom_lists_on_contact_list_id"
 
   create_table "group_memberships", force: :cascade do |t|
     t.integer  "group_id"
@@ -147,6 +177,16 @@ ActiveRecord::Schema.define(version: 20151222133816) do
   add_index "periods", ["course_element_id"], name: "index_periods_on_course_element_id"
   add_index "periods", ["deleted_at"], name: "index_periods_on_deleted_at"
 
+  create_table "recipient_depositories", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "contact_list_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "recipient_depositories", ["contact_list_id"], name: "index_recipient_depositories_on_contact_list_id"
+  add_index "recipient_depositories", ["user_id"], name: "index_recipient_depositories_on_user_id"
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -158,35 +198,52 @@ ActiveRecord::Schema.define(version: 20151222133816) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
 
-  create_table "students", force: :cascade do |t|
+  create_table "senders", force: :cascade do |t|
     t.string   "name"
-    t.string   "phone"
-    t.string   "email"
+    t.integer  "sms_service_account_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "senders", ["sms_service_account_id"], name: "index_senders_on_sms_service_account_id"
+
+  create_table "sms_deliveries", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "sender_id"
+    t.integer  "contact_list_id"
+    t.boolean  "status",          default: false
+    t.datetime "delivery_time"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "sms_deliveries", ["contact_list_id"], name: "index_sms_deliveries_on_contact_list_id"
+  add_index "sms_deliveries", ["sender_id"], name: "index_sms_deliveries_on_sender_id"
+
+  create_table "sms_service_accounts", force: :cascade do |t|
+    t.string   "login"
+    t.string   "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
+    t.string   "email",               default: "", null: false
+    t.string   "encrypted_password",  default: "", null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",       default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "name"
     t.string   "surname"
     t.string   "middlename"
     t.string   "gender"
     t.date     "birthdate"
-    t.string   "phone1"
-    t.string   "phone2"
-    t.string   "skype"
     t.string   "passportdetails"
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -195,7 +252,6 @@ ActiveRecord::Schema.define(version: 20151222133816) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"

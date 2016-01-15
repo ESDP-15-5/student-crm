@@ -21,6 +21,13 @@ class User < ActiveRecord::Base
   has_many :periods, through: :attendances
   has_and_belongs_to_many :roles, join_table: :users_roles
 
+  has_many :recipient_depositories
+  has_many :contact_lists, through: :recipient_depositories
+
+  has_one :contact, dependent: :destroy
+  accepts_nested_attributes_for :contact
+
+
   has_attached_file :image,
                     styles: {medium: '300x300>', thumb: '100x100>'},
                     default_url: '/images/:style/missing.png'
@@ -30,20 +37,23 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 250}
   validates :surname, presence: true, length: {maximum: 250}
   validates :gender, presence: true
-  validates :phone1, presence: true
   validates :email, presence: true
   validates :passportdetails, presence: true
 
-  validates :phone1, presence: true
-  my_regex = /\A(\+996)([0-9]{9})\z/
-  validates_format_of :phone1,
-                      :with => my_regex,
-                      message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
+  # validates :phone1, presence: true
+  # my_regex = /\A(\+996)([0-9]{9})\z/
+  # validates_format_of :phone1,
+  #                     :with => my_regex,
+  #                     message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
+  #
+  # validates_format_of :phone2,
+  #                     :with => my_regex,
+  #                     :allow_blank => true,
+  #                     message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
 
-  validates_format_of :phone2,
-                      :with => my_regex,
-                      :allow_blank => true,
-                      message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
+  after_initialize do
+    self.contact ||= self.build_contact()
+  end
 
   def full_name
     "#{name} #{surname} #{middlename}"

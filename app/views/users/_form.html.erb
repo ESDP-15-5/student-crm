@@ -10,6 +10,29 @@
 
         <div class="row">
           <div class="col-md-6 col-xs-12">
+
+          <div>
+            <p><b>Курс</b></p>
+            <select name="courses" id="courses" class="form-control" style="width: 200px;">
+              <option value="" selected="selected">Курс</option>
+              <% Course.all.each do |course| %>
+                  <option value="<%= course.id %>"                              >
+                    <%= course.name %>
+                  </option>
+              <% end %>
+            </select>
+
+          </div>
+
+          <div>
+            <p><b>Группа</b></p>
+            <select name="groups" id="groups" disabled = "true" class="form-control" style="width: 200px;">
+              <option value="" selected="selected">Группа</option>
+              <% Group.all.each do |group| %>
+                  <option value="<%= group.id %>"data-target="<%= group.course_id %>"><%= group.name %></option>
+              <% end %>
+            </select>
+          </div>
             <%= f.input :name, label: 'Имя', placeholder: 'Имя',
                         input_html: {style: 'width:200px;'} %>
             <%= f.input :surname, label: 'Фамилия', placeholder: 'Фамилия',
@@ -39,12 +62,15 @@
                         input_html: {style: 'width:200px;', autocomplete: 'false'} %>
             <%= f.input :password, label: 'Password', placeholder: 'Password',
                         input_html: {style: 'width:200px;', autocomplete: 'false' } %>
-            <%= f.input :phone1, as: :tel, label: 'Тел.1', placeholder: 'Мобильный номер 1',
-                        input_html: {style: 'width:200px;', maxlength: 13} %>
-            <%= f.input :phone2, label: 'Тел.2', placeholder: 'Мобильный номер 2',
-                        input_html: {style: 'width:200px;', maxlength: 13} %>
-            <%= f.input :skype, label: 'Skype', placeholder: 'Skype',
-                        input_html: {style: 'width:200px;'} %>
+            <%= f.simple_fields_for(:contact, input_html: {style: 'width:200px;'})  do |ff| %>
+                <%= ff.input :phone, label: 'Номер телефона', placeholder: 'Номер телефона',
+                             input_html: {style: 'width:200px;'} %>
+                <%= ff.input :additional_phone, label: 'Доп. номер телефона', placeholder: 'Доп. номер телефона',
+                                             input_html: {style: 'width:200px;'}%>
+                <%= ff.input :skype, label: 'Skype', placeholder: 'Skype',
+                                             input_html: {style: 'width:200px;'} %>
+
+            <% end %>
             <%= f.association :roles, label: 'Роли', as: :check_boxes %>
           </div>
         </div>
@@ -73,12 +99,15 @@
                         input_html: {style: 'width:200px;'} %>
             <%= f.input :password, label: 'Password', placeholder: 'Password',
                         input_html: {autocomplete: 'off', style: 'width:200px;'} %>
-            <%= f.input :phone1, as: :tel, label: 'Тел.1', placeholder: 'Мобильный номер 1',
-                        input_html: {style: 'width:200px;', maxlength: 13} %>
-            <%= f.input :phone2, label: 'Тел.2', placeholder: 'Мобильный номер 2',
-                        input_html: {style: 'width:200px;', maxlength: 13} %>
-            <%= f.input :skype, label: 'Skype', placeholder: 'Skype',
-                        input_html: {style: 'width:200px;'} %>
+            <<%= f.simple_fields_for(:contact, input_html: {style: 'width:200px;'})  do |ff| %>
+                <%= ff.input :phone, label: 'Номер телефона', placeholder: 'Номер телефона',
+                             input_html: {style: 'width:200px;'} %>
+                <%= ff.input :additional_phone, label: 'Доп. номер телефона', placeholder: 'Доп. номер телефона',
+                             input_html: {style: 'width:200px;'}%>
+                <%= ff.input :skype, label: 'Skype', placeholder: 'Skype',
+                             input_html: {style: 'width:200px;'} %>
+
+            <% end %>
 
           </div>
         </div>

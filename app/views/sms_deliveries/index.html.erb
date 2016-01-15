@@ -1,0 +1,37 @@
+<p><%= link_to 'Новая рассылка', new_sms_delivery_path, class: 'btn btn-default margin-bottom' %></p>
+
+<table class="table table-striped table-hover col-sm-12">
+  <tr>
+    <th class="col-sm-3">Название рассылки</th>
+    <th class="col-sm-2">Лист получателей</th>
+    <th class="col-sm-2">Отправитель</th>
+    <th class="col-sm-2">Текст смс</th>
+    <th class="col-sm-3">Действия</th>
+  </tr>
+  <div class="row">
+  </div>
+  <% @sms_deliveries.each do |sms| %>
+      <tr>
+        <td><%= link_to sms.title, sms_delivery_url(sms) %></td>
+        <td><%= sms.contact_list.title %></td>
+        <td><%= sms.sender.name %></td>
+        <td><%= truncate(sms.content, length: 70) %></td>
+        <td>
+          <%= form_for sms, url: sms_send_message_path(sms), method: :post do |f| %>
+		    <% unless sms.status %>
+              <%= f.submit 'Отправить', class: 'btn btn-success btn-xs' %>
+              <%= link_to 'Редактировать', edit_sms_delivery_path(sms), class: 'btn btn-primary btn-xs' %>
+			<% end %>
+            <%= link_to 'Удалить', sms_delivery_path(sms), method: :delete,
+                          data: {confirm: 'Вы действительно хотите удалить эту рассылку?'}, class: 'btn btn-danger btn-xs'  %>
+          <% end %>
+          <%= link_to 'Переотправить', sms_resend_path(sms), class: 'btn btn-primary btn-xs' %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+<div class="row">
+  <div class="col-sm-12">
+    <%= will_paginate @sms_deliveries %>
+  </div>
+</div>

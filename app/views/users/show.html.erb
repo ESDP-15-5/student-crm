@@ -32,7 +32,7 @@
               </tr>
               <tr>
                 <td>Skype</td>
-                <td><%= @user.skype %></td>
+                <td><%= @user.contact.skype %></td>
               </tr>
               <tr>
                 <td>Email:</td>
@@ -40,8 +40,8 @@
               </tr>
               <td>Phones:</td>
               <td>
-                <%= @user.phone1 %> <br/>
-                <%= @user.phone2 %>
+                <%= @user.contact.phone %> <br/>
+                <%= @user.contact.additional_phone %>
               </td>
               </tr>
               <tr>
@@ -67,6 +67,7 @@
       </div>
       <div class="panel-body">
         <div class="btn-group-vertical" role="group" aria-label="...">
+          <%= link_to 'Договор', (user_path(@user.id) + ".pdf") , class: 'btn btn-warning'%>
           <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning' %>
           <%= link_to 'История изменений', change_user_path(@user) , class: 'btn btn-warning' %>
         </div>
