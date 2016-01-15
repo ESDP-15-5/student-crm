@@ -10,6 +10,29 @@
 
         <div class="row">
           <div class="col-md-6 col-xs-12">
+
+          <div>
+            <p><b>Курс</b></p>
+            <select name="courses" id="courses" class="form-control" style="width: 200px;">
+              <option value="" selected="selected">Курс</option>
+              <% Course.all.each do |course| %>
+                  <option value="<%= course.id %>"                              >
+                    <%= course.name %>
+                  </option>
+              <% end %>
+            </select>
+
+          </div>
+
+          <div>
+            <p><b>Группа</b></p>
+            <select name="groups" id="groups" disabled = "true" class="form-control" style="width: 200px;">
+              <option value="" selected="selected">Группа</option>
+              <% Group.all.each do |group| %>
+                  <option value="<%= group.id %>"data-target="<%= group.course_id %>"><%= group.name %></option>
+              <% end %>
+            </select>
+          </div>
             <%= f.input :name, label: 'Имя', placeholder: 'Имя',
                         input_html: {style: 'width:200px;'} %>
             <%= f.input :surname, label: 'Фамилия', placeholder: 'Фамилия',

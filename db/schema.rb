@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112104534) do
+ActiveRecord::Schema.define(version: 20160113110154) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "student_id"
@@ -122,9 +122,12 @@ ActiveRecord::Schema.define(version: 20160112104534) do
     t.string   "name"
     t.date     "starts_at"
     t.date     "ends_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.datetime "deleted_at"
+    t.integer  "theoretical_time"
+    t.integer  "practical_time"
+    t.integer  "educational_cost"
   end
 
   add_index "courses", ["deleted_at"], name: "index_courses_on_deleted_at"

@@ -67,6 +67,7 @@
       </div>
       <div class="panel-body">
         <div class="btn-group-vertical" role="group" aria-label="...">
+          <%= link_to 'Договор', (user_path(@user.id) + ".pdf") , class: 'btn btn-warning'%>
           <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning' %>
           <%= link_to 'История изменений', change_user_path(@user) , class: 'btn btn-warning' %>
         </div>

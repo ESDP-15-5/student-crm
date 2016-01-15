@@ -25,8 +25,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    group_ids = params[:groups]
     @user = User.new(user_params)
     if @user.save
+      @group_membership = GroupMembership.create(:user_id => @user.id, :group_id => group_ids)
       redirect_to users_path
     else
       render 'new'
@@ -46,7 +48,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to users_path
-      sign_in @user, :bypass => true #Это для того чтобы пользователь при смене пароля оставался в системе
+      # sign_in @user, :bypass => true #Это для того чтобы пользователь при смене пароля оставался в системе
     else
       render 'edit'
     end
@@ -55,6 +57,26 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @members = GroupMembership.where(user_id: @user)
+    # @courses=[]
+    # @members.each do |m|
+    #   @courses.push Course.where(id: Group.find(m.group_id).course_id)
+    # end
+    @group = Group.find_by_id(@members[0].group_id)
+    @course = Course.find_by_id(@group.course_id)
+
+    @practical_time = @course.practical_time
+    @theoretical_time = @course.theoretical_time
+    @educational_cost = @course.educational_cost
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ContractPdf.new(@user, view_context, @course, @practical_time, @theoretical_time, @educational_cost)
+        send_data pdf.render, filename:
+            "договор #{@user.created_at.strftime("%d.%m.%Y")}.pdf",
+                  type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   def students
@@ -74,7 +96,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.destroy(params[:id])
+    @user = User.find(params[:id])
+    @group_membership = GroupMembership.where(:user_id => @user.id)
+    @group_membership.destroy(@group_membership)
+    @user.destroy
     redirect_to users_path
   end
 
