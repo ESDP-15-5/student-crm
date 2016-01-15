@@ -91,7 +91,8 @@ $(document).bind('page:change', function() {
                 }
             });
 
-            element.dblclick(function(){
+            element.on('dblclick',function(e) {
+                console.log('dbl');
                 var doDelete = confirm('Вы действительно хотите удалить?');
                 if (doDelete) {
                     var source = url +'/' + event.id;
@@ -102,23 +103,45 @@ $(document).bind('page:change', function() {
                         type: "POST",
                         data: { _method:'DELETE' },
                         success: function(msg) {
+                            $(location).attr('href', url);
                             console.log('ajax request completed');
                         }
                     });
                 }
+
             });
+            /*вернуть значок корзины в popover удаление при нажатии на значок убрать удаление по дблклик*/
+            element.on('click', function(){
+                var redirect_url = url+'/'+event.id+'/edit';
+                $(location).attr('href',redirect_url);
+            })
         },
         eventClick: function(calEvent, jsEvent, view) {
-                        var redirect_url = url+'/'+calEvent.id+'/edit';
-                        $(location).attr('href',redirect_url);
+                        //var redirect_url = url+'/'+calEvent.id+'/edit';
+                        //$(location).attr('href',redirect_url);
+        },
+        dayClick: function(date, jsEvent, view) {
+            date = date.format();
+            var date_array = date.split("-");
+            var day =  parseInt(date_array[2]);
+            var month = parseInt(date_array[1]);
+            var year = parseInt(date_array[0]);
+            var hours = 19;
+            var minutes = '00';
+            $("#period_commence_datetime_3i").val(day);
+            $("#period_commence_datetime_2i").val(month);
+            $("#period_commence_datetime_1i").val(year);
+            $("#period_commence_datetime_4i").val(hours);
+            $("#period_commence_datetime_5i").val(minutes);
+
         },
         eventMouseover: function(calEvent, jsEvent, view) {
             //console.log(calEvent);
-
-            $(this).popover(
-                {}
-            );
-            return true;
+            //$('.popover').hide();
+            //$(this).popover(
+            //    {}
+            //);
+            //return true;
         },
 
         monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
