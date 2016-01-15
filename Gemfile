@@ -86,5 +86,10 @@ gem 'will_paginate', '~> 3.0.6'
 
 gem 'simple_form'
 
+# для работы с excel файлами и xml запросами
 gem 'roo', '~> 2.1.0'
 gem 'dropzonejs-rails'
+
+# Для распечатки договора
+gem 'prawn'
+gem 'numbers_and_words'

@@ -20,82 +20,11 @@ phonecodes.flatten!
 
 password = 'password'
 
-#creating students
-20.times do
-  User.create!(
-      name: Faker::Name.first_name,
-      surname: Faker::Name.last_name,
-      middlename: Faker::Name.first_name,
-      gender: ['Мужчина', 'Женщина'].sample,
-      birthdate: Faker::Date.backward,
-      contact_attributes: {
-          phone:('996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
-          additional_phone:('996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
-          skype:((Faker::Name.name.downcase!).split(' ')).join('_')
-      },
-      passportdetails: Faker::Lorem.word,
-      email: "#{Faker::Name.first_name}.#{Faker::Name.last_name}@gmail.com",
-      password: password,
-      password_confirmation: password,
-      roles:[Role.find_by(name:'student')]
-  )
-end
-
-manager = User.create!(name: 'manager',
-                       surname: 'manager',
-                       gender: 'Мужчина',
-                       birthdate: '02.09.1992',
-                       contact_attributes: {
-                           phone:'996559250209',
-                           additional_phone:'',
-                           skype:'skype.daniyar'},
-                       passportdetails:'abijjljlk',
-                       email: 'manager@gmail.com', password: password, password_confirmation: password)
-
-manager.add_role 'manager'
-
-student = User.create!(name: 'Student',
-                       surname: 'Lastname',
-                       gender: 'Мужчина',
-                       birthdate: '02.09.1992',
-                       contact_attributes: {
-                           phone:'996559250209',
-                           additional_phone:'',
-                           skype:'skype.daniyar'},
-                       passportdetails:'abijjljlk',
-                       email: 'student@gmail.com', password: password, password_confirmation: password)
-
-student.add_role 'student'
-admin = User.create!(name: 'Farid',
-                     surname: 'Babazov',
-                     gender: 'Мужчина',
-                     birthdate: '06.11.1992',
-                     contact_attributes: {
-                         phone:'996772183644',
-                         additional_phone:'',
-                         skype:'skype.admin'},
-                     passportdetails:'MVD 50-01',
-                     email: 'admin@gmail.com', password: password, password_confirmation: password)
-
-admin.add_role 'admin'
-
-tutor = User.create!(name: 'Tutor',
-                     surname: 'Lastname',
-                     gender: 'Мужчина',
-                     birthdate: '02.09.1992',
-                     contact_attributes: {
-                         phone:'996772183644',
-                         additional_phone:'',
-                         skype:'skype.tutor'},
-                     passportdetails:'MVD 50-01',
-                     email: 'tutor@gmail.com', password: password, password_confirmation: password)
-
-tutor.add_role 'manager'
 
 courses = []
 
-courses.push Course.create(name: "HTML", starts_at: nil, ends_at: nil)
-courses.push Course.create(name: "Ruby on Rails", starts_at: nil, ends_at: nil)
+courses.push Course.create(name: "HTML",starts_at: '2015-04-23', ends_at: '2016-02-20', practical_time: 200, theoretical_time: 100, educational_cost: 135000)
+courses.push Course.create(name: "Ruby on Rails",starts_at: '2015-04-23', ends_at: '2016-02-20',practical_time: 140, theoretical_time: 75, educational_cost: 72000)
 
 element_type = CourseElement::ELEMENT_TYPES
 
@@ -282,6 +211,79 @@ periods.push Period.create(title: "Рисунки",
                            course_element: course_elements.sample,
                            group: groups[3],
                            course: courses[0])
+
+#creating students
+20.times do
+  student = User.create!(
+      name: Faker::Name.first_name,
+      surname: Faker::Name.last_name,
+      middlename: Faker::Name.first_name,
+      gender: ['Мужчина', 'Женщина'].sample,
+      birthdate: Faker::Date.backward,
+      contact_attributes: {
+          phone:('996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
+          additional_phone:('996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
+          skype:((Faker::Name.name.downcase!).split(' ')).join('_')
+      },
+      passportdetails: Faker::Lorem.word,
+      email: "#{Faker::Name.first_name}.#{Faker::Name.last_name}@gmail.com",
+      password: password,
+      password_confirmation: password,
+      roles:[Role.find_by(name:'student')]
+  )
+  GroupMembership.create!(group: groups.sample, user_id: student.id);
+end
+
+manager = User.create!(name: 'manager',
+                       surname: 'manager',
+                       gender: 'Мужчина',
+                       birthdate: '02.09.1992',
+                       contact_attributes: {
+                           phone:'996559250209',
+                           additional_phone:'',
+                           skype:'skype.daniyar'},
+                       passportdetails:'abijjljlk',
+                       email: 'manager@gmail.com', password: password, password_confirmation: password)
+
+manager.add_role 'manager'
+
+student = User.create!(name: 'Student',
+                       surname: 'Lastname',
+                       gender: 'Мужчина',
+                       birthdate: '02.09.1992',
+                       contact_attributes: {
+                           phone:'996559250209',
+                           additional_phone:'',
+                           skype:'skype.daniyar'},
+                       passportdetails:'abijjljlk',
+                       email: 'student@gmail.com', password: password, password_confirmation: password)
+
+student.add_role 'student'
+admin = User.create!(name: 'Farid',
+                     surname: 'Babazov',
+                     gender: 'Мужчина',
+                     birthdate: '06.11.1992',
+                     contact_attributes: {
+                         phone:'996772183644',
+                         additional_phone:'',
+                         skype:'skype.admin'},
+                     passportdetails:'MVD 50-01',
+                     email: 'admin@gmail.com', password: password, password_confirmation: password)
+
+admin.add_role 'admin'
+
+tutor = User.create!(name: 'Tutor',
+                     surname: 'Lastname',
+                     gender: 'Мужчина',
+                     birthdate: '02.09.1992',
+                     contact_attributes: {
+                         phone:'996772183644',
+                         additional_phone:'',
+                         skype:'skype.tutor'},
+                     passportdetails:'MVD 50-01',
+                     email: 'tutor@gmail.com', password: password, password_confirmation: password)
+
+tutor.add_role 'manager'
 
 
 
