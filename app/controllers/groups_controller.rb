@@ -34,7 +34,6 @@ class GroupsController < ApplicationController
     def create
       @course = Course.find(params[:course_id])
       @group = @course.groups.build(group_params)
-
       if @group.save
         flash[:notice] = "Группа #{@group.name} успешно создана!"
         redirect_to course_path(@course)

@@ -37,37 +37,37 @@ $(document).bind('page:change', function() {
                 case '1':
                     element.css({
                         'color': 'black',
-                        'background': 'red'
+                        'background': '#ff9999'
                     });
                     break;
                 case '2':
                     element.css({
                         'color': 'black',
-                        'background': 'orange'
+                        'background': '#ffdb99'
                     });
                     break;
                 case '3':
                     element.css({
                         'color': 'black',
-                        'background': 'yellow'
+                        'background': '#ffff99'
                     });
                     break;
                 case '4':
                     element.css({
                         'color': 'black',
-                        'background': 'green'
+                        'background': '#99ff99'
                     });
                     break;
                 case '5':
                     element.css({
                         'color': 'black',
-                        'background': 'blue'
+                        'background': '#9999ff'
                     });
                     break;
                 case '6':
                     element.css({
                         'color': 'black',
-                        'background': 'violet'
+                        'background': '#ffccff'
                     });
                     break;
             }

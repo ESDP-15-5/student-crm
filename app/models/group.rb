@@ -8,5 +8,6 @@ class Group < ActiveRecord::Base
   has_many :group_memberships
   has_many :students, through: :group_memberships, source: :user
 
-  validates :name, presence:  true
+  validates :name, presence:  true, length: { minimum: 2}, uniqueness: true
+  validates_format_of :name, :with => /\A[A-Za-zА-Яа-я]+[1-6]{1}\z/, message: "Допустимо только Название Группы и цифра например (HTML1), цифра от 1 до 6"
 end
