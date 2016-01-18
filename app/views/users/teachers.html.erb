@@ -1,7 +1,7 @@
 <h3>Список преподователей</h3>
 
 <div class="digg_pagination" style="margin:auto">
-  <%= will_paginate @tutors %>
+  <%= will_paginate @teachers %>
 </div>
 
 <div class="row">
@@ -15,12 +15,12 @@
     <th>Действия</th>
   </tr>
 
-  <% @tutors.each do |tutor| %>
+  <% @teachers.each do |teacher| %>
       <tr>
-        <td><%= link_to tutor.full_name, user_path(tutor) %></td>
+        <td><%= link_to teacher.full_name, user_path(teacher) %></td>
 
-        <td><%= link_to 'Просмотреть', user_path(tutor), class: 'btn btn-info' %>
-          <%= link_to 'Редактировать', edit_user_path(tutor), class: 'btn btn-warning' %>
+        <td><%= link_to 'Просмотреть', user_path(teacher), class: 'btn btn-info' %>
+          <%= link_to 'Редактировать', edit_user_path(teacher), class: 'btn btn-warning' %>
         </td>
       </tr>
   <% end %>

@@ -8,7 +8,7 @@
 
 Role.create!(id: 1, name: 'student')
 Role.create!(id: 2, name: 'manager')
-Role.create!(id: 3, name: 'tutor')
+Role.create!(id: 3, name: 'teacher')
 Role.create!(id: 4, name: 'techsuport')
 Role.create!(id: 5, name: 'admin')
 
@@ -272,18 +272,18 @@ admin = User.create!(name: 'Farid',
 
 admin.add_role 'admin'
 
-tutor = User.create!(name: 'Tutor',
+teacher = User.create!(name: 'Teacher',
                      surname: 'Lastname',
                      gender: 'Мужчина',
                      birthdate: '02.09.1992',
                      contact_attributes: {
                          phone:'996772183644',
                          additional_phone:'',
-                         skype:'skype.tutor'},
+                         skype:'skype.teacher'},
                      passportdetails:'MVD 50-01',
-                     email: 'tutor@gmail.com', password: password, password_confirmation: password)
+                     email: 'teacher@gmail.com', password: password, password_confirmation: password)
 
-tutor.add_role 'manager'
+teacher.add_role 'teacher'
 
 
 

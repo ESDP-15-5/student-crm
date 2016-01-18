@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   end
 
   get 'users/students'
-  get 'users/tutors'
+  get 'users/teachers'
 
   get 'users/:id/change(.:format)' => 'users#changes', as: 'change_user'
 

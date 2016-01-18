@@ -4,7 +4,7 @@
     <br/>
     <% @audit.each do |audit| %>
         <h4>
-          <%= audit.user.first_name %>
+          <%= audit.user.name %>
           изменил у пользователя
           <%= audit.auditable.full_name %>
           информацию:</h4>

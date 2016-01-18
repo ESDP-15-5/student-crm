@@ -86,9 +86,9 @@ class UsersController < ApplicationController
     @students = student_role.users.paginate(page: params[:page], per_page: 10)
   end
 
-  def tutors
-    tutor_role = Role.find_by(name: :tutor)
-    @tutors = tutor_role.users.paginate(page: params[:page], per_page: 10)
+  def teachers
+    teacher_role = Role.find_by(name: :teacher)
+    @teachers = teacher_role.users.paginate(page: params[:page], per_page: 10)
   end
 
   def changes

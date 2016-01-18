@@ -17,10 +17,9 @@ class Ability
       can :manage, Period
       can :manage, Group
       can :manage, GroupMembership
-      can :manage, Course
       can :manage, User
 
-    elsif user.is_tutor?
+    elsif user.is_teacher?
       #Может просматривать профили всех пользователей
       can :read, User
       #Может управлять своим профилем
