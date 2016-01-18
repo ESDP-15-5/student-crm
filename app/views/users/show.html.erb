@@ -14,11 +14,19 @@
               <tbody>
               <tr>
                 <td>Course:</td>
-                <td></td>
+                <td>
+                  <% @user.groups.each do |group| %>
+                      <p><%= group.course.name %></p>
+                  <% end %>
+                </td>
               </tr>
               <tr>
                 <td>Group:</td>
-                <td></td>
+                <td>
+                  <% @user.groups.each do |group| %>
+                      <p><%= group.name %></p>
+                  <% end %>
+                </td>
               </tr>
               <tr>
                 <td>Birth date:</td>
