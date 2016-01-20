@@ -14,6 +14,8 @@ class Ability
       #Может управлять всем, пока что
       can :manage, Course
       can :manage, CourseElement
+      can :manage, CourseElementMaterial
+      can :manage, CourseElementFile
       can :manage, Period
       can :manage, Group
       can :manage, GroupMembership

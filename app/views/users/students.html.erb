@@ -21,7 +21,7 @@
       <tr>
         <td><%= link_to student.full_name, user_path(student) %></td>
         <td><%= student.email %></td>
-        <td><%= student.phone1 %></td>
+        <td><%= student.contact.phone %></td>
 
         <td><%= link_to 'Просмотреть', user_path(student), class: 'btn btn-info' %>
           <%= link_to 'Редактировать', edit_user_path(student), class: 'btn btn-warning' %>
