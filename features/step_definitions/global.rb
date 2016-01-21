@@ -5,7 +5,9 @@ When(/^залогинен пользователь под "([^"]*)" с паро�
     fill_in 'user[email]', :with => email
     fill_in 'user[password]', :with => password
   end
-  click_button('Войти')
+
+  click_button('войти')
+
 end
 
 When(/^пользователь создает курс с данными "([^"]*)"$/) do |course_name|
@@ -47,7 +49,7 @@ When(/^я не залогиненный пользователь$/) do
   visit(root_path)
   expect(page).to have_css('form')
   expect(page).to have_content('Войти')
-  find_button('Войти').click
+  find_button('войти').click
 end
 
 When(/^пользователь, зайдя на страницу "([^"]*)", увидет таблицу с курсами$/) do |name_page|
@@ -60,7 +62,7 @@ end
 When(/^меня редиректит на страницу с авторизацией$/) do
   expect(page).to have_css('form')
   expect(page).to have_content('Войти')
-  find_button('Войти').click
+  find_button('войти').click
 end
 
 When(/^пользователь зашел на главную страницу$/) do
@@ -80,6 +82,7 @@ end
 # --------------------------------------course_element.feature
 When(/^пользователь заходит в курс "([^"]*)"$/) do |course_name|
   # find(course_name).click
+  visit('/courses')
   click_link(course_name)
 end
 
@@ -150,7 +153,7 @@ When(/^пользователь заходит в элемент курса "([^
 end
 
 When(/^он видит кнопку "([^"]*)"$/) do |button_name|
-  find_link(button_name, :visible => :all).visible?
+  find_link('button_name', :visible => :all).visible?
   sleep(3)
 end
 
