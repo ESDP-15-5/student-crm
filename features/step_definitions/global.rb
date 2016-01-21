@@ -140,12 +140,12 @@ end
 # --------------------------------------
 When(/^пользователь переходит в курс (.*)$/) do |course|
   click_link(course)
-  sleep(3)
+  sleep(1)
 end
 
 When(/^пользователь переходит в элемент курса (.*)$/) do |course_element|
   click_link(course_element)
-  sleep(3)
+  sleep(1)
 end
 
 When(/^пользователь заходит в элемент курса "([^"]*)"$/) do |course_element|
@@ -153,33 +153,21 @@ When(/^пользователь заходит в элемент курса "([^
 end
 
 When(/^он видит кнопку "([^"]*)"$/) do |button_name|
-  find_link('button_name', :visible => :all).visible?
   sleep(3)
+  find_link(button_name, :visible => :all).visible?
 end
 
-When(/^его перекидывает на форму загрузки файла$/) do
-  expect(page).to have_content('Добавление файла')
-  element = "//*[contains(@class, 'new_course_element_file')]"
-  find(:xpath, element)
-  find_button('Добавить файл')
-end
 
 When(/^выбирает файл с локального ПК$/) do
-  sleep(2)
+  sleep(1)
   attach_file('course_element_file_file', Rails.root.join('features', 'upload-files', 'test_file.jpg'))
-  sleep(2)
+  sleep(1)
 end
 
 
 When(/^файл появляется в списке "([^"]*)"$/) do |file_name|
   expect(page).to have_content(file_name)
 end
-
-When(/^пользователь нажимает на кнопку "([^"]*)" у файла$/) do |arg|
-
-  pending
-end
-
 
 When(/^пользователь удаляет файл с названием "([^"]*)"$/) do |file_name|
   element = "//td//*[contains(text(), '" + file_name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
@@ -197,7 +185,7 @@ When(/^заполняет поле Заголовок материала "([^"]*
   within('#new_course_element_material') do
     fill_in 'course_element_material[title]', :with => title
   end
-  sleep(2)
+  sleep(1)
 end
 
 
@@ -206,13 +194,9 @@ When(/^его перекидывает на форму добавления ма
 end
 
 
-When(/^отображается список с добавленным материалом$/) do
-  expect(page).to have_content(title)
-end
-
 When(/^отображается список с добавленным материалом "([^"]*)"$/) do |title|
   expect(page).to have_content(title)
-  sleep(3)
+  sleep(1)
 end
 
 
@@ -233,7 +217,7 @@ When(/^заполняет поле "([^"]*)"$/) do |text|
 # Example:
   fill_in_ckeditor 'email_body', :with => 'This is my message!'
 
-  sleep(2)
+  sleep(1)
 end
 
 When(/^пользователь нажимает на button "([^"]*)"$/) do |button|
@@ -242,7 +226,7 @@ end
 
 When(/^пользователь на странице редактирования материала "([^"]*)"$/) do |title|
   visit('/courses/3/course_elements/1/course_element_materials/1/edit')
-  sleep(5)
+  sleep(1)
 end
 
 When(/^он меняет содержимое поля "([^"]*)" => с "([^"]*)" на "([^"]*)"$/) do |title1, title2, title3|
@@ -287,21 +271,25 @@ end
 
 When(/^он находится на странице элемента курса "([^"]*)"$/) do |course_element_name|
   visit('/courses/3/course_elements/1/')
-  sleep(5)
+  sleep(1)
 end
 
 When(/^пользователь нажал на кнопку "([^"]*)" материала "([^"]*)"$/) do |button_name, material_name|
   element = "//td//*[contains(text(), '" + material_name + "')]/ancestor::tr//*[contains(text(), '#{button_name}')]"
   find(:xpath, element).click
-  sleep(5)
+  sleep(1)
 end
 
 When(/^его перекидывает на форму изменения материала$/) do
   expect(page).to have_css('.edit_course_element_material')
-  sleep(2)
+  sleep(1)
 end
 
 When(/^пользователь видит измененное имя материала в таблице$/) do
   visit('/courses/3/course_elements/1')
-  sleep(5)
+  sleep(1)
+end
+
+When(/^он видит Выберите файл$/) do
+  find(:xpath, '//*[@id="course_element_file_file"]')
 end
