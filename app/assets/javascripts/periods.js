@@ -72,12 +72,21 @@ $(document).bind('page:change', function() {
                     break;
             }
 
+            var title = event.title;
+            var shortTitle = jQuery.trim(title).substring(0, 12)
+                    .trim(this) + "...";
+            if (title.length < 14) {
+                title
+            }else {
+                title = shortTitle
+            }
+
             element.html(
                 '<div id="'+event.id+'">'+
                 icon_element_type +
                 ' '+ event.name +' |'+ time +
                 '<br>'+
-                event.title+
+                title+
                 '</div>'
             );
 
