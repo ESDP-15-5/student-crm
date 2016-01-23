@@ -128,7 +128,8 @@ $(document).bind('page:change', function() {
         eventMouseover: function(calEvent, jsEvent, view) {
             var _this = this;
             $('.popover').hide();
-            $(this).popover('show');
+            $(_this).popover('show');
+            console.log('show');
             $('.removeEvent').on('click',function(){
                 var doDelete = confirm('Вы действительно хотите удалить?');
                 if (doDelete) {
@@ -147,12 +148,14 @@ $(document).bind('page:change', function() {
                 }
             });
             $(".popover").on("mouseleave", function () {
-                $(this).popover('hide');
+                $(_this).popover('hide');
             });
-            $(this).on('mouseleave', function(){
+            $(_this).on('mouseleave', function(){
+                setTimeout(function () {
                     if (!$(".popover:hover").length) {
-                        $(this).popover("hide")
+                        $(_this).popover("hide")
                     }
+                }, 50);
             });
 
         },
