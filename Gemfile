@@ -32,9 +32,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# This for production on Heroku
+# group :production do
+#   gem 'pg', '0.15.1'
+#   gem 'rails_12factor', '0.0.2'
+# end
+
 group :production do
-  gem 'pg', '0.15.1'
-  gem 'rails_12factor', '0.0.2'
+  gem 'passenger'
 end
 
 group :development, :test do
