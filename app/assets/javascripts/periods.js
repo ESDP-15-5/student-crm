@@ -75,9 +75,7 @@ $(document).bind('page:change', function() {
             var title = event.title;
             var shortTitle = jQuery.trim(title).substring(0, 12)
                     .trim(this) + "...";
-            if (title.length < 14) {
-                title
-            }else {
+            if (title.length > 13) {
                 title = shortTitle
             }
 
