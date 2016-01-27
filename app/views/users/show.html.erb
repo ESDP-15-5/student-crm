@@ -68,18 +68,23 @@
 
     </div>
   </div>
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Действия</h3>
-      </div>
-      <div class="panel-body">
-        <div class="btn-group-vertical" role="group" aria-label="...">
-          <%= link_to 'Договор', (user_path(@user.id) + ".pdf") , class: 'btn btn-warning'%>
-          <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning' %>
-          <%= link_to 'История изменений', change_user_path(@user) , class: 'btn btn-warning' %>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Действия</h3>
+        </div>
+        <div class="panel-body">
+          <div class="btn-group-vertical" role="group" aria-label="...">
+            <% if current_user.has_any_role? :admin,:manager  %>
+              <%= link_to 'Договор', (user_path(@user.id) + ".pdf") , class: 'btn btn-warning'%>
+              <%= link_to 'История изменений', change_user_path(@user) , class: 'btn btn-warning' %>
+              <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning' %>
+          <% elsif current_user.has_role? :student  %>
+              <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning' %>
+            <% end  %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
