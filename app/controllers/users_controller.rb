@@ -27,8 +27,12 @@ class UsersController < ApplicationController
   def create
     group_ids = params[:groups]
     @user = User.new(user_params)
+    generated_password = Devise.friendly_token.first(8)
+    @user.password = generated_password
     if @user.save
+      flash[:notice] = 'Студент успешно добавлен'
       @group_membership = GroupMembership.create(:user_id => @user.id, :group_id => group_ids)
+      UserMailer.password_email(@user, generated_password).deliver_now
       redirect_to users_path
     else
       render 'new'

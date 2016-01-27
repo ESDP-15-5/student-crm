@@ -60,8 +60,6 @@
           <div class="col-md-6 col-xs-12">
             <%= f.input :email, label: 'Эл.почта', placeholder: 'Только @gmail.com',
                         input_html: {style: 'width:200px;', autocomplete: 'false'} %>
-            <%= f.input :password, label: 'Password', placeholder: 'Password',
-                        input_html: {style: 'width:200px;', autocomplete: 'false' } %>
             <%= f.simple_fields_for(:contact, input_html: {style: 'width:200px;'})  do |ff| %>
                 <%= ff.input :phone, label: 'Номер телефона', placeholder: 'Номер телефона',
                              input_html: {style: 'width:200px;'} %>
