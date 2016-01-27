@@ -33,6 +33,8 @@
               <% end %>
             </select>
           </div>
+            <br>
+
             <%= f.input :name, label: 'Имя', placeholder: 'Имя',
                         input_html: {style: 'width:200px;'} %>
             <%= f.input :surname, label: 'Фамилия', placeholder: 'Фамилия',
@@ -45,7 +47,7 @@
               <label for="birthdate">* Дата рождения</label>
             </div>
             <div class="col-sm-9">
-              <%= f.input :birthdate, label: false, start_year: 1950, end_year: Date.today.year - 10, order: [:day, :month, :year] %>
+              <%= f.input :birthdate, label: false, start_year: 1980, end_year: Date.today.year - 10, order: [:day, :month, :year] %>
             </div>
             <%= f.input :passportdetails, label: 'Паспорт', placeholder: 'Паспортные данные' %>
             <div class="col-sm-3" style="text-align: right">
