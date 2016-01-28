@@ -1,18 +1,5 @@
 <% @Colors = ['#ff9999','#ffdb99', '#ffff99', '#99ff99', '#9999ff', '#ffccff'] %>
-<div class="row">
-  <div class="col-md-4">
-    <h1>Календарь занятий</h1>
-  </div>
-  <div class="col-md-8">
-    <h3 style="margin-bottom: 0px">примеры групп по цветам</h3>
-    <% if @groups.empty? %>
-    <%else%>
-        <% @groups.each do |group| %>
-            <div class="color_examples" style=" background-color: <%= @Colors[(group.name.slice(group.name.length - 1)).to_i - 1] %>;"><%= group.name  %></div>
-        <% end %>
-    <% end %>
-  </div>
-</div></br>
+
 <div class="row">
   <div id="calendar" data-request-url="<%=course_periods_path(@course) %>" class="col-md-8"> </div>
   <div class="col-md-4">
