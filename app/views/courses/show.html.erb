@@ -2,8 +2,7 @@
 
 <%= link_to 'Открыть календарь', course_periods_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
 
-
-<%= link_to 'Создать группу', new_course_group_path(@course.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
+<%= link_to 'Создать группу', new_course_group_path(@course.id), class: 'btn btn-primary ', style: 'margin-bottom: 10px' %>
 
 
 <% if @groups.empty? %>
@@ -12,16 +11,18 @@
     <table class="table table-bordered table-striped">
       <tr>
         <th>Группа</th>
+        <th>Студенты</th>
         <th class="action">Действие</th>
       </tr>
       <% @groups.each do |element| %>
           <tr data-item-id="<%= element.id %>" class="item">
             <td><%= link_to element.name, course_group_path(@course.id, element.id)  %></td>
+            <td><%=  element.students.count %></td>
             <td>
+              <%= link_to 'Редактировать', edit_course_group_path(@course.id, element.id), :class => 'btn btn-warning  ' %>
               <%= link_to 'Удалить', course_group_path(@course.id, element.id),
                           method: :delete,
-                          data: {confirm: 'Вы действительно хотите удалить этот элемент курса?'}, :class => 'btn btn-default pull-right'%>
-              <%= link_to 'Обновить', edit_course_group_path(@course.id, element.id), :class => 'btn btn-default pull-right' %>
+                          data: {confirm: 'Вы действительно хотите удалить этот элемент курса?'}, :class => 'btn btn-danger'%>
             </td>
           </tr>
       <% end %>
@@ -48,10 +49,10 @@
         <td><%= link_to element.theme, course_course_element_path(@course.id, element.id)  %></td>
         <td><%= element.element_type %></td>
         <td>
+          <%= link_to 'Редактировать', edit_course_course_element_path(@course.id, element.id), :class => 'btn btn-warning' %>
           <%= link_to 'Удалить', course_course_element_path(@course.id, element.id),
                       method: :delete,
-                      data: {confirm: 'Вы действительно хотите удалить этот элемент курса?'}, :class => 'btn btn-default pull-right'%>
-          <%= link_to 'Обновить', edit_course_course_element_path(@course.id, element.id), :class => 'btn btn-default pull-right' %>
+                      data: {confirm: 'Вы действительно хотите удалить этот элемент курса?'}, :class => 'btn btn-danger '%>
         </td>
       </tr>
   <% end %>

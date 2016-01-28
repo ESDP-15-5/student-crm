@@ -18,4 +18,8 @@ class CourseElement < ActiveRecord::Base
   include RankedModel
   ranks :row_order, :with_same => :course_id
 
+  def name_with_type
+    "#{theme} ( #{element_type} )"
+  end
+
 end

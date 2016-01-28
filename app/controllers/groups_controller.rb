@@ -6,6 +6,11 @@ class GroupsController < ApplicationController
       }
     end
 
+    def index
+      @course = Course.find(params[:course_id])
+      @groups = @course.groups
+    end
+
     def show
       @course = Course.find(params[:course_id])
       @group = Group.find(params[:id])
