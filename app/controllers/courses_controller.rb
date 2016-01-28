@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.all
-
+    @bread_crums = get_initial_crums()
   end
 
   def show
