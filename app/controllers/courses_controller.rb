@@ -7,6 +7,7 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.all
+
   end
 
   def show
@@ -15,7 +16,7 @@ class CoursesController < ApplicationController
     @groups = @course.groups
 
     hash_crums = {
-        "Элементы курса #{@course.name}"=> {}
+        @course.name => {}
     }
     @bread_crums = add_bread_crums(hash_crums)
   end

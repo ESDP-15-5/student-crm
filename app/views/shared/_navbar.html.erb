@@ -1,3 +1,5 @@
+
+<% if user_signed_in? %>
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -9,7 +11,6 @@
       <!--<ul class="nav navbar-nav">
       </ul>-->
       <ul class="nav navbar-nav navbar-left">
-        <% if user_signed_in? %>
             <li><span class=""></span><%= link_to 'Курсы', courses_path , class: 'glyphicon glyphicon-education' %></li>
 
             <ul class="nav navbar-nav">
@@ -39,7 +40,6 @@
 
 
 
-        <% end %>
       </ul>
       <ul class="navbar-nav navbar-right">
         <% if user_signed_in? %>
@@ -65,3 +65,4 @@
     </div>
   </div>
 </nav>
+<% end %>

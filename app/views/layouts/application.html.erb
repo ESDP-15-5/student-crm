@@ -10,15 +10,14 @@
 <body class="<%= controller_name %> <%= action_name %>">
 
 <div class="container">
-  <%=	 render 'shared/navbar' %>
+    <%=	 render 'shared/navbar' %>
 
-    <div class="col-md-12 margin-bottom20 ">
+  <div class="margin-top60">
       <%= render 'shared/breadcrums' %>
-    </div>
-  <br>
-    <%= flash_messages %>
+         <%= flash_messages %>
 
-    <%= yield %>
+      <%= yield %>
+  </div>
 
 </div>
 

@@ -10,14 +10,13 @@
 
 @import "fullcalendar";
 @import "periods";
+@import "login1";
 
 @import "custom";
 
-/* Navbar fixed top - по умолчанию будет закрывать контент, поэтому ставим отступ */
-body{
-  margin-top: 70px;
+.sessions.new{
+  background: url("bg-first.jpg");
 }
-/* Конец  */
 
 /* Alert classes for devise */
 .alert-notice {
