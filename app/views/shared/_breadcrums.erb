@@ -1,12 +1,11 @@
-<% if @bread_crums.nil? %>
-<%else%>
-<div class="crums">
+<% unless @bread_crums.nil? %>
+  <ol class="breadcrumb">
   <% @bread_crums.each do |name, path| %>
       <% if  path.empty? %>
-          <%= name %>
+         <li> <%= name %></li>
       <% else %>
-          <%= link_to name, path %> >
+         </li> <%= link_to name, path %> /</li>
       <% end %>
   <% end %>
-</div>
+  </ol>
 <%end%>

@@ -1,12 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+
       <%= link_to 'IT-Attractor +', root_path, class: 'navbar-brand' %>
     </div>
 
@@ -15,14 +10,14 @@
       </ul>-->
       <ul class="nav navbar-nav navbar-left">
         <% if user_signed_in? %>
-            <li><%= link_to ' Курсы', courses_path %></li>
+            <li><span class=""></span><%= link_to 'Курсы', courses_path , class: 'glyphicon glyphicon-education' %></li>
 
             <ul class="nav navbar-nav">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Пользователи<span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Пользователи<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><%= link_to ' Пользователи', users_path %></li>
-                  <li><%= link_to ' Студенты', users_students_path %></li>
+                  <li><%= link_to ' Студенты', users_students_path%></li>
                   <li><%= link_to ' Учителя', users_teachers_path %></li>
                 </ul>
               </li>
@@ -31,7 +26,7 @@
             <% if current_user.has_role? :admin %>
               <ul class="nav navbar-nav">
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sms-рассылка<span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle glyphicon glyphicon-envelope" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sms-рассылка<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><%= link_to ' Sms-service-account', sms_service_accounts_path %></li>
                     <li><%= link_to ' Sms-delivery', sms_deliveries_path %></li>
