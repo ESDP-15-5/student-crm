@@ -9,7 +9,7 @@ def get_initial_crums()
 
   def index
     @course = Course.find(params[:course_id])
-    @course_elements = CourseElement.where(course_id: @course)
+    @course_elements = CourseElement.where(course_id: @course).order(:row_order)
     @groups = Group.where(course_id: @course)
     @period = Period.new
     @button_text = 'Создать занятие'
@@ -27,20 +27,6 @@ def get_initial_crums()
 
     hash_crums = {
         "Занятие #{@period.title}"=> {}
-    }
-    @bread_crums = add_bread_crums(hash_crums)
-  end
-
-  def new
-    @course = Course.find(params[:course_id])
-    @course_elements = @course.course_elements
-    @groups = @course.groups
-    @period = Period.new
-    @button_text = 'Создать занятие'
-
-    hash_crums = {
-        @course.name => course_path(@course.id),
-        "Создание нового Занятия" => {}
     }
     @bread_crums = add_bread_crums(hash_crums)
   end
@@ -66,7 +52,7 @@ def get_initial_crums()
   def edit
     @course = Course.find(params[:course_id])
     @period = Period.find(params[:id])
-    @course_elements = @course.course_elements
+    @course_elements = @course.course_elements.order(:row_order)
     @groups = @course.groups
     @button_text = 'Обновить занятие'
     render 'index'
