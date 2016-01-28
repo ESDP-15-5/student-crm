@@ -51,7 +51,7 @@ class CoursesController < ApplicationController
   def edit
     @course = Course.find(params[:id])
     hash_crums = {
-        "Обновление курса #{@course.name}" => {}
+        "Редактировать курс #{@course.name}" => {}
     }
 
     @bread_crums = add_bread_crums(hash_crums)
