@@ -2,6 +2,8 @@ class Assignment < ActiveRecord::Base
   belongs_to :user
   belongs_to :period
 
+  acts_as_paranoid
+
   has_attached_file :homework
 
   validates :homework, presence: true
