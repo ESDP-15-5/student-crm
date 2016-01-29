@@ -51,8 +51,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      sign_in @user, :bypass => true #Это для того чтобы пользователь при смене пароля оставался в системе
       redirect_to users_path
-      # sign_in @user, :bypass => true #Это для того чтобы пользователь при смене пароля оставался в системе
     else
       render 'edit'
     end

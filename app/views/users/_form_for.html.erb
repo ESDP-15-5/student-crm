@@ -1,0 +1,203 @@
+<% if current_user.has_any_role? :admin, :manager %>
+    <%= form_for @user do |f| %>
+<div class="row user_form">
+  <div class="col-md-6  col-xs-12">
+        <div  class="form-group ">
+          <b class="col-sm-3 control-label">Курс</b>
+          <select name="courses" id="courses" class="form-control " style="width: 200px;">
+            <option value="" selected="selected">Курс</option>
+            <% Course.all.each do |course| %>
+                <option value="<%= course.id %>"                              >
+                  <%= course.name %>
+                </option>
+            <% end %>
+          </select>
+        </div>
+        <div  class="form-group ">
+          <b class="col-sm-3 control-label">Группа</b>
+          <select name="groups" id="groups" disabled = "true" class="form-control" style="width: 200px;">
+            <option value="" selected="selected">Группа</option>
+            <% Group.all.each do |group| %>
+                <option value="<%= group.id %>"data-target="<%= group.course_id %>"><%= group.name %></option>
+            <% end %>
+          </select>
+        </div>
+
+        <div class="form-group  <%= 'has-error' if @user.errors[:email].any? %>">
+      <%= f.label :email, class: 'col-sm-3 control-label' %>
+      <div class="form-inline">
+        <%= f.text_field :email, placeholder: 'Элeктронная почта', class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @user, field_name: :email %>
+      </div>
+    </div>
+
+
+    <div class="form-group  <%= 'has-error' if @user.errors[:name].any? %>">
+          <%= f.label :name,'Имя*', class: 'col-sm-3 control-label' %>
+          <div class="form-inline">
+            <%= f.text_field :name, placeholder: 'Имя', class: 'form-control' %>
+            <%= render 'shared/field_errors', object: @user, field_name: :name %>
+          </div>
+        </div>
+
+        <div class="form-group  <%= 'has-error' if @user.errors[:surname].any? %>">
+          <%= f.label :surname,'Фамилия*', class: 'col-sm-3 control-label' %>
+          <div class="form-inline">
+            <%= f.text_field :surname, placeholder: 'Фамилия', class: 'form-control' %>
+            <%= render 'shared/field_errors', object: @user, field_name: :surname %>
+          </div>
+        </div>
+
+        <div class="form-group  <%= 'has-error' if @user.errors[:middlename].any? %>">
+          <%= f.label :middlename,'Отчество', class: 'col-sm-3 control-label' %>
+          <div class="form-inline">
+            <%= f.text_field :middlename, placeholder: 'Отчество', class: 'form-control' %>
+            <%= render 'shared/field_errors', object: @user, field_name: :middlename %>
+          </div>
+        </div>
+
+
+    <div class="form-group  <%= 'has-error' if @user.errors[:gender].any? %>">
+      <%= f.label :gender,'Пол*', class: 'col-sm-3 control-label' %>
+      <div class="form-inline">
+        <%= f.radio_button :gender, 'Мужской' %>
+        <%= f.label :gender, 'Мужской', :value => 'Мужской' %>
+        <%= f.radio_button :gender, 'Женский' %>
+        <%= f.label :gender, 'Женский', :value => 'Женский' %>
+        <%= render 'shared/field_errors', object: @user, field_name: :gender %>
+      </div>
+    </div>
+
+
+    <div class="form-group <%= 'has-error' if @user.errors[:image].any? %>">
+          <%= f.label :image,'Фото', class: 'col-sm-3 control-label' %>
+          <div class="form-inline">
+            <%= f.file_field :image %>
+            <%= render 'shared/field_errors', object: @user, field_name: :image %>
+          </div>
+        </div>
+
+    <div class="form-group <%= 'has-error' if @user.errors[:birthdate].any? %>">
+      <%= f.label :birthdate, 'День рождения' , class: 'col-sm-3 control-label' %>
+      <div class="form-inline inline-date">
+        <%= f.date_select :birthdate, {start_year: 1980, end_year: Date.today.year - 10,order: [:day, :month, :year]}, class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @user, field_name: :birthdate %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6  col-xs-12">
+
+
+
+    <div class="form-group  <%= 'has-error' if @user.errors[:passportdetails].any? %>">
+      <%= f.label :passportdetails, 'Паспортные данные', class: 'col-sm-3 control-label' %>
+      <div class="form-inline">
+        <%= f.text_field :passportdetails, placeholder: 'Паспорт', class: 'form-control' %>
+        <%= render 'shared/field_errors', object: @user, field_name: :passportdetails %>
+      </div>
+    </div>
+
+    <%= f.fields_for(:contact) do |ff| %>
+        <div class="form-group  <%= 'has-error' if @user.errors[:phone].any? %>">
+          <%= ff.label :phone, 'Номер телефона*', class: 'col-sm-3 control-label' %>
+          <div class="form-inline">
+            <%= ff.text_field :phone, placeholder: 'Номер телефона', class: 'form-control' %>
+            <%= render 'shared/field_errors', object: @user.contact, field_name: :phone %>
+          </div>
+        </div>
+        <span class="help-block">996###xxxxxx, где ### - код моб. оператора/города, xxxxxx - номер телефона</span>
+
+
+        <div class="form-group  <%= 'has-error' if @user.errors[:additional_phone].any? %>">
+          <%= ff.label :additional_phone, 'Доп. номер телефона', class: 'col-sm-3 control-label' %>
+          <div class="form-inline">
+            <%= ff.text_field :additional_phone, placeholder: 'Доп. номер телефона', class: 'form-control' %>
+            <%= render 'shared/field_errors', object: @user.contact, field_name: :additional_phone %>
+          </div>
+        </div>
+
+        <div class="form-group  <%= 'has-error' if @user.errors[:skype].any? %>">
+          <%= ff.label :skype, 'Skype*', class: 'col-sm-3 control-label' %>
+          <div class="form-inline">
+            <%= ff.text_field :skype, placeholder: 'Skype', class: 'form-control' %>
+          </div>
+        </div>
+
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :roles, 'Статус', class: 'col-sm-3 control-label' %>
+        <div class="checkbox-inline">
+          <%= f.collection_check_boxes(:role_ids, Role.all, :id, :name) do |r| %>
+              <p class="normal"><%= r.label { r.check_box + ' ' + r.text } %></p>
+          <% end %>
+       </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="row " style="text-align: center">
+    <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+</div>
+
+    <% end %>
+<!-- Если пользователь студент, препод, или суппорт, то разрешить изменять только эти данные -->
+<% else %>
+    <%= form_for @user do |f| %>
+
+      <div class="row">
+        <div class="col-md-6 student_form" style="margin: 0 auto;float: none">
+          <div class="form-group  <%= 'has-error' if @user.errors[:email].any? %>">
+              <%= f.label :email, class: 'col-sm-3 control-label' %>
+              <div class="form-inline">
+                <%= f.text_field :email, placeholder: 'Элeктронная почта', class: 'form-control' %>
+                <%= render 'shared/field_errors', object: @user, field_name: :email %>
+              </div>
+            </div>
+
+          <div class="form-group  <%= 'has-error' if @user.errors[:password].any? %>">
+            <%= f.label :password, label: 'Пароль', class: 'col-sm-3 control-label' %>
+              <div class="form-inline">
+                <%= f.password_field :password,placeholder: 'Пароль', class: 'form-control' %>
+                <%= render 'shared/field_errors', object: @user, field_name: :password %>
+              </div>
+          </div>
+
+          <%= f.fields_for(:contact) do |ff| %>
+              <div class="form-group  <%= 'has-error' if @user.errors[:phone].any? %>">
+                <%= ff.label :phone, 'Номер телефона*', class: 'col-sm-3 control-label' %>
+                <div class="form-inline">
+                  <%= ff.text_field :phone, placeholder: 'Номер телефона', class: 'form-control' %>
+                  <%= render 'shared/field_errors', object: @user.contact, field_name: :phone %>
+                </div>
+              </div>
+              <span class="help-block">996###xxxxxx, где ### - код моб. оператора/города, xxxxxx - номер телефона</span>
+
+
+              <div class="form-group  <%= 'has-error' if @user.errors[:additional_phone].any? %>">
+                <%= ff.label :additional_phone, 'Доп. номер телефона', class: 'col-sm-3 control-label' %>
+                <div class="form-inline">
+                  <%= ff.text_field :additional_phone, placeholder: 'Доп. номер телефона', class: 'form-control' %>
+                  <%= render 'shared/field_errors', object: @user.contact, field_name: :additional_phone %>
+                </div>
+              </div>
+
+              <div class="form-group  <%= 'has-error' if @user.errors[:skype].any? %>">
+                <%= ff.label :skype, 'Skype*', class: 'col-sm-3 control-label' %>
+                <div class="form-inline">
+                  <%= ff.text_field :skype, placeholder: 'Skype', class: 'form-control' %>
+                </div>
+              </div>
+
+          <% end %>
+        </div>
+      </div>
+      <hr>
+      <div class="row"  style="text-align: center">
+        <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+<% end %>
