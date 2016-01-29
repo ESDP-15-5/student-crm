@@ -15,10 +15,15 @@
         <td><%= course.groups.count %></td>
         <td><%= course.course_elements.count %></td>
         <td>
-          <%= link_to 'Редактировать', edit_course_path(course), :class => 'btn btn-warning'  %>
-          <%= link_to 'Удалить', course_path(course),
-                      method: :delete,
-                      data: {confirm: 'Вы действительно хотите удалить этот курс?'}, :class => 'btn btn-danger'  %>
+          <%= link_to edit_course_path(course), class: 'btn btn-warning btn-xs' do %>
+              Редактировать
+              <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+          <%= link_to course_path(course), class: 'btn btn-danger btn-xs',
+                      data: {confirm: "Вы уверены что хотите удалить курс: #{course.name}?"}, method: :delete do %>
+              Удалить
+              <span class="glyphicon glyphicon-remove"></span>
+           <% end %>
         </td>
       </tr>
   <% end %>

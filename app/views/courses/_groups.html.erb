@@ -1,0 +1,25 @@
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Группа</th>
+    <th>Студенты</th>
+    <th class="action">Действие</th>
+  </tr>
+  <% @groups.each do |element| %>
+      <tr data-item-id="<%= element.id %>" class="item">
+        <td><%= link_to element.name, course_group_path(@course.id, element.id)  %></td>
+        <td><%=  element.students.count %></td>
+        <td>
+          <%= link_to edit_course_group_path(@course.id, element.id), class: 'btn btn-warning btn-xs' do %>
+              Редактировать
+              <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+          <%= link_to course_group_path(@course.id, element.id), class: 'btn btn-danger btn-xs',
+                      data: {confirm: 'Вы действительно хотите удалить эту группу?'}, method: :delete do %>
+              Удалить
+              <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+
+</table>

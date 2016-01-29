@@ -19,8 +19,16 @@
       <tr>
         <td><%= link_to teacher.full_name, user_path(teacher) %></td>
 
-        <td><%= link_to 'Просмотреть', user_path(teacher), class: 'btn btn-info' %>
-          <%= link_to 'Редактировать', edit_user_path(teacher), class: 'btn btn-warning' %>
+        <td>
+          <%= link_to user_path(teacher), class: 'btn btn-warning btn-xs' do %>
+              Просмотреть
+              <span class="glyphicon glyphicon-eye-open"></span>
+          <% end %>
+          <%= link_to edit_user_path(teacher), class: 'btn btn-danger btn-xs' do %>
+              Редактировать
+              <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+
         </td>
       </tr>
   <% end %>

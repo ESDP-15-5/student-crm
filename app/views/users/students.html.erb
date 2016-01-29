@@ -23,8 +23,15 @@
         <td><%= student.email %></td>
         <td><%= student.contact.phone %></td>
 
-        <td><%= link_to 'Просмотреть', user_path(student), class: 'btn btn-info' %>
-          <%= link_to 'Редактировать', edit_user_path(student), class: 'btn btn-warning' %>
+        <td>
+          <%= link_to user_path(student), class: 'btn btn-warning btn-xs' do %>
+                Просмотреть
+              <span class="glyphicon glyphicon-eye-open"></span>
+          <% end %>
+          <%= link_to edit_user_path(student), class: 'btn btn-danger btn-xs' do %>
+              Редактировать
+              <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
         </td>
       </tr>
   <% end %>

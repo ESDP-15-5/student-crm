@@ -9,24 +9,18 @@
 <table class="table table-condensed">
   <tr>
     <th><%= sortable "name", 'Пользователь' %></th>
-    <th></th>
     <th><%= sortable "role_id", 'Роли' %></th>
 
     <th><%= sortable "email" %></th>
     <th>Телефон</th>
     <th>skype</th>
+    <th></th>
 
   </tr>
 
   <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.full_name, user_path(user) %></td>
-        <td>
-          <%= link_to '', edit_user_path(user), class: 'glyphicon glyphicon-pencil' %>
-          <%= link_to '', user_path(user),
-                      method: :delete,
-                      data: {confirm: 'Вы действительно хотите удалить этого пользователя ?'}, :class => 'glyphicon glyphicon-remove-circle'  %>
-        </td>
         <td>
           <% user.roles.each do |role| %>
               <p><%= role.name %></p>
@@ -36,7 +30,19 @@
         <td><%= user.email %></td>
         <td><%= user.contact.phone %></td>
         <td><%= user.contact.skype %></td>
+        <td>
 
+          <%= link_to edit_user_path(user), class: 'btn btn-warning btn-xs' do %>
+              Редактировать
+              <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+          <%= link_to user_path(user), class: 'btn btn-danger btn-xs',
+                      data: {confirm: 'Вы действительно хотите удалить этого пользователя?'}, method: :delete do %>
+              Удалить
+              <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+
+        </td>
       </tr>
   <% end %>
 </table>
