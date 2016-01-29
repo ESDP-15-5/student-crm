@@ -1,5 +1,5 @@
 class SendersController < ApplicationController
-  def get_initial_crums()
+  def get_initial_crumbs()
     {
         "Учетные записи"=> sms_service_accounts_path
     }
@@ -7,10 +7,10 @@ class SendersController < ApplicationController
   def new
     @sender = Sender.new
 
-    hash_crums = {
+    hash_crumbs = {
         "Новый отравитель" => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
 
     # add_breadcrumb 'Учетные записи', :sms_service_accounts_url
     # add_breadcrumb 'Новый отравитель', :new_sender_url

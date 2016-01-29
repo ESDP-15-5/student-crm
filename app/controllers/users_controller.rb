@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   helper_method :sort_column, :sort_direction, :role_sort_column
 
-  def get_initial_crums()
+  def get_initial_crumbs()
     {
         "Пользователи"=> users_path
     }
@@ -17,11 +17,11 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    hash_crums = {
+    hash_crumbs = {
        "Создание нового пользователя" => {}
     }
 
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def create
@@ -41,11 +41,11 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    hash_crums = {
+    hash_crumbs = {
         "Обновление пользователя #{@user.email}" => {}
     }
 
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def update

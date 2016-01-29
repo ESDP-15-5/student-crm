@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  def get_initial_crums()
+  def get_initial_crumbs()
     {
         "Курсы"=> courses_path
     }
@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.all
-    @bread_crums = get_initial_crums()
+    @bread_crumbs = get_initial_crumbs()
   end
 
   def show
@@ -15,19 +15,19 @@ class CoursesController < ApplicationController
     @course_elements = @course.course_elements.rank(:row_order)
     @groups = @course.groups
 
-    hash_crums = {
+    hash_crumbs = {
         @course.name => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def new
     @course = Course.new
 
-    hash_crums = {
+    hash_crumbs = {
         "Создание нового курса" => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
 
   end
 
@@ -50,11 +50,11 @@ class CoursesController < ApplicationController
 
   def edit
     @course = Course.find(params[:id])
-    hash_crums = {
+    hash_crumbs = {
         "Редактировать курс #{@course.name}" => {}
     }
 
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def update

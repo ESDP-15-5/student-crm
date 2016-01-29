@@ -1,6 +1,6 @@
-<% unless @bread_crums.nil? %>
+<% unless @bread_crumbs.nil? %>
   <ol class="breadcrumb">
-  <% @bread_crums.each do |name, path| %>
+  <% @bread_crumbs.each do |name, path| %>
       <% if  path.empty? %>
          <li> <%= name %></li>
       <% else %>

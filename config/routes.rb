@@ -43,6 +43,6 @@ Rails.application.routes.draw do
   get 'sms_deliveries/new_from_contact_list/:id' => 'sms_deliveries#new_from_contact_list', as: 'sms_new_from_contact_list'
   get 'sms_deliveries/resend_message/:id' => 'sms_deliveries#resend_message', as: 'sms_resend'
 
-
+  resources :assignment
 
 end

@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def add_bread_crums(hash_crums)
-    initial_crums = get_initial_crums
-    new_crums = initial_crums.merge(hash_crums)
+  def add_bread_crumbs(hash_crumbs)
+    initial_crumbs = get_initial_crumbs
+    new_crumbs = initial_crumbs.merge(hash_crumbs)
   end
 
   rescue_from CanCan::AccessDenied do |exception|

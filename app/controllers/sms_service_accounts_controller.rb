@@ -1,7 +1,7 @@
 class SmsServiceAccountsController < ApplicationController
   before_action :set_sms_service_account, only: [:show, :edit, :update, :destroy]
 
-  def get_initial_crums()
+  def get_initial_crumbs()
     {
         "Учетные записи"=> sms_service_accounts_path
     }
@@ -14,19 +14,19 @@ class SmsServiceAccountsController < ApplicationController
 
   def show
 
-    hash_crums = {
+    hash_crumbs = {
         "#{@sms_service_account.login}"=> {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def new
     @sms_service_account = SmsServiceAccount.new
     @sms_service_account.senders.build
-    hash_crums = {
+    hash_crumbs = {
         "Новая учетная запись" => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
 
   end
 
@@ -43,11 +43,11 @@ class SmsServiceAccountsController < ApplicationController
 
   def edit
     @sms_service_account.senders.build
-    hash_crums = {
+    hash_crumbs = {
         "Редактирование учетной записи -  #{@sms_service_account.login}" => {}
     }
 
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def update

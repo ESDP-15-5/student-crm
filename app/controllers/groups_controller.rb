@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
 
-    def get_initial_crums()
+    def get_initial_crumbs()
       {
           "Курсы"=> courses_path
       }
@@ -16,24 +16,24 @@ class GroupsController < ApplicationController
       @group = Group.find(params[:id])
       @students = @group.students
 
-      hash_crums = {
+      hash_crumbs = {
           @course.name => course_path(@course.id),
           @group.name => {}
       }
 
-      @bread_crums = add_bread_crums(hash_crums)
+      @bread_crumbs = add_bread_crumbs(hash_crumbs)
     end
 
     def new
       @course = Course.find(params[:course_id])
       @group = @course.groups.build
 
-      hash_crums = {
+      hash_crumbs = {
           @course.name => course_path(@course.id),
           "Создание новой группы" => {}
       }
 
-      @bread_crums = add_bread_crums(hash_crums)
+      @bread_crumbs = add_bread_crumbs(hash_crumbs)
     end
 
     def create
@@ -51,12 +51,12 @@ class GroupsController < ApplicationController
       @course = Course.find(params[:course_id])
       @group = Group.find(params[:id])
 
-      hash_crums = {
+      hash_crumbs = {
           @course.name => course_path(@course.id),
           "Редактирование группы #{@group.name}" => {}
       }
 
-      @bread_crums = add_bread_crums(hash_crums)
+      @bread_crumbs = add_bread_crumbs(hash_crumbs)
     end
 
     def update

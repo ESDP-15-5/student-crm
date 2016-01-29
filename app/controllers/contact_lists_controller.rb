@@ -1,5 +1,5 @@
 class ContactListsController < ApplicationController
-  def get_initial_crums()
+  def get_initial_crumbs()
     {
         "Листы получателей"=> contact_lists_path
     }
@@ -12,18 +12,18 @@ class ContactListsController < ApplicationController
   def show
     @contact_list = ContactList.find(params[:id])
 
-    hash_crums = {
+    hash_crumbs = {
         @contact_list.title => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def new
     @contact_list = ContactList.new
-    hash_crums = {
+    hash_crumbs = {
         "Новый лист получателей"=> {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def create
@@ -39,10 +39,10 @@ class ContactListsController < ApplicationController
 
   def edit
     @contact_list = ContactList.find(params[:id])
-    hash_crums = {
+    hash_crumbs = {
         "Редактирование листа получателей - #{@contact_list.title}"=> {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def update

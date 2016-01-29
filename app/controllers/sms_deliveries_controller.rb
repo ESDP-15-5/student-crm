@@ -1,5 +1,5 @@
 class SmsDeliveriesController < ApplicationController
-  def get_initial_crums()
+  def get_initial_crumbs()
     {
         "Рассылки"=> sms_deliveries_path
     }
@@ -12,10 +12,10 @@ class SmsDeliveriesController < ApplicationController
   def show
     @sms_delivery = SmsDelivery.find(params[:id])
 
-    hash_crums = {
+    hash_crumbs = {
         @sms_delivery.title => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def resend_message
@@ -27,20 +27,20 @@ class SmsDeliveriesController < ApplicationController
   def new
     @sms_delivery = SmsDelivery.new
 
-    hash_crums = {
+    hash_crumbs = {
         "Новая рассылка" => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
 
   end
 
   def new_from_contact_list
     @sms_delivery = SmsDelivery.new
     @contact_list = ContactList.find(params[:id])
-    hash_crums = {
+    hash_crumbs = {
         "Новая рассылка" => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
 
   end
 
@@ -58,10 +58,10 @@ class SmsDeliveriesController < ApplicationController
 
   def edit
     @sms_delivery = SmsDelivery.find(params[:id])
-    hash_crums = {
+    hash_crumbs = {
         "Редактирование рассылки - #{@sms_delivery.title}" => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
 
   end
 

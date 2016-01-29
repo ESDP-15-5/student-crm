@@ -1,7 +1,7 @@
 class PeriodsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
-def get_initial_crums()
+def get_initial_crumbs()
     {
         "Курсы"=> courses_path
     }
@@ -15,20 +15,20 @@ def get_initial_crums()
     @button_text = 'Создать занятие'
 
     @periods = Period.where(group_id: @groups)
-    hash_crums = {
+    hash_crumbs = {
         @course.name => course_path(@course),
         'Календарь'=>{}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def show
     @period = Period.find(params[:id])
 
-    hash_crums = {
+    hash_crumbs = {
         "Занятие #{@period.title}"=> {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def create
@@ -57,10 +57,10 @@ def get_initial_crums()
     @button_text = 'Обновить занятие'
     render 'index'
 
-    hash_crums = {
+    hash_crumbs = {
         "Обновление занятия #{@period.title}" => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def update

@@ -1,6 +1,6 @@
 class CourseElementMaterialsController < ApplicationController
 
-  def get_initial_crums()
+  def get_initial_crumbs()
     {
         "Курсы"=> courses_path
     }
@@ -10,13 +10,13 @@ class CourseElementMaterialsController < ApplicationController
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_material = CourseElementMaterial.find(params[:id])
-    hash_crums = {
+    hash_crumbs = {
         @course.name => course_path(@course.id),
         @course_element.theme => course_course_element_path(@course.id, @course_element.id),
         @course_element_material.title => {}
     }
 
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def new
@@ -24,13 +24,13 @@ class CourseElementMaterialsController < ApplicationController
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_material = @course_element.course_element_materials.build
 
-    hash_crums = {
+    hash_crumbs = {
         @course.name => course_path(@course.id),
         @course_element.theme => course_course_element_path(@course.id, @course_element.id),
         "Добавление материала" => {}
     }
 
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def create
@@ -51,13 +51,13 @@ class CourseElementMaterialsController < ApplicationController
     @course_element = CourseElement.find(params[:course_element_id])
     @course_element_material = CourseElementMaterial.find(params[:id])
 
-    hash_crums = {
+    hash_crumbs = {
         @course.name => course_path(@course.id),
         @course_element.theme => course_course_element_path(@course.id, @course_element.id),
         "Обновление материала" => {}
     }
 
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def update

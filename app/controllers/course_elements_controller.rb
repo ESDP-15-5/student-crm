@@ -1,6 +1,6 @@
 class CourseElementsController < ApplicationController
 
-  def get_initial_crums()
+  def get_initial_crumbs()
     {
         "Курсы"=> courses_path
     }
@@ -14,23 +14,23 @@ class CourseElementsController < ApplicationController
 
     @course_element_file_new = CourseElementFile.new
 
-    hash_crums = {
+    hash_crumbs = {
         @course.name => course_path(@course.id),
         @course_element.theme => {}
     }
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def new
     @course = Course.find(params[:course_id])
     @course_element = @course.course_elements.build
 
-    hash_crums = {
+    hash_crumbs = {
         @course.name => course_path(@course.id),
         "Создание нового элемента курса" => {}
     }
 
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def create
@@ -49,12 +49,12 @@ class CourseElementsController < ApplicationController
     @course = Course.find(params[:course_id])
     @course_element = CourseElement.find(params[:id])
 
-    hash_crums = {
+    hash_crumbs = {
         @course.name => course_path(@course.id),
         "Обновление элемента курса #{@course_element.theme}" => {}
     }
 
-    @bread_crums = add_bread_crums(hash_crums)
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
   def update
