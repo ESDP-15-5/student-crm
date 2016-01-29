@@ -4,8 +4,7 @@
 
 
 <%= link_to 'Добавить материал',  new_course_course_element_course_element_material_path(@course, @course_element.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
-<% if @course_element_material.empty? %>
-<%else%>
+<% unless @course_element_material.empty? %>
     <table class="table table-bordered table-striped">
       <tr>
         <th> Заголовок</th>
