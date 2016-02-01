@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_one :contact, dependent: :destroy
   accepts_nested_attributes_for :contact
 
+  has_many :assignments
 
   has_attached_file :image,
                     styles: {medium: '300x300>', thumb: '100x100>'},

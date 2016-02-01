@@ -10,6 +10,7 @@ class Period < ActiveRecord::Base
   belongs_to :course_element
   has_many :attendances
   has_many :students, through: :attendances
+  has_many :assignments
 
   validates :title, presence:  true
   validates :commence_datetime, presence:  true
