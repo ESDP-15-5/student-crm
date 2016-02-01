@@ -84,10 +84,10 @@ class CourseElementsController < ApplicationController
 
 
   def download
-    upload = CourseElementFile.find(params[:id])
-    send_file upload.file.path,
-              :filename => upload.file_file_name,
-              :type => upload.file_content_type,
+    download = CourseElementFile.find(params[:id])
+    send_file download.file.path,
+              :filename => download.file_file_name,
+              :type => download.file_content_type,
               :disposition => 'attachment'
     flash[:notice] = 'Your file has been downloaded'
   end
