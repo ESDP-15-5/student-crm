@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
 
+  before_action :admin?
+
     def get_initial_crumbs()
       {
           "Курсы"=> courses_path

@@ -7,6 +7,15 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def admin?
+    redirect_to students_path unless current_user.has_role? :admin || :manager || :teacher
+  end
+
+  def student?
+    redirect_to root_path unless current_user.has_role? :student
+  end
+
+
   def add_bread_crumbs(hash_crumbs)
     initial_crumbs = get_initial_crumbs
     new_crumbs = initial_crumbs.merge(hash_crumbs)
@@ -20,7 +29,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    user_path(current_user)
+    if current_user.has_role? :admin
+      root_path
+    elsif current_user.has_role? :student
+      s
+    end
   end
 
   def configure_permitted_parameters

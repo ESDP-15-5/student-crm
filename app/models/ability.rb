@@ -6,11 +6,11 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
 
-    if user.is_admin?
+    if user.has_role? :admin
       #Может управлять всем
       can :manage, :all
       can :assign_roles, User
-    elsif user.is_manager?
+    elsif user.has_role? :manager
       #Может управлять всем, пока что
       can :manage, Course
       can :manage, CourseElement
@@ -21,19 +21,19 @@ class Ability
       can :manage, GroupMembership
       can :manage, User
 
-    elsif user.is_teacher?
+    elsif user.has_role? :teacher
       #Может просматривать профили всех пользователей
       can :read, User
       #Может управлять своим профилем
       can [:show, :update], User, :id => user.id
 
-    elsif user.is_techsupport?
+    elsif user.has_role? :techsupport
       #Может просматривать профили всех пользователей
       can :read, User
       #Может управлять своим профилем
       can [:show, :update], User, :id => user.id
 
-    elsif user.is_student?
+    elsif user.has_role? :student
       #Может управлять своим профилем
       can [:show, :update ], User, :id => user.id
 

@@ -1,4 +1,6 @@
 class SmsDeliveriesController < ApplicationController
+  before_action :admin?
+
   def get_initial_crumbs()
     {
         "Рассылки"=> sms_deliveries_path

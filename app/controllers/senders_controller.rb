@@ -1,4 +1,6 @@
 class SendersController < ApplicationController
+  before_action :admin?
+
   def get_initial_crumbs()
     {
         "Учетные записи"=> sms_service_accounts_path

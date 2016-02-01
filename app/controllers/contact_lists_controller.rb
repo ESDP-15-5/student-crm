@@ -1,4 +1,6 @@
 class ContactListsController < ApplicationController
+  before_action :admin?
+
   def get_initial_crumbs()
     {
         "Листы получателей"=> contact_lists_path

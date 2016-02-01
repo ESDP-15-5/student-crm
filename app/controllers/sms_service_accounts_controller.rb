@@ -1,5 +1,6 @@
 class SmsServiceAccountsController < ApplicationController
-  before_action :set_sms_service_account, only: [:show, :edit, :update, :destroy]
+  before_action :admin?, :set_sms_service_account, only: [:show, :edit, :update, :destroy]
+
 
   def get_initial_crumbs()
     {

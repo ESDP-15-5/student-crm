@@ -1,5 +1,5 @@
 class GroupMembershipsController < ApplicationController
-
+  before_action :admin?
 
   def new
     @group_membership = GroupMembership.new

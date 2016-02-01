@@ -1,4 +1,7 @@
 class CoursesController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
+
   def get_initial_crumbs()
     {
         "Курсы"=> courses_path
