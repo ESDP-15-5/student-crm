@@ -23,8 +23,18 @@
         <td>Не загружено</td>
         <td></td>
     <% else %>
-        <td><%= row[:assigment].name %></td>
-        <td><%= row[:assigment].created_at.strftime("%H:%M %d %b %Y") %></td>
+        <td>
+          <% row[:assigment].each do|e| %>
+              <%= link_to e.homework_file_name, download_hw_path(e.id) %>
+
+          <% end %>
+        </td>
+        <td>
+          <% row[:assigment].each do|e| %>
+              <%= e.created_at.strftime("%H:%M %d %b %Y") %>
+
+          <% end %>
+        </td>
     <%	end %>
 
   </tr>

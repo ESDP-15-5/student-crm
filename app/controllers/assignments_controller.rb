@@ -45,6 +45,10 @@ class AssignmentsController < ApplicationController
 
   def new
     @assignment = Assignment.new
+    gr_members = GroupMembership.find_by(user_id: current_user.id)
+    @group = Group.find(gr_members.group_id)
+    @periods = @group.periods
+
     hash_crumbs = {
         "Создание нового курса" => {}
     }
@@ -53,7 +57,7 @@ class AssignmentsController < ApplicationController
 
   def create
     @assignment = Assignment.new(assignment_params)
-
+    @assignment.user_id = current_user.id
     if @assignment.save
       flash[:notice] = "Домашняя работа #{@assignment.name} успешно загружена!"
       redirect_to @assignment
@@ -75,9 +79,17 @@ class AssignmentsController < ApplicationController
     redirect_to @assignment
   end
 
+  def download
+    download = Assignment.find(params[:id])
+    send_file download.homework.path,
+              :filename => download.homework_file_name,
+              :type => download.homework_content_type,
+              :disposition => 'attachment'
+    flash[:notice] = 'Your file has been downloaded'
+  end
   private
 
   def assignment_params
-    params.require(:assignments).permit(:user_id, :period_id,:name,:grade, :review, :homework)
+    params.require(:assignment).permit(:user_id, :period_id,:name, :homework)
   end
 end

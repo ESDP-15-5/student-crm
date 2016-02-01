@@ -44,5 +44,6 @@ Rails.application.routes.draw do
   get 'sms_deliveries/resend_message/:id' => 'sms_deliveries#resend_message', as: 'sms_resend'
 
   resources :assignments
+  get 'assignments/:id/download' =>  'assignments#download', :as => :download_hw
 
 end
