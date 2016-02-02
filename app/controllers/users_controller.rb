@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, :admin?
+  before_action :authenticate_user!
   load_and_authorize_resource
   helper_method :sort_column, :sort_direction, :role_sort_column
 
@@ -53,7 +53,12 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       sign_in(@user, :bypass => true) if @user == current_user
       #Это для того чтобы пользователь при смене пароля оставался в системе
-      redirect_to users_path
+      if current_user.has_role? :student
+      redirect_to user_path(current_user)
+      else
+        redirect_to users_path
+      end
+
     else
       render 'edit'
     end

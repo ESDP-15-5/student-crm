@@ -35,6 +35,9 @@ class Ability
 
     elsif user.has_role? :student
       #Может управлять своим профилем
+      can :read, User
+      can :read, CourseElement
+      can :read, CourseElementMaterial
       can [:show, :update ], User, :id => user.id
 
     else
