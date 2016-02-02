@@ -1,0 +1,25 @@
+
+  <h3 class="text-center">Список занятий курса <%= @group.course.name %> группа <%= @group.name %></h3>
+
+
+    <ul class="nav nav-pills">
+      <li class="active"><a data-toggle="tab" href="#student">Студенты группы</a></li>
+      <li><a data-toggle="tab" href="#course_element">Элементы курса</a></li>
+      <li><a data-toggle="tab" href="#homework">Домашняя работа</a></li>
+      <li><a data-toggle="tab" href="#attendances">Посещаемость</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="student" class="tab-pane fade in active">
+        <h4> Список студентов данной группы </h4>
+        <%= render 'student_of_group' %>
+      </div>
+      <div id="homework" class="tab-pane fade">
+        <%= render 'student_hws' %>
+      </div>
+      <div id="course_element" class="tab-pane fade">
+        <%= render 'course_element' %>
+      </div>
+      <div id="attendances" class="tab-pane fade">
+      </div>
+    </div>

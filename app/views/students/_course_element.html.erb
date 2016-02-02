@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Название элемента курса</th>
+    <th>Тип элемента</th>
+    <th>Дата проведения занятия</th>
+  </tr>
+  </thead>
+  <tbody>
+      <% @course_elements.each do |course_element| %>
+          <tr>
+            <% if @time > course_element.commence_datetime %>
+              <td><%= link_to course_element.course_element.theme, course_course_element_path(@course.id, course_element.id)  %></td></td>
+            <% else  %>
+                <td><%= course_element.course_element.theme %></td></td>
+            <% end %>
+            <td><%= course_element.course_element.element_type %></td>
+            <td><%= course_element.commence_datetime.to_formatted_s(:long) %></td>
+          </tr>
+      <% end %>
+  </tbody>
+</table>

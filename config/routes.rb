@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'students', to: 'students#index'
 
   root 'courses#index'
 
@@ -47,5 +46,8 @@ Rails.application.routes.draw do
 
   resources :assignments
   get 'assignments/:id/download' =>  'assignments#download', :as => :download_hw
+
+  get 'students', to: 'students#student_main_page'
+  get 'student_info/:id' => 'students#index', as: 'student_info'
 
 end

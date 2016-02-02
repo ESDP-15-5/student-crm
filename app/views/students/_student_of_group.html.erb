@@ -1,0 +1,23 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Студент</th>
+    <th>Email</th>
+    <th>Skype</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @students %>
+      <% @students.each do |student| %>
+          <tr>
+            <td> <%= @counter %> </td>
+            <td><%= student.full_name %></td>
+            <td><%= student.email %></td>
+            <td><%= student.contact.skype %></td>
+          </tr>
+          <% @counter += 1 %>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
