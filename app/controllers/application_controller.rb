@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
     if current_user.has_role? :admin
       root_path
     elsif current_user.has_role? :student
-      s
+      students_path
     end
   end
 

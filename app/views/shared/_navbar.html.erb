@@ -24,7 +24,7 @@
                       <ul class="dropdown-menu">
                         <li>
                           <% current_user.groups.each do |group| %>
-                             <%= link_to  group.course.name, student_hws_path(group.course) %>
+                             <%= link_to  group.course.name, student_info_path(group.course) %>
                           <% end %>
                         </li>
                       </ul>
