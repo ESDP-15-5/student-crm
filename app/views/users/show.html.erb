@@ -76,12 +76,12 @@
         </div>
         <div class="panel-body">
           <div class="btn-group-vertical" role="group" aria-label="...">
-            <% if current_user.has_any_role? :admin,:manager  %>
-              <%= link_to 'Договор', (user_path(@user.id) + ".pdf") , class: 'btn btn-warning'%>
-              <%= link_to 'История изменений', change_user_path(@user) , class: 'btn btn-warning' %>
-              <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning' %>
+            <% if current_user.has_role? :admin || :manager  %>
+              <%= link_to 'Договор', (user_path(@user.id) + ".pdf") , class: 'btn btn-warning  btn-xs'%>
+              <%= link_to 'История изменений', change_user_path(@user) , class: 'btn btn-warning  btn-xs' %>
+              <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning  btn-xs' %>
           <% elsif current_user.has_role? :student  %>
-              <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning' %>
+              <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning  btn-xs' %>
             <% end  %>
           </div>
         </div>
