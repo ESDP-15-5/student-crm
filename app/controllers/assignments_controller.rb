@@ -5,10 +5,21 @@ class AssignmentsController < ApplicationController
     }
   end
   def index
-    courses = Course.all
+    if params[:course].nil? || params[:course][0].blank?
+      courses = Course.all
+    else
+      courses = Course.find(params[:course])
+    end
+
     hw_table_array = []
     courses.each do |course|
-      course.periods.each do |period|
+      if params[:group].nil?||params[:group][0].empty?
+        @periods = course.periods
+      else
+        @periods = course.periods.where(group_id: params[:group])
+      end
+
+      @periods.each do |period|
         # add check for emty deadline
         GroupMembership.where(group_id: Group.find(period.group_id)).each do |gr_member|
           table_raw = {
