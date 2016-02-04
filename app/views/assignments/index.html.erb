@@ -1,4 +1,31 @@
 
+<%= form_tag assignments_path, method: 'get', id: 'filter_assignments' do %>
+    <div class="form-group">
+      <label for="course">Курс</label>
+      <%= collection_select :course,
+                            params[:course_id],
+                            Course.all,
+                            :id,
+                            :name,
+                            class: 'form-control',
+                            selected: params[:course],
+                            include_blank: true %>
+      <label for="group">Группа</label>
+      <%= grouped_collection_select :group,
+                                    params[:group_id],
+                                    Course.order(:name),
+                                    :groups,
+                                    :name,
+                                    :id,
+                                    :name,
+                                    class: 'form-control',
+                                    selected: params[:group],
+                                    include_blank: true %>
+    </div>
+<% end %>
+
+<hr/>
+
 <div class="digg_pagination" style="margin:auto">
   <%= will_paginate @hw_table %>
 </div>
