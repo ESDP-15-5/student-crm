@@ -13,6 +13,7 @@ $(document).ready(function(){
     }
 
     $('#course_').change(function(){
+        $('#group_').empty();
         $('#filter_assignments').submit();
     });
 
