@@ -5,8 +5,7 @@ When(/^залогинен пользователь под "([^"]*)" с паро�
     fill_in 'user[email]', :with => email
     fill_in 'user[password]', :with => password
   end
-
-  click_button('войти')
+  find(:xpath, '//*[@id="login"]').click
 
 end
 
@@ -42,14 +41,13 @@ When(/^Пользователь редактирует курс с назван�
   within('.edit_course') do
     fill_in 'course[name]', :with => course_name_new
   end
-  click_button('Обновить курс')
+  click_button('Редактировать')
 end
 # --------------------------------------login.feature
 When(/^я не залогиненный пользователь$/) do
   visit(root_path)
   expect(page).to have_css('form')
-  expect(page).to have_content('Войти')
-  find_button('войти').click
+  find(:xpath, '//*[@id="login"]').click
 end
 
 When(/^пользователь, зайдя на страницу "([^"]*)", увидет таблицу с курсами$/) do |name_page|
@@ -61,8 +59,7 @@ end
 
 When(/^меня редиректит на страницу с авторизацией$/) do
   expect(page).to have_css('form')
-  expect(page).to have_content('Войти')
-  find_button('войти').click
+  find(:xpath, '//*[@id="login"]').click
 end
 
 When(/^пользователь зашел на главную страницу$/) do
@@ -73,12 +70,6 @@ When(/^я зашел на страницы (.*)$/) do |pages_path|
   visit(eval(pages_path))
 end
 
-
-When(/^меня редиректит на страницу с авторизацией (.*)$/) do |redirect_path|
-  expect(page).to have_css('form')
-  expect(page).to have_content('Войти')
-  find_button('Войти').click
-end
 # --------------------------------------course_element.feature
 When(/^пользователь заходит в курс "([^"]*)"$/) do |course_name|
   # find(course_name).click
@@ -87,8 +78,10 @@ When(/^пользователь заходит в курс "([^"]*)"$/) do |cour
 end
 
 When(/^он видит список элементов курса "([^"]*)"$/) do |course_name|
-  expect(page).to have_content("Элементы курса #{course_name}")
-  expect(page).to have_css('table')
+  course_string = 'Курс "'+course_name.to_s+'"'
+  expect(page).to have_content(course_string)
+  expect(page).to have_xpath('//table[@id="sortable"]')
+  expect(page).to have_content('Название элемента курса')
 end
 
 When(/^пользователь нажимает на "([^"]*)"$/) do |button_name|
@@ -130,7 +123,7 @@ When(/^элемент курса "([^"]*)" пропадет из списка э
 end
 
 When(/^пользователь редактирует элемент курса  с названием "([^"]*)" на "([^"]*)"$/) do |course_element_name_old, course_element_new|
-  element = "//td//*[contains(text(), '" + course_element_name_old + "')]/ancestor::tr//*[contains(text(), 'Обновить')]"
+  element = "//td//*[contains(text(), '" + course_element_name_old + "')]/ancestor::tr//*[contains(text(), 'Редактировать')]"
   find(:xpath, element).click
   within('.edit_course_element') do
     fill_in 'course_element[theme]', :with => course_element_new
@@ -153,7 +146,7 @@ When(/^пользователь заходит в элемент курса "([^
 end
 
 When(/^он видит кнопку "([^"]*)"$/) do |button_name|
-  sleep(3)
+  sleep(1)
   find_link(button_name, :visible => :all).visible?
 end
 
