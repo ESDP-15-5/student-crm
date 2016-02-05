@@ -13,7 +13,6 @@ class CourseElementFilesController < ApplicationController
     @course_element_file = @course_element.course_element_files.build(course_element_file_params)
 
     if @course_element_file.save
-      # redirect_to course_course_element_path(@course, @course_element)
       flash[:notice] = 'Файл успешно загружен!'
       redirect_to :back
     else
