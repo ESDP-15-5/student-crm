@@ -16,22 +16,18 @@
       <ul class="nav navbar-nav navbar-left">
 
         <% if current_user.has_role? :admin  %>
-            <li><span class=""></span><%= link_to 'Курсы', courses_path , class: 'glyphicon glyphicon-education' %></li>
+            <li><%= link_to 'Курсы', courses_path , class: 'glyphicon glyphicon-education' %></li>
         <% elsif current_user.has_role? :student %>
-                  <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle glyphicon glyphicon-education" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Курс<span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <% current_user.groups.each do |group| %>
-                             <%= link_to  group.course.name, student_info_path(group.course) %>
-                          <% end %>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
 
-        <% end %>
+            <li>
+              <% current_user.groups.each do |group| %>
+                  <%= link_to  group.course.name, student_info_path(group.course), class: 'glyphicon glyphicon-education'  %>
+              <% end %>
+            </li>
+            <li><%= link_to 'Календарь занятий', periods_calendar_group_path(current_user.groups.first) , class: 'glyphicon glyphicon-calendar' %></li>
+
+
+      <% end %>
         <% if current_user.has_role? :admin %>
 
             <ul class="nav navbar-nav">
