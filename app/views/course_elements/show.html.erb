@@ -2,42 +2,49 @@
 
 <br/>
 
-
-<%= link_to 'Добавить материал',  new_course_course_element_course_element_material_path(@course, @course_element.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
+<% unless current_user.has_role? :student %>
+  <%= link_to 'Добавить материал',  new_course_course_element_course_element_material_path(@course, @course_element.id), class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
+<% end %>
 <% unless @course_element_material.empty? %>
     <table class="table table-bordered table-striped">
       <tr>
         <th> Заголовок</th>
-        <th  class="action"> Действия </th>
+        <% unless current_user.has_role? :student %>
+          <th  class="action"> Действия </th>
+        <% end %>
       </tr>
 
       <% @course_element_material.each do |material| %>
           <tr>
             <td><%=link_to material.title, course_course_element_course_element_material_path( Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id) %></td>
-            <td>
-              <%= link_to 'Удалить', course_course_element_course_element_material_path( Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id),
-                          method: :delete,
-                          data: {confirm: 'Вы действительно хотите удалить этот раздаточный материал?'}, :class => 'btn btn-default pull-right' %>
 
-              <%= link_to 'Изменить', edit_course_course_element_course_element_material_path(Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id) ,:class => 'btn btn-default pull-right' %>
+            <% unless current_user.has_role? :student %>
+              <td>
+                <%= link_to 'Удалить', course_course_element_course_element_material_path( Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id),
+                            method: :delete,
+                            data: {confirm: 'Вы действительно хотите удалить этот раздаточный материал?'}, :class => 'btn btn-default pull-right' %>
 
-            </td>
+                <%= link_to 'Изменить', edit_course_course_element_course_element_material_path(Course.find(CourseElement.find(material.course_element_id).course_id),material.course_element_id,material.id) ,:class => 'btn btn-default pull-right' %>
+
+              </td>
+            <% end %>
           </tr>
       <% end %>
     </table>
 <%end%>
 
-<%= form_for @course_element_file_new, url: course_course_element_course_element_files_path(@course, @course_element.id),method: :post, :onchange=>"this.form.submit();" do |f|%>
+<% unless current_user.has_role? :student %>
+  <%= form_for @course_element_file_new, url: course_course_element_course_element_files_path(@course, @course_element.id),method: :post, :onchange=>"this.form.submit();" do |f|%>
     <div class="form-group <%= 'has-error' if @course_element_file_new.errors[:file].any? %>">
       <div class="col-sm-4">
         <%= f.file_field :file, label: 'Выберите файл', class: 'file_input'  %>
         <%= render 'shared/field_errors', object: @course_element_file_new, field_name: :file %>
       </div>
     </div>
+  <% end %>
 <% end %>
 
-<% if @course_element_file.empty? %>
-<%else%>
+<% unless @course_element_file.empty? %>
     <table class="table table-bordered table-striped">
       <tr>
         <th>Файл</th>
