@@ -24,15 +24,19 @@ class AssignmentsController < ApplicationController
         GroupMembership.where(group_id: Group.find(period.group_id)).each do |gr_member|
           table_raw = {
               course: course.name,
+              course_id: course.id,
               period: period.title,
+              period_id: period.id,
               group: Group.find(period.group_id).name,
               user: gr_member.user.name,
+              user_id: gr_member.user.id,
               assigment: Assignment.where(user_id: gr_member.user.id, period_id: period.id)
           }
           hw_table_array.push(table_raw)
         end
       end
     end
+    @assignment_homework_new = Assignment.new
     @hw_table = hw_table_array.paginate(page: params[:page], per_page: 10)
 
     hash_crumbs = {
@@ -54,24 +58,24 @@ class AssignmentsController < ApplicationController
     @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
-  def new
-    @assignment = Assignment.new
-    gr_members = GroupMembership.find_by(user_id: current_user.id)
-    @group = Group.find(gr_members.group_id)
-    @periods = @group.periods
-
-    hash_crumbs = {
-        "Создание нового курса" => {}
-    }
-    @bread_crumbs = add_bread_crumbs(hash_crumbs)
-  end
+  # def new
+  #   @assignment = Assignment.new
+  #   gr_members = GroupMembership.find_by(user_id: current_user.id)
+  #   @group = Group.find(gr_members.group_id)
+  #   @periods = @group.periods
+  #
+  #   hash_crumbs = {
+  #       "Создание нового курса" => {}
+  #   }
+  #   @bread_crumbs = add_bread_crumbs(hash_crumbs)
+  # end
 
   def create
     @assignment = Assignment.new(assignment_params)
     @assignment.user_id = current_user.id
     if @assignment.save
       flash[:notice] = "Домашняя работа #{@assignment.name} успешно загружена!"
-      redirect_to @assignment
+      redirect_to :back
     else
       render 'new'
     end
