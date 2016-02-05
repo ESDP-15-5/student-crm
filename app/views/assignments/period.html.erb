@@ -1,0 +1,51 @@
+<div class="digg_pagination" style="margin:auto">
+  <%= will_paginate @hw_table %>
+</div>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th> ФИО </th>
+    <th> Домашняя работа </th>
+    <th> Время отправки </th>
+    <th> Оценка </th>
+    <th> Комментарий </th>
+  </tr>
+
+  <% @hw_table.each do |row| %>
+      <tr>
+        <td><%= row[:user] %></td>
+        <% if row[:assigment].empty? %>
+            <td>
+              не присланно
+            </td>
+            <td>
+                -
+            </td>
+            <td>
+              оценка
+            </td>
+            <td>
+              комментарий
+            </td>
+        <% else %>
+            <td>
+              <% row[:assigment].each do|e| %>
+                  <%= link_to e.homework_file_name, download_hw_path(e.id) %>
+              <% end %>
+            </td>
+            <td>
+              <% row[:assigment].each do|e| %>
+                  <%= e.created_at.strftime("%H:%M %d %b %Y") %>
+              <% end %>
+            </td>
+            <td>
+              оценка
+            </td>
+            <td>
+              комментарий
+            </td>
+        <%	end %>
+
+      </tr>
+  <% end %>
+</table>

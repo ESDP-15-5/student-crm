@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   resources :assignments
   get 'assignments/:id/download' =>  'assignments#download', :as => :download_hw
+  get 'assignments/period/:id' => 'assignments#period', :as=> :assignment_period
 
   get 'students', to: 'students#student_main_page'
   get 'student_info/:id' => 'students#index', as: 'student_info'

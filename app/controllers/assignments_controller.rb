@@ -11,37 +11,52 @@ class AssignmentsController < ApplicationController
       courses = Course.find(params[:course])
     end
 
-    hw_table_array = []
-    courses.each do |course|
-      if params[:group].nil?||params[:group][0].empty?
-        @periods = course.periods
-      else
-        @periods = course.periods.where(group_id: params[:group])
-      end
-
-      @periods.each do |period|
-        # add check for emty deadline
-        GroupMembership.where(group_id: Group.find(period.group_id)).each do |gr_member|
-          table_raw = {
-              course: course.name,
-              course_id: course.id,
-              period: period.title,
-              period_id: period.id,
-              group: Group.find(period.group_id).name,
-              user: gr_member.user.name,
-              user_id: gr_member.user.id,
-              assigment: Assignment.where(user_id: gr_member.user.id, period_id: period.id)
-          }
-          hw_table_array.push(table_raw)
-        end
-      end
+    if params[:group].nil?||params[:group][0].empty?
+      @periods = Period.where(course_id: courses)
+    else
+      @periods = Period.where(group_id: params[:group])
     end
-    @assignment_homework_new = Assignment.new
+
+    hw_table_array = []
+    @periods.order(course_id: :asc,commence_datetime: :asc).each do |period|
+      assignments = Assignment.where(period_id: period.id)
+      table_raw = {
+          course: Course.find(period.course_id).name,
+          period: period.title,
+          period_id: period.id,
+          group: Group.find(period.group_id).name,
+          assignment: assignments,
+          assignment_number_grades: assignments.where.not(grade: nil)
+      }
+      hw_table_array.push(table_raw)
+    end
 
     @hw_table = hw_table_array.paginate(page: params[:page], per_page: 10)
 
     hash_crumbs = {
         'Домашние работы' => {}
+    }
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
+  end
+
+  def period
+    period =Period.find(params[:id])
+    @assignments = period.assignments
+    hw_table_array=[]
+
+    GroupMembership.where(group_id: Group.find(period.group_id)).each do |gr_member|
+      table_raw = {
+          user: gr_member.user.name,
+          user_id: gr_member.user.id,
+          assigment: Assignment.where(user_id: gr_member.user.id, period_id: period.id)
+      }
+      hw_table_array.push(table_raw)
+    end
+
+    @hw_table = hw_table_array.paginate(page: params[:page], per_page: 10)
+    hash_crumbs = {
+        'Домашние работы' => assignments_path,
+        "Домашние работы к занятию #{period.title}" => {}
     }
     @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end

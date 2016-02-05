@@ -31,45 +31,22 @@
 </div>
 
 <table class="table table-bordered table-striped">
-<tr>
-  <th> Курс </th>
-  <th> Занятие </th>
-  <th> Гр№ </th>
-  <th> ФИО </th>
-  <th> Домашняя работа </th>
-  <th> Дата загрузки </th>
-</tr>
-
-<% @hw_table.each do |row| %>
   <tr>
-    <td><%= row[:course] %></td>
-    <td><%= row[:period] %></td>
-    <td><%= row[:group] %></td>
-    <td><%= row[:user] %></td>
-    <% if row[:assigment].empty? %>
-        <td>
-          <%= form_for @assignment_homework_new, url: assignments_path,method: :post, html: { id: "assignment_for_#{row[:period_id]}" } do |f| %>
-              <%= f.hidden_field :user_id, value: row[:user_id] %>
-              <%= f.hidden_field :period_id, value: row[:period_id] %>
-              <%= f.file_field :homework, label: 'Выберите файл', class: 'submit_file'  %>
-          <% end %>
-        </td>
-        <td></td>
-    <% else %>
-        <td>
-          <% row[:assigment].each do|e| %>
-              <%= link_to e.homework_file_name, download_hw_path(e.id) %>
-          <% end %>
-        </td>
-        <td>
-          <% row[:assigment].each do|e| %>
-              <%= e.created_at.strftime("%H:%M %d %b %Y") %>
-
-          <% end %>
-        </td>
-    <%	end %>
-
+    <th> Курс </th>
+    <th> Занятие </th>
+    <th> Гр№ </th>
+    <th> Кол-во присланных работ </th>
+    <th> Кол-во выставленных оценок </th>
   </tr>
-<% end %>
 
+  <% @hw_table.each do |row| %>
+      <tr>
+        <td><%= row[:course] %></td>
+        <td><%= row[:period] %></td>
+        <td><%= row[:group] %></td>
+        <td><%= link_to row[:assignment].count, assignment_period_path(row[:period_id]) %></td>
+        <td><%= row[:assignment_number_grades].count %></td>
+
+      </tr>
+  <% end %>
 </table>
