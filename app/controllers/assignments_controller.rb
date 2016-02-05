@@ -37,6 +37,7 @@ class AssignmentsController < ApplicationController
       end
     end
     @assignment_homework_new = Assignment.new
+
     @hw_table = hw_table_array.paginate(page: params[:page], per_page: 10)
 
     hash_crumbs = {
@@ -58,21 +59,8 @@ class AssignmentsController < ApplicationController
     @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
-  # def new
-  #   @assignment = Assignment.new
-  #   gr_members = GroupMembership.find_by(user_id: current_user.id)
-  #   @group = Group.find(gr_members.group_id)
-  #   @periods = @group.periods
-  #
-  #   hash_crumbs = {
-  #       "Создание нового курса" => {}
-  #   }
-  #   @bread_crumbs = add_bread_crumbs(hash_crumbs)
-  # end
-
   def create
     @assignment = Assignment.new(assignment_params)
-    @assignment.user_id = current_user.id
     if @assignment.save
       flash[:notice] = "Домашняя работа #{@assignment.name} успешно загружена!"
       redirect_to :back

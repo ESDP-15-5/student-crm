@@ -47,13 +47,18 @@
     <td><%= row[:group] %></td>
     <td><%= row[:user] %></td>
     <% if row[:assigment].empty? %>
-        <td>Не загружено</td>
+        <td>
+          <%= form_for @assignment_homework_new, url: assignments_path,method: :post, html: { id: "assignment_for_#{row[:period_id]}" } do |f| %>
+              <%= f.hidden_field :user_id, value: row[:user_id] %>
+              <%= f.hidden_field :period_id, value: row[:period_id] %>
+              <%= f.file_field :homework, label: 'Выберите файл', class: 'submit_file'  %>
+          <% end %>
+        </td>
         <td></td>
     <% else %>
         <td>
           <% row[:assigment].each do|e| %>
               <%= link_to e.homework_file_name, download_hw_path(e.id) %>
-
           <% end %>
         </td>
         <td>

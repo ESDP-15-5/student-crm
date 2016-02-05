@@ -21,3 +21,13 @@ $(document).ready(function(){
         $('#filter_assignments').submit();
     });
 });
+
+$(document).bind('page:change', function() {
+    if (($(".assignments.index").length == 0)) {
+        return;
+    }
+    $('.submit_file').on('change', function() {
+        $(this).closest('form').submit();
+
+    });
+});
