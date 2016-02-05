@@ -1,4 +1,7 @@
-$(document).ready(function(){
+$(document).bind('page:change', function() {
+if (($(".assignments.index").length == 0)) {
+    return;
+}
     var groups = $('#group_').html();
     var course = $('#course_ option:selected').text();
 
@@ -20,12 +23,8 @@ $(document).ready(function(){
     $('#group_').change(function(){
         $('#filter_assignments').submit();
     });
-});
 
-$(document).bind('page:change', function() {
-    if (($(".assignments.index").length == 0)) {
-        return;
-    }
+
     $('.submit_file').on('change', function() {
         $(this).closest('form').submit();
 

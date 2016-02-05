@@ -1,4 +1,7 @@
 $(document).bind('page:change', function() {
+    if (($(".periods.index").length == 0)) {
+        return;
+    }
 
     var url = $("#calendar").attr('data-request-url');
     //console.log(url);
