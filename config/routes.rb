@@ -49,5 +49,6 @@ Rails.application.routes.draw do
 
   get 'students', to: 'students#student_main_page'
   get 'student_info/:id' => 'students#index', as: 'student_info'
+  get 'student_info/calendar/:group_id' => 'students#calendar_group', as: 'periods_calendar_group'
 
 end
