@@ -1,0 +1,4 @@
+<%= form_for @assignment, url: assignment_grade_path, method: :put do |f|  %>
+    <%= f.text_field :grade, placeholder: 'От 0 до 100 балов' %>
+    <%= f.submit %>
+<% end %>

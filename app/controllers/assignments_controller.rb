@@ -62,18 +62,42 @@ class AssignmentsController < ApplicationController
   end
 
   def show
-    if params[:period_id]
-      @assignments = Assignment.where(period_id: params[:period_id])
-    else
-      @assignment = Assignment.find(params[:id])
-    end
+    @assignment = Assignment.find(params[:id])
+
+     if params[:grade].to_i == 1
+       @grade = 1
+     end
+     if params[:review].to_i == 1
+       @grade = 0
+     end
 
     hash_crumbs = {
-        @assignment.name => {}
+        'Домашние работы' => assignments_path,
+        "Домашние работы к занятию #{@assignment.period.title}" => assignment_period_path(@assignment.period),
     }
     @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
+  def rate
+    @assignment = Assignment.find(params[:id])
+
+    if @assignment.update(grade_params)
+      flash[:notice] = "Вы поставили #{@assignment.grade}"
+      redirect_to assignment_period_path(Period.find(@assignment.period_id))
+    else
+      render 'grade'
+    end
+  end
+  def review
+    @assignment = Assignment.find(params[:id])
+
+    if @assignment.update(review_params)
+      flash[:notice] = "Рецензия добавлена"
+      redirect_to assignment_period_path(Period.find(@assignment.period_id))
+    else
+      render 'review'
+    end
+  end
   def create
     @assignment = Assignment.new(assignment_params)
     if @assignment.save
@@ -83,6 +107,7 @@ class AssignmentsController < ApplicationController
       render 'new'
     end
   end
+
   def edit
 
   end
@@ -109,5 +134,13 @@ class AssignmentsController < ApplicationController
 
   def assignment_params
     params.require(:assignment).permit(:user_id, :period_id,:name, :homework)
+  end
+
+  def grade_params
+    params.require(:assignment).permit(:grade)
+  end
+
+  def review_params
+    params.require(:assignment).permit(:review)
   end
 end

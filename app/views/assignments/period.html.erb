@@ -39,10 +39,22 @@
               <% end %>
             </td>
             <td>
-              оценка
+              <% row[:assigment].each do|e| %>
+                  <% if e.grade.nil? %>
+                    <%= link_to "поставить оценку", assignment_path(e.id, grade:1)%>
+                  <% else%>
+                    <%= link_to e.grade, assignment_path(e.id, grade:1)%>
+                  <% end %>
+              <% end %>
             </td>
             <td>
-              комментарий
+              <% row[:assigment].each do|e| %>
+                  <% if e.review.nil? %>
+                      <%= link_to "написать комментарий", assignment_path(e.id, review:1)%>
+                  <% else%>
+                      <%= link_to "Просмотреть комментарий", assignment_path(e.id, review:1)%>
+                  <% end %>
+              <% end %>
             </td>
         <%	end %>
 
