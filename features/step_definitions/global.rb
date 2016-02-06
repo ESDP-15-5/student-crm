@@ -75,6 +75,7 @@ When(/^пользователь заходит в курс "([^"]*)"$/) do |cour
   # find(course_name).click
   visit('/courses')
   click_link(course_name)
+  sleep(1)
 end
 
 When(/^он видит список элементов курса "([^"]*)"$/) do |course_name|
@@ -285,4 +286,62 @@ end
 
 When(/^он видит Выберите файл$/) do
   find(:xpath, '//*[@id="course_element_file_file"]')
+end
+
+
+When(/^он видит список групп курса "([^"]*)"$/) do |course|
+  course_string = 'Курс "'+course.to_s+'"'
+  expect(page).to have_content(course_string)
+  expect(page).to have_selector('#course_groups')
+  expect(page).to have_content('Группа')
+  sleep(1)
+end
+
+
+When(/^вводит в название группы "([^"]*)"$/) do |group_name|
+  within('#new_group') do
+    fill_in 'group[name]', :with => group_name
+  end
+  sleep(2)
+end
+
+When(/^"([^"]*)" появляется в списке групп$/) do |group_name|
+  expect(page).to have_content(group_name)
+  expect(page).to have_selector('table')
+  sleep(2)
+end
+
+When(/^пользователь удаляет группу с названием "([^"]*)"$/) do |group_name|
+  group = "//td//*[contains(text(), '" + group_name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
+  find(:xpath, group).click
+  page.driver.browser.switch_to.alert.accept
+  sleep(2)
+end
+
+When(/^группа "([^"]*)" пропадет из списка групп$/) do |group_name|
+  page.should have_no_content(group_name)
+  sleep(2)
+end
+
+When(/^пользователь редактирует группу с названием "([^"]*)" на "([^"]*)"$/) do |old_group_name, new_group_name|
+  element = "//td//*[contains(text(), '" + old_group_name + "')]/ancestor::tr//*[contains(text(), 'Редактировать')]"
+  find(:xpath, element).click
+  within('.edit_group') do
+    fill_in 'group[name]', :with => new_group_name
+  end
+  click_button('Редактировать группу')
+  sleep(2)
+end
+
+
+When(/^пользователь заходит в группу "([^"]*)"$/) do |group_name|
+  visit('/courses/3/groups/1')
+  sleep(2)
+end
+
+
+When(/^он видит список студентов группы "([^"]*)"$/) do |group_name|
+  expect(page).to have_selector('#student_table')
+  expect(page).to have_content('Студент')
+  sleep(2)
 end

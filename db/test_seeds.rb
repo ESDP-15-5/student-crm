@@ -36,3 +36,32 @@ CourseElementMaterial.create(course_element_id: 1,
                              title: 'Раздатка-1',
                              content:'Содержимое раздатки 1'
 )
+
+groups = []
+groups.push Group.create(name: 'Html1', course: courses[2])
+groups.push Group.create(name: 'Html2', course: courses[2])
+
+
+Role.create!(name: 'student')
+
+
+5.times do
+  student = User.create!(
+      name: Faker::Name.first_name,
+      surname: Faker::Name.last_name,
+      middlename: Faker::Name.first_name,
+      gender: ['Мужчина', 'Женщина'].sample,
+      birthdate: Faker::Date.backward,
+      contact_attributes: {
+          phone:('996550123456'),
+          additional_phone:('996550123456'),
+          skype:((Faker::Name.name.downcase!).split(' ')).join('_')
+      },
+      passportdetails: Faker::Lorem.word,
+      email: "#{Faker::Name.first_name}.#{Faker::Name.last_name}@gmail.com",
+      password: 'password',
+      password_confirmation: 'password',
+      roles:[Role.find_by(name:'student')]
+  )
+  GroupMembership.create!(group: groups[0], user_id: student.id);
+end
