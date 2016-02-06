@@ -1,7 +1,16 @@
 $(document).bind('page:change', function() {
-    if (($(".periods.index").length == 0)) {
-        return;
-    }
+    //if (($(".periods.index").length == 0)) {
+    //    return;
+    //}
+
+    $('#period_deadline').on("change",function(){
+        console.log('1')
+        if(this.checked){
+            $('#hidden_deadline_time').css("display", "block");;
+        }else{
+            $('#hidden_deadline_time').css("display", "none");;
+        }
+    });
 
     var url = $("#calendar").attr('data-request-url');
     //console.log(url);

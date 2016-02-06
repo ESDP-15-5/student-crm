@@ -35,7 +35,9 @@ def get_initial_crumbs()
   def create
     @course = Course.find(params[:course_id])
     @period = @course.periods.build(period_params)
-
+    if !@period.deadline
+      @period.deadline_time = nil
+    end
     if @period.save
       flash[:notice] = 'Занятие успешно создано!'
       redirect_to :back
@@ -79,7 +81,7 @@ def get_initial_crumbs()
   private
 
   def period_params
-    params.require(:period).permit(:group_id,:course_element_id,:title, :commence_datetime)
+    params.require(:period).permit(:group_id,:course_element_id,:title, :commence_datetime, :deadline, :deadline_time)
   end
   # Use callbacks to share common setup or constraints between actions.
   def set_event
