@@ -10,11 +10,11 @@ class AssignmentsController < ApplicationController
     else
       courses = Course.find(params[:course])
     end
-
+    course_elements = CourseElement.where(course_id: courses, element_type: 'Лекция', element_type: 'Контрольная')
     if params[:group].nil?||params[:group][0].empty?
-      @periods = Period.where(course_id: courses)
+      @periods = Period.where(course_element_id: course_elements)
     else
-      @periods = Period.where(group_id: params[:group])
+      @periods = Period.where(group_id: params[:group],course_element_id: course_elements)
     end
 
     hw_table_array = []
