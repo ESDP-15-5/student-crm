@@ -56,7 +56,7 @@ class AssignmentsController < ApplicationController
 
     @hw_table = hw_table_array.paginate(page: params[:page], per_page: 10)
     hash_crumbs = {
-        'Домашние работы' => assignments_path,
+        'Домашние работы' => assignments_path(course: period.course.id),
         "Домашние работы к занятию #{period.title}" => {}
     }
     @bread_crumbs = add_bread_crumbs(hash_crumbs)
@@ -73,7 +73,7 @@ class AssignmentsController < ApplicationController
      end
 
     hash_crumbs = {
-        'Домашние работы' => assignments_path,
+        'Домашние работы' => assignments_path(course: period.course.id),
         "Домашние работы к занятию #{@assignment.period.title}" => assignment_period_path(@assignment.period),
     }
     @bread_crumbs = add_bread_crumbs(hash_crumbs)
