@@ -85,7 +85,7 @@ $(document).bind('page:change', function() {
             element.html(
                 '<div id="'+event.id+'">'+
                 icon_element_type +
-                ' '+ event.name +' |'+ time +
+                ' '+ event.name +'|'+ time +
                 '<br>'+
                 title+
                 '</div>'
