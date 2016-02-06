@@ -10,7 +10,8 @@ class AssignmentsController < ApplicationController
     else
       courses = Course.find(params[:course])
     end
-    course_elements = CourseElement.where(course_id: courses, element_type: 'Лекция', element_type: 'Контрольная')
+    element_types = ['Лекция','Контрольная']
+    course_elements = CourseElement.where(course_id: courses, element_type: element_types)
     if params[:group].nil?||params[:group][0].empty?
       @periods = Period.where(course_element_id: course_elements)
     else

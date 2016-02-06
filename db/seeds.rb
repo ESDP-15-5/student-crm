@@ -5,6 +5,125 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+def create_course_element(course, element_type)
+  course_elements = []
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Введение",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Начало работы",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Введение в синтаксис",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Развертка приложения",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Основы баз данных",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Глубокий анализ данных",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Если ничего не пошло",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Многопоточное программирование",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Клиент Серверные решения",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Основные тэги HTML5",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Логические операторы",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Фрэймворки",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Работа над ошибками",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Командная работа",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Системный анализ данных",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Примеры из практики",
+                                            element_type: element_type.sample)
+
+  course_elements.push CourseElement.create(course: course,
+                                            theme: "Система заголовков",
+                                            element_type: element_type.sample)
+end
+
+def create_period(group, course_elements_html, course)
+  periods = []
+  periods.push Period.create(title: "Введение в HTML",
+                             commence_datetime: "24/Dec/2015 18:00:30 +0600".to_datetime,
+                             course_element: course_elements_html.sample,
+                             group: group,
+                             course: course)
+  periods.push Period.create(title: "Обычный текст или абзац",
+                             commence_datetime: "28/Dec/2015 18:00:30 +0600".to_datetime,
+                             course_element: course_elements_html.sample,
+                             group: group,
+                             course: course)
+  periods.push Period.create(title: "Ссылки",
+                             commence_datetime: "31/Dec/2015 18:00:30 +0600".to_datetime,
+                             course_element: course_elements_html.sample,
+                             group: group,
+                             course: course)
+  periods.push Period.create(title: "Списки",
+                             commence_datetime: "04/Jan/2015 18:00:30 +0600".to_datetime,
+                             course_element: course_elements_html.sample,
+                             group: group,
+                             course: course)
+  periods.push Period.create(title: "Адpеса",
+                             commence_datetime: "07/Jan/2015 18:00:30 +0600".to_datetime,
+                             course_element: course_elements_html.sample,
+                             group: group,
+                             course: course)
+  periods.push Period.create(title: "Логические стили",
+                             commence_datetime: "11/Jan/2015 18:00:30 +0600".to_datetime,
+                             course_element: course_elements_html.sample,
+                             group: group,
+                             course: course)
+  periods.push Period.create(title: "Физические стили",
+                             commence_datetime: "14/Jan/2015 18:00:30 +0600".to_datetime,
+                             course_element: course_elements_html.sample,
+                             group: group,
+                             course: course)
+  periods.push Period.create(title: "Специальные символы",
+                             commence_datetime: "18/Jan/2015 18:00:30 +0600".to_datetime,
+                             course_element: course_elements_html.sample,
+                             group: group,
+                             course: course)
+  periods.push Period.create(title: "Рисунки",
+                             commence_datetime: "21/Jan/2015 18:00:30 +0600".to_datetime,
+                             course_element: course_elements_html.sample,
+                             group: group,
+                             course: course)
+end
 
 Role.create!(id: 1, name: 'student')
 Role.create!(id: 2, name: 'manager')
@@ -20,7 +139,6 @@ phonecodes.flatten!
 
 password = 'password'
 
-
 courses = []
 
 courses.push Course.create(name: "HTML",starts_at: '2015-04-23', ends_at: '2016-02-20', practical_time: 200, theoretical_time: 100, educational_cost: 135000)
@@ -28,75 +146,8 @@ courses.push Course.create(name: "Ruby on Rails",starts_at: '2015-04-23', ends_a
 
 element_type = CourseElement::ELEMENT_TYPES
 
-course_elements = []
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Введение",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Начало работы",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Введение в синтаксис",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Развертка приложения",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Основы баз данных",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Глубокий анализ данных",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Если ничего не пошло",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Многопоточное программирование",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Клиент Серверные решения",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Основные тэги HTML5",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Логические операторы",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Фрэймворки",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Работа над ошибками",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Командная работа",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Системный анализ данных",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Примеры из практики",
-                                          element_type: element_type.sample)
-
-course_elements.push CourseElement.create(course: courses.sample,
-                                          theme: "Система заголовков",
-                                          element_type: element_type.sample)
+course_elements_html = create_course_element(courses[0], element_type)
+course_elements_ruby = create_course_element(courses[1], element_type)
 
 groups = []
 groups.push Group.create(name: 'RoR1', course: courses[1])
@@ -104,113 +155,24 @@ groups.push Group.create(name: 'RoR2', course: courses[1])
 groups.push Group.create(name: 'HTML1', course: courses[0])
 groups.push Group.create(name: 'HTML2', course: courses[0])
 
-periods = []
-periods.push Period.create(title: "1# Вводное",
-                           commence_datetime: "19/Dec/2015 16:29:30 +0100".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[1],
-                           course: courses[1])
-periods.push Period.create(title: "2# Основы",
-                           commence_datetime: "20/Dec/2015 16:30:30 +0100".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[1],
-                           course: courses[1])
 
+Period.create(title: "1# Вводное",
+                           commence_datetime: "19/Dec/2015 16:29:30 +0100".to_datetime,
+                           course_element: course_elements_ruby.sample,
+                           group: groups[1],
+                           course: courses[1])
+Period.create(title: "2# Основы",
+                           commence_datetime: "20/Dec/2015 16:30:30 +0100".to_datetime,
+                           course_element: course_elements_ruby.sample,
+                           group: groups[1],
+                           course: courses[1])
 
 ############# Занятия HTML для группы HTML1
-periods.push Period.create(title: "Введение в HTML",
-                           commence_datetime: "24/Dec/2015 18:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[2],
-                           course: courses[0])
-periods.push Period.create(title: "Обычный текст или абзац",
-                           commence_datetime: "28/Dec/2015 18:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[2],
-                           course: courses[0])
-periods.push Period.create(title: "Ссылки",
-                           commence_datetime: "31/Dec/2015 18:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[2],
-                           course: courses[0])
-periods.push Period.create(title: "Списки",
-                           commence_datetime: "04/Jan/2015 18:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[2],
-                           course: courses[0])
-periods.push Period.create(title: "Адpеса",
-                           commence_datetime: "07/Jan/2015 18:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[2],
-                           course: courses[0])
-periods.push Period.create(title: "Логические стили",
-                           commence_datetime: "11/Jan/2015 18:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[2],
-                           course: courses[0])
-periods.push Period.create(title: "Физические стили",
-                           commence_datetime: "14/Jan/2015 18:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[2],
-                           course: courses[0])
-periods.push Period.create(title: "Специальные символы",
-                           commence_datetime: "18/Jan/2015 18:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[2],
-                           course: courses[0])
-periods.push Period.create(title: "Рисунки",
-                           commence_datetime: "21/Jan/2015 18:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[2],
-                           course: courses[0])
+create_period(groups[2], course_elements_html, courses[0])
 
 
 ############# Занятия HTML для группы HTML2
-periods.push Period.create(title: "Введение в HTML",
-                           commence_datetime: "24/Dec/2015 20:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[3],
-                           course: courses[0])
-periods.push Period.create(title: "Обычный текст или абзац",
-                           commence_datetime: "28/Dec/2015 20:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[3],
-                           course: courses[0])
-periods.push Period.create(title: "Ссылки",
-                           commence_datetime: "31/Dec/2015 20:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[3],
-                           course: courses[0])
-periods.push Period.create(title: "Списки",
-                           commence_datetime: "04/Jan/2016 20:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[3],
-                           course: courses[0])
-periods.push Period.create(title: "Адpеса",
-                           commence_datetime: "07/Jan/2016 20:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[3],
-                           course: courses[0])
-periods.push Period.create(title: "Логические стили",
-                           commence_datetime: "11/Jan/2016 20:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[3],
-                           course: courses[0])
-periods.push Period.create(title: "Физические стили",
-                           commence_datetime: "14/Jan/2016 20:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[3],
-                           course: courses[0])
-periods.push Period.create(title: "Специальные символы",
-                           commence_datetime: "18/Jan/2016 20:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[3],
-                           course: courses[0])
-periods.push Period.create(title: "Рисунки",
-                           commence_datetime: "21/Jan/2016 20:00:30 +0600".to_datetime,
-                           course_element: course_elements.sample,
-                           group: groups[3],
-                           course: courses[0])
+create_period(groups[3], course_elements_html, courses[0])
 
 #creating students
 20.times do
@@ -231,7 +193,7 @@ periods.push Period.create(title: "Рисунки",
       password_confirmation: password,
       roles:[Role.find_by(name:'student')]
   )
-  GroupMembership.create!(group: groups.sample, user_id: student.id);
+  GroupMembership.create!(group: groups.sample, user_id: student.id)
 end
 
 manager = User.create!(name: 'manager',
