@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129133752) do
+ActiveRecord::Schema.define(version: 20160206151008) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
@@ -191,6 +191,8 @@ ActiveRecord::Schema.define(version: 20160129133752) do
     t.datetime "deleted_at"
     t.integer  "group_id"
     t.integer  "course_id"
+    t.boolean  "deadline"
+    t.datetime "deadline_time"
   end
 
   add_index "periods", ["course_element_id"], name: "index_periods_on_course_element_id"

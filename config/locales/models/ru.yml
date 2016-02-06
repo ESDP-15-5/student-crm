@@ -25,3 +25,4 @@ ru:
         period:
           title: Название занятия
           commence_datetime: Время начала
+          deadline_time: Дедлайн
