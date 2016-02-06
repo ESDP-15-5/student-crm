@@ -1,19 +1,21 @@
 
 <%= link_to 'Создать новый курс', new_course_path, class: 'btn btn-primary', style: 'margin-bottom: 10px' %>
 
-<table class="table table-bordered table-striped" >
+<table class="table table-striped table-bordered " >
   <tr>
     <th>Название курса</th>
     <th>Группы</th>
     <th>Темы</th>
+    <th>Присланные работы</th>
     <th style="width:250px;"> Действия </th>
   </tr>
 
   <% @courses.each do |course| %>
       <tr>
         <td><%= link_to course.name, course_path(course)  %></td>
-        <td><%= course.groups.count %></td>
-        <td><%= course.course_elements.count %></td>
+        <td class="text-center"><%= course.groups.count %></td>
+        <td class="text-center"><%= course.course_elements.count %></td>
+        <td class="text-center"><%= link_to Assignment.where(period_id: course.periods).count, assignments_path(course: course.id), {class: "col-sm-12"} %></td>
         <td>
           <%= link_to edit_course_path(course), class: 'btn btn-warning btn-xs' do %>
               Редактировать

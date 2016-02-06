@@ -44,9 +44,8 @@
         <td><%= row[:course] %></td>
         <td><%= row[:period] %></td>
         <td><%= row[:group] %></td>
-        <td><%= link_to row[:assignment].count, assignment_period_path(row[:period_id]) %></td>
-        <td><%= row[:assignment_number_grades].count %></td>
-
+        <td><%= link_to row[:assignment].count, assignment_period_path(row[:period_id]), class: "text-center col-sm-12" %></td>
+        <td class="text-center"><%= row[:assignment_number_grades].count %></td>
       </tr>
   <% end %>
 </table>
