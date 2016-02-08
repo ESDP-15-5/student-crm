@@ -2,6 +2,7 @@
 <table class="table table-hover">
   <thead>
   <tr>
+    <th>#</th>
     <th>Тема занятия</th>
     <th>Дата проведения занятия</th>
     <th>Домашняя работа</th>
@@ -11,6 +12,7 @@
   <tbody>
   <% @periods.each do |period| %>
       <tr>
+        <td><%= @counter_for_homework %></td>
         <% if @time > period.commence_datetime %>
             <td><%= link_to period.title, course_course_element_path(@course.id, period.id)  %></td>
             <td><%= period.commence_datetime.to_formatted_s(:long) %></td>
@@ -21,6 +23,7 @@
             </td>
             <td>
               <%= form_for @assignment, url: assignments_path,method: :post, html: { id: "assignment_for_#{period.id}" } do |f| %>
+                  <%= f.hidden_field :lesson_id, value: @counter_for_homework %>
                   <%= f.hidden_field :period_id, value: period.id %>
                   <%= f.hidden_field :user_id, value: current_user.id %>
                   <%= f.file_field :homework, class: :submit_file %>
@@ -33,6 +36,7 @@
         <% end %>
 
       </tr>
+      <% @counter_for_homework += 1 %>
   <% end %>
   </tbody>
 </table>

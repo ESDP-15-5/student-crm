@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206151008) do
+ActiveRecord::Schema.define(version: 20160208084156) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160206151008) do
     t.integer  "homework_file_size"
     t.datetime "homework_updated_at"
     t.datetime "deleted_at"
+    t.integer  "lesson_id"
   end
 
   add_index "assignments", ["deleted_at"], name: "index_assignments_on_deleted_at"

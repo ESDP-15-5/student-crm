@@ -73,7 +73,6 @@ class AssignmentsController < ApplicationController
      end
 
     hash_crumbs = {
-        'Домашние работы' => assignments_path(course: period.course.id),
         "Домашние работы к занятию #{@assignment.period.title}" => assignment_period_path(@assignment.period),
     }
     @bread_crumbs = add_bread_crumbs(hash_crumbs)
@@ -101,6 +100,9 @@ class AssignmentsController < ApplicationController
   end
   def create
     @assignment = Assignment.new(assignment_params)
+    $file = params[:assignment][:homework]
+    $lesson_id = params[:assignment][:lesson_id]
+    @assignment.lesson_id = $lesson_id
     if @assignment.save
       flash[:notice] = "Домашняя работа #{@assignment.name} успешно загружена!"
       redirect_to :back

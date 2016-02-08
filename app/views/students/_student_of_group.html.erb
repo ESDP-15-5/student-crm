@@ -8,7 +8,6 @@
   </tr>
   </thead>
   <tbody>
-  <% if @students %>
       <% @students.each do |student| %>
           <tr>
             <td> <%= @counter %> </td>
@@ -18,6 +17,5 @@
           </tr>
           <% @counter += 1 %>
       <% end %>
-  <% end %>
   </tbody>
 </table>
