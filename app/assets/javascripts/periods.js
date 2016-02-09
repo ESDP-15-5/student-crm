@@ -1,7 +1,9 @@
 $(document).bind('page:change', function() {
-    //if (($(".periods.index").length == 0)) {
-    //    return;
-    //}
+
+    var page = ($(".periods.index").length == 0) && ($(".periods.edit").length == 0)
+    if (page) {
+        return;
+    }
 
     $('#period_deadline').on("change",function(){
         console.log('1')
