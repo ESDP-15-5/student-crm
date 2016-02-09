@@ -5,19 +5,23 @@
 </div>
 
 <div class="row">
-  <%= link_to 'Добавить преподователя', new_user_path(role: :teacher), class:'btn btn-primary' %>
+  <%= link_to 'Добавить преподователя', new_user_path(role_ids: @teacher_role.id), class:'btn btn-primary' %>
 </div>
 <br />
 
 <table class="table table-condensed">
   <tr>
     <th>Преподаватель</th>
+    <th>Gmail</th>
+    <th>Телефон</th>
     <th>Действия</th>
   </tr>
 
   <% @teachers.each do |teacher| %>
       <tr>
         <td><%= link_to teacher.full_name, user_path(teacher) %></td>
+        <td><%= teacher.email %></td>
+        <td><%= teacher.contact.phone %></td>
 
         <td>
           <%= link_to user_path(teacher), class: 'btn btn-warning btn-xs' do %>

@@ -26,8 +26,7 @@ class Ability
       can :read, User
       #Может управлять своим профилем
       can [:show, :update], User, :id => user.id
-
-    elsif user.has_role? :techsupport
+    elsif user.has_role? :assistent
       #Может просматривать профили всех пользователей
       can :read, User
       #Может управлять своим профилем

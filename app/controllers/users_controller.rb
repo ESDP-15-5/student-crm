@@ -31,7 +31,8 @@ class UsersController < ApplicationController
     if @user.save
       flash[:notice] = 'Студент успешно добавлен'
       UserMailer.password_email(@user, generated_password).deliver_now
-      redirect_to users_path
+
+      redirect_to users_students_path
     else
       render 'new'
     end
@@ -90,14 +91,24 @@ class UsersController < ApplicationController
   end
 
   def students
-    student_role = Role.find_by(name: 'student')
+    @student_role = Role.find_by(name: 'student')
 
-    @students = student_role.users.paginate(page: params[:page], per_page: 10)
+    @students = @student_role.users.paginate(page: params[:page], per_page: 10)
   end
 
   def teachers
-    teacher_role = Role.find_by(name: :teacher)
-    @teachers = teacher_role.users.paginate(page: params[:page], per_page: 10)
+    @teacher_role = Role.find_by(name: :teacher)
+    @teachers = @teacher_role.users.paginate(page: params[:page], per_page: 10)
+  end
+
+  def managers
+    @manager_role = Role.find_by(name: :manager)
+    @managers = @manager_role.users.paginate(page: params[:page], per_page: 10)
+  end
+
+  def assistents
+    @assistent_role = Role.find_by(name: :assistent)
+    @assistents = @assistent_role.users.paginate(page: params[:page], per_page: 10)
   end
 
   def changes

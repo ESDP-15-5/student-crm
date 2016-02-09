@@ -128,7 +128,7 @@ end
 Role.create!(id: 1, name: 'student')
 Role.create!(id: 2, name: 'manager')
 Role.create!(id: 3, name: 'teacher')
-Role.create!(id: 4, name: 'techsuport')
+Role.create!(id: 4, name: 'assistent')
 Role.create!(id: 5, name: 'admin')
 
 phonecodes = (550..559).to_a

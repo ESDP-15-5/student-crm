@@ -1,0 +1,40 @@
+<h3>Список ассистентов</h3>
+
+<div class="digg_pagination" style="margin:auto">
+  <%= will_paginate @assistents %>
+</div>
+
+<div class="row">
+  <%= link_to 'Добавить ассистента', new_user_path(role_ids: @assistent_role.id), class:'btn btn-primary' %>
+</div>
+<br />
+
+<table class="table table-condensed">
+  <tr>
+    <th>Ассистент</th>
+    <th>Gmail</th>
+    <th>Телефон</th>
+    <th>Действия</th>
+  </tr>
+
+  <% @assistents.each do |assistent| %>
+      <tr>
+        <td><%= link_to assistent.full_name, user_path(assistent) %></td>
+        <td><%= assistent.email %></td>
+        <td><%= assistent.contact.phone %></td>
+
+        <td>
+          <%= link_to user_path(assistent), class: 'btn btn-warning btn-xs' do %>
+              Просмотреть
+              <span class="glyphicon glyphicon-eye-open"></span>
+          <% end %>
+          <%= link_to edit_user_path(assistent), class: 'btn btn-danger btn-xs' do %>
+              Редактировать
+              <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+
+        </td>
+      </tr>
+  <% end %>
+</table>
+

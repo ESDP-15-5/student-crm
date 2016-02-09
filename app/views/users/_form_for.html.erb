@@ -107,7 +107,7 @@
 
 
     <div class="form-group  <%= 'has-error' if @user.errors[:passportdetails].any? %>">
-      <%= f.label :passportdetails, 'Паспортные данные', class: 'col-sm-3 control-label' %>
+      <%= f.label :passportdetails, 'Паспортные данные*', class: 'col-sm-3 control-label' %>
       <div class="form-inline">
         <%= f.text_field :passportdetails, placeholder: 'Паспорт', class: 'form-control' %>
         <%= render 'shared/field_errors', object: @user, field_name: :passportdetails %>
@@ -127,7 +127,7 @@
     <div class="form-group">
       <%= f.label :roles, 'Статус', class: 'col-sm-3 control-label' %>
         <div class="checkbox-inline">
-          <%= f.collection_check_boxes(:role_ids, Role.all, :id, :name) do |r| %>
+          <%= f.collection_check_boxes(:role_ids, Role.all, :id, :name,checked: [params[:role_ids]], hide_label: true) do |r| %>
               <p class="normal"><%= r.label { r.check_box + ' ' + r.text } %></p>
           <% end %>
        </div>

@@ -1,0 +1,40 @@
+<h3>Список менеджеров</h3>
+
+<div class="digg_pagination" style="margin:auto">
+  <%= will_paginate @managers %>
+</div>
+
+<div class="row">
+  <%= link_to 'Добавить менеджера', new_user_path(role_ids: @manager_role.id), class:'btn btn-primary' %>
+</div>
+<br />
+
+<table class="table table-condensed">
+  <tr>
+    <th>Менеджер</th>
+    <th>Gmail</th>
+    <th>Телефон</th>
+    <th>Действия</th>
+  </tr>
+
+  <% @managers.each do |manager| %>
+      <tr>
+        <td><%= link_to manager.full_name, user_path(manager) %></td>
+        <td><%= manager.email %></td>
+        <td><%= manager.contact.phone %></td>
+
+        <td>
+          <%= link_to user_path(manager), class: 'btn btn-warning btn-xs' do %>
+              Просмотреть
+              <span class="glyphicon glyphicon-eye-open"></span>
+          <% end %>
+          <%= link_to edit_user_path(manager), class: 'btn btn-danger btn-xs' do %>
+              Редактировать
+              <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+
+        </td>
+      </tr>
+  <% end %>
+</table>
+
