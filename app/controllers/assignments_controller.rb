@@ -111,11 +111,17 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
   def update
+    @assignment_update = Assignment.find_by_user_id_and_period_id(params[:id], params[:assignment][:period_id])
+    $lesson_id = params[:assignment][:lesson_id]
+    @assignment_update.lesson_id = $lesson_id
+    if @assignment_update.update(assignment_params)
+      flash[:success] = 'Домашнее задание успешно заменено'
+
+      redirect_to :back
+    else
+      render 'index'
+    end
 
   end
 
@@ -136,7 +142,7 @@ class AssignmentsController < ApplicationController
   private
 
   def assignment_params
-    params.require(:assignment).permit(:user_id, :period_id,:name, :homework)
+    params.require(:assignment).permit(:user_id, :period_id,:name, :homework, :lesson_id)
   end
 
   def grade_params

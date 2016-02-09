@@ -7,6 +7,8 @@
     <th>Дата проведения занятия</th>
     <th>Домашняя работа</th>
     <th>Загрузка домашней</th>
+    <th>Оценка</th>
+    <th>Рецензия</th>
   </tr>
   </thead>
   <tbody>
@@ -17,23 +19,43 @@
             <td><%= link_to period.title, course_course_element_path(@course.id, period.id)  %></td>
             <td><%= period.commence_datetime.to_formatted_s(:long) %></td>
             <td>
-              <% Assignment.where(period_id: period.id,user_id: current_user.id).each do|ass|%>
-                        <%= link_to ass.homework_file_name, download_hw_path(ass.id) %>
+              <% @have_assignment = Assignment.where(period_id: period.id,user_id: current_user.id)  %>
+              <% @have_assignment.each do|assignment|%>
+                      <%= link_to assignment.homework_file_name, download_hw_path(assignment.id) %>
               <% end %>
             </td>
             <td>
-              <%= form_for @assignment, url: assignments_path,method: :post, html: { id: "assignment_for_#{period.id}" } do |f| %>
-                  <%= f.hidden_field :lesson_id, value: @counter_for_homework %>
-                  <%= f.hidden_field :period_id, value: period.id %>
-                  <%= f.hidden_field :user_id, value: current_user.id %>
-                  <%= f.file_field :homework, class: :submit_file %>
+              <% if @have_assignment.blank? %>
+                <%= form_for @assignment, url: assignments_path,method: :post, html: { id: "assignment_for_#{period.id}" } do |f| %>
+                    <%= f.hidden_field :lesson_id, value: @counter_for_homework %>
+                    <%= f.hidden_field :period_id, value: period.id %>
+                    <%= f.hidden_field :user_id, value: current_user.id %>
+                    <%= f.file_field :homework, class: :submit_file %>
+                <% end  %>
+              <% else  %>
+                  <%= form_for @assignment_update, url: assignment_path(current_user.id, period.id),method: :PUT, html: { id: "assignment_for_#{period.id}" } do |f| %>
+                      <%= f.hidden_field :lesson_id, value: @counter_for_homework %>
+                      <%= f.hidden_field :period_id, value: period.id %>
+                      <%= f.hidden_field :user_id, value: current_user.id %>
+                      <%= f.file_field :homework, class: :submit_file %>
+                  <% end  %>
               <% end  %>
+            </td>
+            <td>
+              <% @have_assignment.each do|assignment|%>
+                  <%= assignment.grade %>
+              <% end %>
+            </td>
+            <td>
+              <% @have_assignment.each do|assignment|%>
+                  <%= assignment.review %>
+              <% end %>
             </td>
         <% else  %>
             <td><%= period.course_element.theme %></td>
-            <td></td>
-            <td></td>
+            <td colspan="5"><%= period.commence_datetime.to_formatted_s(:long) %></td>
         <% end %>
+
 
       </tr>
       <% @counter_for_homework += 1 %>
