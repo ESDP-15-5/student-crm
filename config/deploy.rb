@@ -1,14 +1,15 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
+set :user, 'igor'
 set :application, 'student-crm'
 set :repo_url, 'git@github.com:ESDP-15-5/student-crm.git'
-
+set :branch, fetch(:branch, "capistrano")
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
- set :deploy_to, '/home/igor/student-crm'
+ set :deploy_to, '/home/igor/capistrano'
 
 # Default value for :scm is :git
 # set :scm, :git
