@@ -33,12 +33,16 @@
                     <%= f.file_field :homework, class: :submit_file %>
                 <% end  %>
               <% else  %>
-                  <%= form_for @assignment_update, url: assignment_path(current_user.id, period.id),method: :PUT, html: { id: "assignment_for_#{period.id}" } do |f| %>
-                      <%= f.hidden_field :lesson_id, value: @counter_for_homework %>
-                      <%= f.hidden_field :period_id, value: period.id %>
-                      <%= f.hidden_field :user_id, value: current_user.id %>
-                      <%= f.file_field :homework, class: :submit_file %>
-                  <% end  %>
+                  <% if @have_assignment[0].grade.blank? && @have_assignment[0].review.blank? %>
+                      <%= form_for @assignment_update, url: assignment_path(current_user.id, period.id),method: :PUT, html: { id: "assignment_for_#{period.id}" } do |f| %>
+                          <%= f.hidden_field :lesson_id, value: @counter_for_homework %>
+                          <%= f.hidden_field :period_id, value: period.id %>
+                          <%= f.hidden_field :user_id, value: current_user.id %>
+                          <%= f.file_field :homework, class: :submit_file %>
+                      <% end  %>
+                  <% else %>
+                  -
+                  <% end %>
               <% end  %>
             </td>
             <td>
