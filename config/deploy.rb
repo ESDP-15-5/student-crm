@@ -3,7 +3,7 @@ lock '3.1.0'
 
 set :application, 'student-crm'
 set :repo_url, 'git@github.com:ESDP-15-5/student-crm.git'
-
+set :branch, fetch(:branch, "capistrano")
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
