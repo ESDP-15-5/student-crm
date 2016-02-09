@@ -65,3 +65,21 @@ Role.create!(name: 'student')
   )
   GroupMembership.create!(group: groups[0], user_id: student.id);
 end
+student = User.create!(
+    name: 'Иван',
+    surname: 'Иванов',
+    middlename: 'Иваныч',
+    gender: 'Мужчина',
+    birthdate: '06.11.1992',
+    contact_attributes: {
+        phone:('996550123456'),
+        additional_phone:('996550123456'),
+        skype: 'ivan'
+    },
+    passportdetails: 'Mvd 50-05',
+    email: 'ivan@gmail.com',
+    password: 'password',
+    password_confirmation: 'password',
+    roles:[Role.find_by(name:'student')]
+)
+GroupMembership.create!(group: groups[0], user_id: student.id);

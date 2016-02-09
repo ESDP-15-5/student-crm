@@ -401,3 +401,18 @@ When(/^выбирает группу "([^"]*)"$/) do |field_name|
     sleep(2)
   end
 end
+
+
+When(/^нажимает на кнопку "([^"]*)" у пользователя "([^"]*)"$/) do |button, fullname|
+  student = "//td//*[contains(text(), '" + fullname + "')]/ancestor::tr//*[contains(text(), '#{button}')]"
+  find(:xpath, student).click
+
+end
+
+
+When(/^меняет email "([^"]*)" на "([^"]*)"$/) do |old_email, new_email|
+  within('.edit_user') do
+    fill_in 'user[email]', :with => new_email
+  end
+  sleep(2)
+end
