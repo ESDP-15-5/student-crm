@@ -41,23 +41,34 @@
             <td>
               <% row[:assigment].each do|e| %>
                   <% if e.grade.nil? %>
-                    <%= link_to "поставить оценку", assignment_path(e.id, grade:1)%>
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#grade_<%= e.id %>">
+                        Оценить
+                      </button>
+                      <%= render partial: 'assignments/grade_form', locals:{assignment: e, grade: e.id} %>
                   <% else%>
-                    <%= link_to e.grade, assignment_path(e.id, grade:1)%>
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#grade_<%= e.id %>">
+                        <%= e.grade %>
+                      </button>
+                      <%= render partial: 'assignments/grade_form', locals:{assignment: e, grade: e.id} %>
                   <% end %>
               <% end %>
             </td>
             <td>
               <% row[:assigment].each do|e| %>
                   <% if e.review.nil? %>
-                      <%= link_to "написать комментарий", assignment_path(e.id, review:1)%>
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#review_<%= e.id %>">
+                        Оставить комментарий
+                      </button>
+                      <%= render partial: 'assignments/review_form', locals:{assignment: e, review: e.id} %>
                   <% else%>
-                      <%= link_to "Просмотреть комментарий", assignment_path(e.id, review:1)%>
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#review_<%= e.id %>">
+                        Просмотреть комментарий
+                      </button>
+                      <%= render partial: 'assignments/review_form', locals:{assignment: e, review: e.id} %>
                   <% end %>
               <% end %>
             </td>
         <%	end %>
-
       </tr>
   <% end %>
 </table>

@@ -10,12 +10,11 @@ class AssignmentsController < ApplicationController
     else
       courses = Course.find(params[:course])
     end
-    element_types = ['Лекция','Контрольная']
-    course_elements = CourseElement.where(course_id: courses, element_type: element_types)
+    course_elements = CourseElement.where(course_id: courses)
     if params[:group].nil?||params[:group][0].empty?
       @periods = Period.where(course_element_id: course_elements)
     else
-      @periods = Period.where(group_id: params[:group],course_element_id: course_elements)
+      @periods = Period.where(group_id: params[:group], course_element_id: course_elements)
     end
 
     hw_table_array = []
@@ -53,7 +52,7 @@ class AssignmentsController < ApplicationController
       }
       hw_table_array.push(table_raw)
     end
-
+    @e= Assignment.find(2)
     @hw_table = hw_table_array.paginate(page: params[:page], per_page: 10)
     hash_crumbs = {
         'Домашние работы' => assignments_path(course: period.course.id),
@@ -98,6 +97,7 @@ class AssignmentsController < ApplicationController
       render 'review'
     end
   end
+
   def create
     @assignment = Assignment.new(assignment_params)
     $file = params[:assignment][:homework]
@@ -115,9 +115,8 @@ class AssignmentsController < ApplicationController
     @assignment_update = Assignment.find_by_user_id_and_period_id(params[:id], params[:assignment][:period_id])
     $lesson_id = params[:assignment][:lesson_id]
     @assignment_update.lesson_id = $lesson_id
-    if @assignment_update.update(assignment_params)
+    if @assignment_update.grade.nil? && @assignment_update.update(assignment_params)
       flash[:success] = 'Домашнее задание успешно заменено'
-
       redirect_to :back
     else
       render 'index'
