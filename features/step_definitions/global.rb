@@ -345,3 +345,59 @@ When(/^он видит список студентов группы "([^"]*)"$/)
   expect(page).to have_content('Студент')
   sleep(2)
 end
+
+When(/^пользователь заходит на страницу со студентами$/) do
+  visit('/users/students')
+  sleep(1)
+end
+
+When(/^он видит таблицу со студентами$/) do
+  expect(page).to have_selector('#student_table')
+  expect(page).to have_content('Студент')
+  sleep(1)
+end
+
+When(/^попадает на страницу создание студента$/) do
+  visit('/manage/users/new')
+  sleep(1)
+end
+
+
+When(/^вводит в поле "([^"]*)" данные "([^"]*)"$/) do |label, text|
+  within('#new_user') do
+    fill_in label, :with => text
+  end
+  sleep(1)
+end
+
+When(/^выбирает Пол "([^"]*)"$/) do |gender|
+  within('#new_user') do
+   choose('man')
+  end
+  sleep(1)
+end
+
+When(/^заполняю "([^"]*)" данными "([^"]*)"$/) do |field_name, date_components|
+  within('#new_user') do
+    label = find('label', text: field_name)
+    select_base_id = label[:for]
+    date_components.split(",").each_with_index do |value, index|
+      select value.strip, from: "#{select_base_id}_#{index+1}i"
+    end
+  end
+  sleep(1)
+end
+
+When(/^выбирает фотографию с локального ПК$/) do
+  within('#new_user') do
+    attach_file('user_image', Rails.root.join('features', 'upload-files', 'test_file.jpg'))
+  end
+  sleep(1)
+end
+
+When(/^выбирает группу "([^"]*)"$/) do |field_name|
+  within('#new_user') do
+    check('user_group_ids_2')
+    sleep(2)
+  end
+end

@@ -49,10 +49,10 @@
     <div class="form-group  <%= 'has-error' if @user.errors[:gender].any? %>">
       <%= f.label :gender,'Пол*', class: 'col-sm-3 control-label' %>
       <div class="form-inline">
-        <%= f.radio_button :gender, 'Мужской' %>
-        <%= f.label :gender, 'Мужской', :value => 'Мужской' %>
-        <%= f.radio_button :gender, 'Женский' %>
-        <%= f.label :gender, 'Женский', :value => 'Женский' %>
+        <%= f.radio_button :gender, 'Мужской', id: 'man'%>
+        <%= f.label :gender, 'Мужской' %>
+        <%= f.radio_button :gender, 'Женский', id: 'woman'  %>
+        <%= f.label :gender, 'Женский'%>
         <%= render 'shared/field_errors', object: @user, field_name: :gender %>
       </div>
     </div>
@@ -127,7 +127,7 @@
     <div class="form-group">
       <%= f.label :roles, 'Статус', class: 'col-sm-3 control-label' %>
         <div class="checkbox-inline">
-          <%= f.collection_check_boxes(:role_ids, Role.all, :id, :name,checked: [params[:role_ids]], hide_label: true) do |r| %>
+          <%= f.collection_check_boxes(:role_ids, Role.all, :id, :name, checked: params[:role_ids], hide_label: true) do |r| %>
               <p class="normal"><%= r.label { r.check_box + ' ' + r.text } %></p>
           <% end %>
        </div>
@@ -138,7 +138,8 @@
 <hr>
 
 <div class="row " style="text-align: center">
-    <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+  <%= f.submit yield(:button_text), class: 'btn btn-primary' %>
+  <%= link_to 'Отмена', :back, class: 'btn btn-danger' %>
 </div>
 
     <% end %>
@@ -194,7 +195,8 @@
       </div>
       <hr>
       <div class="row"  style="text-align: center">
-        <%= f.submit 'Сохранить', class: 'btn btn-primary' %>
+        <%= f.submit yield(:button_text), class: 'btn btn-primary' %>
+        <%= link_to 'Отмена', :back, class: 'btn btn-danger' %>
       </div>
     <% end %>
 <% end %>

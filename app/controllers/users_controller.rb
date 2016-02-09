@@ -56,7 +56,7 @@ class UsersController < ApplicationController
       if current_user.has_role? :student
       redirect_to user_path(current_user)
       else
-        redirect_to users_path
+        redirect_to users_students_path
       end
 
     else
