@@ -3,7 +3,7 @@
   width: 357px;
   height: 383px;
   margin: 100px auto;
-  background: url('login_bg.png') top left no-repeat;
+  background: asset-url('login_bg.png') top left no-repeat;
 }
 
 #form_container {
@@ -24,7 +24,7 @@
   padding: 0px 0px 0px 10px;
   width: 229px;
   height: 32px;
-  background: url('text_input.png') top left no-repeat;
+  background: asset-url('text_input.png') top left no-repeat;
 }
 
 #login {
@@ -32,14 +32,14 @@
   border: 0;
   width: 83px;
   height: 30px;
-  background: url('login_btn.png') top left no-repeat;
+  background: asset-url('login_btn.png') top left no-repeat;
   cursor:pointer;
 }
 
 #login:hover {opacity:0.9;}
 
 #login:active {
-  background: url('login_btn_hov.png') top left no-repeat;
+  background: asset-url('login_btn_hov.png') top left no-repeat;
 }
 
 .login-text {

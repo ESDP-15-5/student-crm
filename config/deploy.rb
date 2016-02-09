@@ -2,7 +2,7 @@
 lock '3.1.0'
 
 set :user, 'igor'
-set :application, 'student-crm'
+set :application, 'capistrano'
 set :repo_url, 'git@github.com:ESDP-15-5/student-crm.git'
 set :branch, fetch(:branch, "capistrano")
 # Default branch is :master
