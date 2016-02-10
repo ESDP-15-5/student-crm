@@ -15,7 +15,7 @@
 @import "custom";
 
 .sessions.new{
-  background: url("bg-first.jpg");
+  background: asset-url("bg-first.jpg");
 }
 
 /* Alert classes for devise */
