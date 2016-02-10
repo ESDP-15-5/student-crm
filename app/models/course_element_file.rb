@@ -1,6 +1,6 @@
 class CourseElementFile < ActiveRecord::Base
   acts_as_paranoid
-
+  audited
   include Paperclip::Glue
 
   belongs_to :course_element

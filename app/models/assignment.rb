@@ -1,6 +1,8 @@
 class Assignment < ActiveRecord::Base
   before_save :set_file_name
 
+  audited
+
   belongs_to :user
   belongs_to :period
 
