@@ -121,7 +121,7 @@ class UsersController < ApplicationController
     @group_membership = GroupMembership.where(:user_id => @user.id)
     @group_membership.destroy(@group_membership)
     @user.destroy
-    redirect_to users_path
+    redirect_to users_students_path
   end
 
 

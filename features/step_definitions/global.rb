@@ -407,6 +407,7 @@ When(/^нажимает на кнопку "([^"]*)" у пользователя 
   student = "//td//*[contains(text(), '" + fullname + "')]/ancestor::tr//*[contains(text(), '#{button}')]"
   find(:xpath, student).click
 
+  sleep(5)
 end
 
 
@@ -415,4 +416,22 @@ When(/^меняет email "([^"]*)" на "([^"]*)"$/) do |old_email, new_email|
     fill_in 'user[email]', :with => new_email
   end
   sleep(2)
+end
+
+When(/^пользователь удаляет пользователя с именем "([^"]*)"$/) do |name|
+  student = "//td//*[contains(text(), '" + name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
+  find(:xpath, student).click
+  page.driver.browser.switch_to.alert.accept
+  sleep(2)
+end
+
+When(/^пользователь "([^"]*)" пропадает из списка студентов$/) do |name|
+  page.should have_no_content(name)
+  sleep(2)
+end
+
+When(/^он видит данные студента "([^"]*)"$/) do |name|
+  expect(page).to have_selector('.panel-info')
+  expect(page).to have_content(name)
+  pending
 end

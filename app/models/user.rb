@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{name} #{surname} #{middlename}"
+    "#{surname} #{name} #{middlename}"
   end
 
   def self.all_students_except(student_ids)
