@@ -8,8 +8,7 @@ class StudentsController < ApplicationController
     @students = @group.students
 
     @course_elements = @course.course_elements.order(row_order: :ASC)
-    # @periods = Period.where(group_id: @group, deadline: true).where('commence_datetime <= ?', Date.tomorrow).order(commence_datetime: :ASC)
-    @periods = Period.where(group_id: @group, deadline: true).order(commence_datetime: :ASC)
+    @periods = Period.where(group_id: @group, deadline: true).where('commence_datetime <= ?', Date.tomorrow).order(commence_datetime: :ASC)
 
     @assignment = Assignment.new
     @assignment_update = Assignment.find_by_user_id_and_period_id(current_user, @periods)
