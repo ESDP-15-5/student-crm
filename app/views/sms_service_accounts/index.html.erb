@@ -18,9 +18,15 @@
           <% end %>
         </td>
         <td>
-          <%= link_to '<i class="glyphicon glyphicon-pencil"></i>'.html_safe, edit_sms_service_account_path(account), class: 'btn btn-default btn-xs' %>
-          <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, sms_service_account_path(account), method: :delete,
-                      data: {confirm: 'Вы действительно хотите удалить данную учетную запись?'}, class: 'btn btn-danger btn-xs'  %>
+          <%= link_to edit_sms_service_account_path(account), class: 'btn btn-warning btn-xs' do %>
+             Редактировать
+           <span class="glyphicon glyphicon-edit"></span>
+          <% end %>
+          <%= link_to sms_service_account_path(account), class: 'btn btn-danger btn-xs',
+                      data: {confirm: "Вы уверены что хотите удалить данную учетную запись: #{account.login}?"}, method: :delete do %>
+              Удалить
+              <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
         </td>
       </tr>
   <% end %>
