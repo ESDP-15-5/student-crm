@@ -1,5 +1,5 @@
 $(window).on('page:change', function() {
-    var page = ($(".sms_deliveries.new").length == 0) && ($(".sms_deliveries.new_from_contact_list").length == 0)
+    var page = ($(".sms_deliveries").length == 0)
     if (page) {
         return;
     }

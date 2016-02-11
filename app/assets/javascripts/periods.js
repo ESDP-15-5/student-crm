@@ -1,6 +1,6 @@
 $(document).bind('page:change', function() {
 
-    var page = ($(".periods.index").length == 0) && ($(".periods.edit").length == 0)
+    var page = ($(".periods").length == 0)
     if (page) {
         return;
     }
