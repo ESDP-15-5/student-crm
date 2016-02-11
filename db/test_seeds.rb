@@ -83,3 +83,7 @@ student = User.create!(
     roles:[Role.find_by(name:'student')]
 )
 GroupMembership.create!(group: groups[0], user_id: student.id);
+
+# Sms Service Accounts
+login_nikita = SmsServiceAccount.create!(login: 'faridbabazov', password: 'eAswyztN')
+

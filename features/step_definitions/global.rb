@@ -448,11 +448,21 @@ When(/^пользователь заполняет поля формы$/) do |ta
   # table is a table.hashes.keys # => [:field, :value]
   for row in table.hashes
     fill_in row[:field], :with => row[:value]
-    sleep(1)
   end
+  sleep(1)
 end
 
 When(/^он видит таблицу с данными аккаунта "([^"]*)"$/) do |name|
   expect(page).to have_selector('.table-striped')
   expect(page).to have_content(name)
+end
+
+When(/^пользователь на странице с таблицей аккаунтов$/) do
+  visit('/sms_service_accounts')
+end
+
+When(/^пользователь редактирует данные у "([^"]*)"$/) do |name|
+  account = "//td//*[contains(text(), '" + name + "')]/ancestor::tr//*[contains(text(), 'Редактировать')]"
+  find(:xpath, account).click
+  sleep(1)
 end
