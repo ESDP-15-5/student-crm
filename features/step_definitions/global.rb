@@ -288,6 +288,7 @@ When(/^он видит Выберите файл$/) do
   find(:xpath, '//*[@id="course_element_file_file"]')
 end
 
+#group
 
 When(/^он видит список групп курса "([^"]*)"$/) do |course|
   course_string = 'Курс "'+course.to_s+'"'
@@ -339,6 +340,7 @@ When(/^пользователь заходит в группу "([^"]*)"$/) do |
   sleep(2)
 end
 
+# User
 
 When(/^он видит список студентов группы "([^"]*)"$/) do |group_name|
   expect(page).to have_selector('#student_table')
@@ -434,4 +436,23 @@ When(/^он видит данные студента "([^"]*)"$/) do |name|
   expect(page).to have_selector('.panel-info')
   expect(page).to have_content(name)
   pending
+end
+
+# Sms - Рассылка
+
+When(/^пользователь переходит на страницу создания аккаунта$/) do
+  visit('/sms_service_accounts/new')
+end
+
+When(/^пользователь заполняет поля формы$/) do |table|
+  # table is a table.hashes.keys # => [:field, :value]
+  for row in table.hashes
+    fill_in row[:field], :with => row[:value]
+    sleep(1)
+  end
+end
+
+When(/^он видит таблицу с данными аккаунта "([^"]*)"$/) do |name|
+  expect(page).to have_selector('.table-striped')
+  expect(page).to have_content(name)
 end
