@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :course_elements, except: :index do
       post :update_row_order, on: :collection
       get 'download/:id' =>  'course_elements#download', :as => :download
-      resources :course_element_files, only: [:create, :delete]
+      resources :course_element_files, only: [:show,:create, :delete]
       resources :course_element_materials, except: :index
     end
   end
