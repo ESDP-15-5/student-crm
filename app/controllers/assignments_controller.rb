@@ -52,27 +52,10 @@ class AssignmentsController < ApplicationController
       }
       hw_table_array.push(table_raw)
     end
-    @e= Assignment.find(2)
     @hw_table = hw_table_array.paginate(page: params[:page], per_page: 10)
     hash_crumbs = {
         'Домашние работы' => assignments_path(course: period.course.id),
         "Домашние работы к занятию #{period.title}" => {}
-    }
-    @bread_crumbs = add_bread_crumbs(hash_crumbs)
-  end
-
-  def show
-    @assignment = Assignment.find(params[:id])
-
-     if params[:grade].to_i == 1
-       @grade = 1
-     end
-     if params[:review].to_i == 1
-       @grade = 0
-     end
-
-    hash_crumbs = {
-        "Домашние работы к занятию #{@assignment.period.title}" => assignment_period_path(@assignment.period),
     }
     @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
@@ -84,7 +67,8 @@ class AssignmentsController < ApplicationController
       flash[:notice] = "Вы поставили #{@assignment.grade}"
       redirect_to assignment_period_path(Period.find(@assignment.period_id))
     else
-      render 'grade'
+      flash[:alert] = "'#{@assignment.grade}' не входит в диапозон от 0 до 100"
+      redirect_to :back
     end
   end
   def review
@@ -94,7 +78,8 @@ class AssignmentsController < ApplicationController
       flash[:notice] = "Рецензия добавлена"
       redirect_to assignment_period_path(Period.find(@assignment.period_id))
     else
-      render 'review'
+      flash[:alert] = "Не удалось добавить рецензию"
+      redirect_to :back
     end
   end
 
@@ -107,7 +92,8 @@ class AssignmentsController < ApplicationController
       flash[:notice] = "Домашняя работа #{@assignment.name} успешно загружена!"
       redirect_to :back
     else
-      render 'new'
+      flash[:alert] = "Вы можете прикрепить только архив, pdf, txt, doc"
+      redirect_to :back
     end
   end
 
