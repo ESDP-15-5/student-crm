@@ -86,6 +86,7 @@ When(/^он видит список элементов курса "([^"]*)"$/) d
 end
 
 When(/^пользователь нажимает на "([^"]*)"$/) do |button_name|
+  sleep(50)
   click_link(button_name)
   sleep(2)
 end
@@ -522,4 +523,9 @@ end
 When(/^он видит список пользователей кому будет отослана смс$/) do
   expect(page).to have_selector('.panel-body')
 
+end
+
+When(/^пользователь нажимает у "([^"]*)" иконку "([^"]*)"$/) do |title, arg2|
+  account = "//td//*[contains(text(), '" + title + "')]/ancestor::tr//*[@id='send_sms']"
+  find(:xpath, account).click
 end
