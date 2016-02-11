@@ -87,6 +87,7 @@ end
 
 When(/^пользователь нажимает на "([^"]*)"$/) do |button_name|
   click_link(button_name)
+  sleep(2)
 end
 
 
@@ -477,4 +478,28 @@ end
 When(/^аккаунт "([^"]*)" пропадает из таблицу$/) do |account|
   page.should have_no_content(account)
   sleep(1)
+end
+
+
+When(/^пользователь на странице с таблицей получателей$/) do
+  visit('/contact_lists')
+end
+
+When(/^заполняет поле Название "([^"]*)"$/) do |title|
+  within('#new_contact_list') do
+    fill_in 'contact_list[title]', :with => title
+  end
+  sleep(1)
+end
+
+When(/^выбирает студента "([^"]*)"$/) do |full_name|
+  within('#new_contact_list') do
+    find('label', :text => full_name ).click
+  end
+  sleep(1)
+end
+
+When(/^он видит таблицу получателей с названием "([^"]*)"$/) do |title|
+  expect(page).to have_selector('.table-striped')
+  expect(page).to have_content(title)
 end

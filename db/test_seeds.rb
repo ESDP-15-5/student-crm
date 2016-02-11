@@ -72,12 +72,31 @@ student = User.create!(
     gender: 'Мужчина',
     birthdate: '06.11.1992',
     contact_attributes: {
-        phone:('996550123456'),
-        additional_phone:('996550123456'),
+        phone:('996772183644'),
+        additional_phone:(''),
         skype: 'ivan'
     },
     passportdetails: 'Mvd 50-05',
     email: 'ivan@gmail.com',
+    password: 'password',
+    password_confirmation: 'password',
+    roles:[Role.find_by(name:'student')]
+)
+GroupMembership.create!(group: groups[0], user_id: student.id);
+
+student = User.create!(
+    name: 'Вася',
+    surname: 'Пупкин',
+    middlename: '',
+    gender: 'Мужчина',
+    birthdate: '06.11.1992',
+    contact_attributes: {
+        phone:('996550362180'),
+        additional_phone:(''),
+        skype: 'vasya'
+    },
+    passportdetails: 'Mvd 50-05',
+    email: 'vasya@gmail.com',
     password: 'password',
     password_confirmation: 'password',
     roles:[Role.find_by(name:'student')]
