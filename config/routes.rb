@@ -7,14 +7,14 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :groups do
-      resources :group_memberships
+      resources :group_memberships, only: [:new, :create]
     end
-    resources :periods
-    resources :course_elements do
+    resources :periods, except: :new
+    resources :course_elements, except: :index do
       post :update_row_order, on: :collection
       get 'download/:id' =>  'course_elements#download', :as => :download
-      resources :course_element_files
-      resources :course_element_materials
+      resources :course_element_files, only: [:create, :delete]
+      resources :course_element_materials, except: :index
     end
   end
 
@@ -33,8 +33,8 @@ Rails.application.routes.draw do
 
   resources :contact_lists,
             :sms_deliveries,
-            :sms_service_accounts,
-            :senders
+            :sms_service_accounts
+  resources :senders, only: [:new, :create]
 
   resources :custom_lists do
     collection {post :import}
@@ -46,11 +46,11 @@ Rails.application.routes.draw do
   get 'sms_deliveries/new_from_contact_list/:id' => 'sms_deliveries#new_from_contact_list', as: 'sms_new_from_contact_list'
   get 'sms_deliveries/resend_message/:id' => 'sms_deliveries#resend_message', as: 'sms_resend'
 
-  resources :assignments
-  get 'assignments/:id/download' =>  'assignments#download', :as => :download_hw
-  put 'assignments/:id/grade' =>  'assignments#rate', :as => :assignment_grade
-  put 'assignments/:id/review' =>  'assignments#review', :as => :assignment_review
-  get 'assignments/period/:id' => 'assignments#period', :as=> :assignment_period
+  resources :assignments, :except => [:new, :edit]
+  get 'assignments/:id/download' =>  'assignments#download', as: :download_hw
+  put 'assignments/:id/grade' =>  'assignments#rate', as: :assignment_grade
+  put 'assignments/:id/review' =>  'assignments#review', as: :assignment_review
+  get 'assignments/period/:id' => 'assignments#period', as: :assignment_period
 
   get 'students', to: 'students#student_main_page'
   get 'student_info/:id' => 'students#index', as: 'student_info'
