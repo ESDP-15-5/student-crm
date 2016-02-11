@@ -106,3 +106,5 @@ GroupMembership.create!(group: groups[0], user_id: student.id);
 # Sms Service Accounts
 login_nikita = SmsServiceAccount.create!(login: 'faridbabazov', password: 'eAswyztN')
 
+ContactList.create!(title: 'Лист получателей')
+

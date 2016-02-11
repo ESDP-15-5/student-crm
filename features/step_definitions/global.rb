@@ -493,13 +493,17 @@ When(/^заполняет поле Название "([^"]*)"$/) do |title|
 end
 
 When(/^выбирает студента "([^"]*)"$/) do |full_name|
-  within('#new_contact_list') do
     find('label', :text => full_name ).click
-  end
   sleep(1)
 end
 
 When(/^он видит таблицу получателей с названием "([^"]*)"$/) do |title|
   expect(page).to have_selector('.table-striped')
   expect(page).to have_content(title)
+end
+
+When(/^пользователь редактирует лист получателей "([^"]*)"$/) do |title|
+  account = "//td//*[contains(text(), '" + title + "')]/ancestor::tr//*[@id='edit_contact_list']"
+  find(:xpath, account).click
+  sleep(2)
 end
