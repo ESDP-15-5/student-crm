@@ -27,6 +27,6 @@ if (($(".assignments.index").length == 0)) {
 
     $('.submit_file').on('change', function() {
         $(this).closest('form').submit();
-
+        location.reload();
     });
 });

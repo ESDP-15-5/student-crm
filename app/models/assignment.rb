@@ -24,8 +24,13 @@ class Assignment < ActiveRecord::Base
       period = Period.find(self.period_id)
       lesson = $lesson_id
       group = Group.find(period.group_id)
-      "#{group.name}-#{student.name}-#{student.surname}-hw-#{lesson}#{extension}"
+      version = self.name
+      "#{group.name}-#{student.name}-#{student.surname}-hw-#{lesson}-v#{version}#{extension}"
     end
+  end
+
+  def give_name_of_new_version(user_id, period_id)
+    number = Assignment.where(period_id: period_id, user_id: user_id).order(name: :desc).first.name.to_i + 1
   end
 
   private

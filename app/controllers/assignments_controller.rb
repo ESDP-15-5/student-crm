@@ -64,7 +64,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
 
     if @assignment.update(grade_params)
-      flash[:notice] = "Вы поставили #{@assignment.grade}"
+      flash[:success] = "Вы поставили #{@assignment.grade}"
       redirect_to assignment_period_path(Period.find(@assignment.period_id))
     else
       flash[:alert] = "'#{@assignment.grade}' не входит в диапозон от 0 до 100"
@@ -75,7 +75,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
 
     if @assignment.update(review_params)
-      flash[:notice] = "Рецензия добавлена"
+      flash[:success] = "Рецензия добавлена"
       redirect_to assignment_period_path(Period.find(@assignment.period_id))
     else
       flash[:alert] = "Не удалось добавить рецензию"
@@ -89,10 +89,10 @@ class AssignmentsController < ApplicationController
     $lesson_id = params[:assignment][:lesson_id]
     @assignment.lesson_id = $lesson_id
     if @assignment.save
-      flash[:notice] = "Домашняя работа #{@assignment.name} успешно загружена!"
+      flash[:success] = "Домашняя работа #{@assignment.name} успешно загружена!"
       redirect_to :back
     else
-      flash[:alert] = "Вы можете прикрепить только архив, pdf, txt, doc"
+      flash[:alert] = "Вы можете прикрепить только zip, pdf, txt, doc"
       redirect_to :back
     end
   end
@@ -101,11 +101,12 @@ class AssignmentsController < ApplicationController
     @assignment_update = Assignment.find_by_user_id_and_period_id(params[:id], params[:assignment][:period_id])
     $lesson_id = params[:assignment][:lesson_id]
     @assignment_update.lesson_id = $lesson_id
-    if @assignment_update.grade.nil? && @assignment_update.update(assignment_params)
+    if @assignment_update.DownloadStatus? && @assignment_update.update(assignment_params)
       flash[:success] = 'Домашнее задание успешно заменено'
       redirect_to :back
     else
-      render 'index'
+      flash[:alert] = 'Домашнюю работу уже скачал преподаватель'
+      redirect_to :back
     end
 
   end
@@ -122,12 +123,14 @@ class AssignmentsController < ApplicationController
               :filename => download.homework_file_name,
               :type => download.homework_content_type,
               :disposition => 'attachment'
-    flash[:notice] = 'Your file has been downloaded'
+    download.DownloadStatus = true
+    download.save
+    flash[:notice] = 'Файл успешно скачан'
   end
   private
 
   def assignment_params
-    params.require(:assignment).permit(:user_id, :period_id,:name, :homework, :lesson_id)
+    params.require(:assignment).permit(:user_id, :period_id, :name, :homework, :lesson_id)
   end
 
   def grade_params

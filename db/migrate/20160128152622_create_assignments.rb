@@ -3,7 +3,7 @@ class CreateAssignments < ActiveRecord::Migration
     create_table :assignments do |t|
       t.references :user, index: true, foreign_key: true
       t.references :period, index:true, foreign_key: true
-      t.string :name
+      t.integer :file_version
       t.integer :grade
       t.text :review
 
