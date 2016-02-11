@@ -428,8 +428,8 @@ When(/^пользователь удаляет пользователя с им�
 end
 
 When(/^пользователь "([^"]*)" пропадает из списка студентов$/) do |name|
-  page.should have_no_content(name)
-  sleep(2)
+    page.should have_no_content(name)
+    sleep(2)
 end
 
 When(/^он видит данные студента "([^"]*)"$/) do |name|
@@ -464,5 +464,17 @@ end
 When(/^пользователь редактирует данные у "([^"]*)"$/) do |name|
   account = "//td//*[contains(text(), '" + name + "')]/ancestor::tr//*[contains(text(), 'Редактировать')]"
   find(:xpath, account).click
+  sleep(1)
+end
+
+When(/^пользователь удаляет аккаунт "([^"]*)"$/) do |name|
+  account = "//td//*[contains(text(), '" + name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
+  find(:xpath, account).click
+  page.driver.browser.switch_to.alert.accept
+  sleep(1)
+end
+
+When(/^аккаунт "([^"]*)" пропадает из таблицу$/) do |account|
+  page.should have_no_content(account)
   sleep(1)
 end
