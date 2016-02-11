@@ -9,9 +9,9 @@
       <tr>
         <td><%= link_to list.title, contact_list_path(list) %></td>
         <td>
-          <%= link_to '<i class="glyphicon glyphicon-envelope"></i>'.html_safe, sms_new_from_contact_list_path(list), class: 'btn btn-default btn-xs' %>
-          <%= link_to '<i class="glyphicon glyphicon-pencil"></i>'.html_safe, edit_contact_list_path(list), class: 'btn btn-default btn-xs' %>
-          <%= link_to '<i class="glyphicon glyphicon-remove-circle"></i>'.html_safe, contact_list_path(list), method: :delete,
+          <%= link_to '<i class="glyphicon glyphicon-envelope" id="send_sms"></i>'.html_safe, sms_new_from_contact_list_path(list), class: 'btn btn-default btn-xs' %>
+          <%= link_to '<i class="glyphicon glyphicon-pencil" id="edit_contact_list"></i>'.html_safe, edit_contact_list_path(list), class: 'btn btn-default btn-xs' %>
+          <%= link_to '<i class="glyphicon glyphicon-remove-circle" id="delete_contact_list"></i>'.html_safe, contact_list_path(list), method: :delete,
                       data: {confirm: 'Вы действительно хотите удалить этот лист получателей?'}, class: 'btn btn-danger btn-xs'  %>
         </td>
       </tr>

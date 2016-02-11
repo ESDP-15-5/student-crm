@@ -1,8 +1,9 @@
 <div class="col-sm-6">
+    <%= link_to '<i class="glyphicon glyphicon-pencil" id="edit_contact_list"></i>'.html_safe, edit_contact_list_path(@contact_list), class: 'btn btn-default btn-xs right' %>
+
   <div class="panel panel-default">
     <div class="panel-body">
       <table class="table">
-        <tr>
           <% @contact_list.users.each do |student| %>
           <tr>
             <td class="col-sm-3"><%= student.name %></td>
@@ -10,8 +11,7 @@
               <%= student.contact.phone %>
             </td>
             <td class="col-sm-1">
-              <%= link_to '<i class="fa fa-remove"></i>'.html_safe, user_path(student), method: :delete,
-                          data: {confirm: 'Вы действительно хотите удалить данные студента?'}, class: 'btn btn-danger btn-xs' %>
+
             </td>
           </tr>
         <% end %>
