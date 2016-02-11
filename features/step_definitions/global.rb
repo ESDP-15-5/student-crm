@@ -507,3 +507,14 @@ When(/^пользователь редактирует лист получате
   find(:xpath, account).click
   sleep(2)
 end
+
+When(/^пользователь удаляет лист получателей "([^"]*)"$/) do |title|
+  account = "//td//*[contains(text(), '" + title + "')]/ancestor::tr//*[@id='delete_contact_list']"
+  find(:xpath, account).click
+  page.driver.browser.switch_to.alert.accept
+end
+
+When(/^лист получателей с названием "([^"]*)" пропадает из списка таблиц$/) do |title|
+  page.should have_no_content(title)
+  sleep(1)
+end
