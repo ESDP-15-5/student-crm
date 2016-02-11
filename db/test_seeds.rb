@@ -42,6 +42,9 @@ groups.push Group.create(name: 'Html1', course: courses[2])
 groups.push Group.create(name: 'Html2', course: courses[2])
 
 
+list = ContactList.create!(title: 'Лист получателей')
+
+
 Role.create!(name: 'student')
 
 
@@ -65,7 +68,7 @@ Role.create!(name: 'student')
   )
   GroupMembership.create!(group: groups[0], user_id: student.id);
 end
-student = User.create!(
+student1 = User.create!(
     name: 'Иван',
     surname: 'Иванов',
     middlename: 'Иваныч',
@@ -82,9 +85,10 @@ student = User.create!(
     password_confirmation: 'password',
     roles:[Role.find_by(name:'student')]
 )
-GroupMembership.create!(group: groups[0], user_id: student.id);
+GroupMembership.create!(group: groups[0], user_id: student1.id);
+RecipientDepository.create!(user_id: student1.id, contact_list_id: list.id)
 
-student = User.create!(
+student2 = User.create!(
     name: 'Вася',
     surname: 'Пупкин',
     middlename: '',
@@ -101,10 +105,9 @@ student = User.create!(
     password_confirmation: 'password',
     roles:[Role.find_by(name:'student')]
 )
-GroupMembership.create!(group: groups[0], user_id: student.id);
+GroupMembership.create!(group: groups[0], user_id: student2.id);
 
 # Sms Service Accounts
 login_nikita = SmsServiceAccount.create!(login: 'faridbabazov', password: 'eAswyztN')
 
-ContactList.create!(title: 'Лист получателей')
 
