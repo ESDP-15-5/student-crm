@@ -10,6 +10,8 @@ class Assignment < ActiveRecord::Base
 
   has_attached_file :homework
 
+  validates :grade, allow_nil: true, numericality: {greater_than_or_equal_to: 0,less_than_or_equal_to: 100, }
+
   validates :homework, presence: true
   validates_attachment_content_type :homework,
                                     content_type: ['application/x-compressed', 'application/x-zip-compressed.zip', 'application/zip', 'multipart/x-zip', 'application/msword', 'text/plain']
