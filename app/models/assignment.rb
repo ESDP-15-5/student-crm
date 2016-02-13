@@ -1,5 +1,6 @@
 class Assignment < ActiveRecord::Base
   before_create :set_file_name
+  before_update :set_file_name
 
   audited
 
@@ -18,15 +19,13 @@ class Assignment < ActiveRecord::Base
 
 
   def normalized_file_name
-    if $file
-      extension = File.extname($file.original_filename)
-      student = User.find(self.user_id)
-      period = Period.find(self.period_id)
-      lesson = $lesson_id
-      group = Group.find(period.group_id)
-      version = self.file_version
-      "#{group.name}-#{student.name}-#{student.surname}-hw-#{lesson}-v#{version}#{extension}"
-    end
+    extension = File.extname($file.original_filename)
+    student = User.find(self.user_id)
+    period = Period.find(self.period_id)
+    lesson = self.lesson_id
+    group = Group.find(period.group_id)
+    version = self.file_version
+    "#{group.name}-#{student.name}-#{student.surname}-hw-#{lesson}-v#{version}#{extension}"
   end
 
   def what_number_of_new_version(user_id, period_id)
