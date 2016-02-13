@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def admin?
-    redirect_to root_path if current_user.has_role? :admin || :manager || :teacher
+    redirect_to root_path unless current_user.has_role? :admin || :manager || :teacher
   end
 
   def student?
