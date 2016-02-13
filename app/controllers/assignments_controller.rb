@@ -42,8 +42,8 @@ class AssignmentsController < ApplicationController
   def period
     period =Period.find(params[:id])
     @assignments = period.assignments
-    hw_table_array=[]
 
+    hw_table_array=[]
     GroupMembership.where(group_id: Group.find(period.group_id)).each do |gr_member|
       table_raw = {
           user: gr_member.user.name,
@@ -61,20 +61,18 @@ class AssignmentsController < ApplicationController
   end
 
   def rate
-    @assignment = Assignment.find(params[:id])
-
-    if @assignment.update(grade_params)
+    assignment = Assignment.find(params[:id])
+    if assignment.DownloadStatus && assignment.update(grade_params)
       flash[:success] = "Вы поставили #{@assignment.grade}"
       redirect_to assignment_period_path(Period.find(@assignment.period_id))
     else
-      flash[:alert] = "'#{@assignment.grade}' не входит в диапозон от 0 до 100"
+      flash[:alert] = "Оценка не входит в диапазон от 0 до 100"
       redirect_to :back
     end
   end
   def review
-    @assignment = Assignment.find(params[:id])
-
-    if @assignment.update(review_params)
+    assignment = Assignment.find(params[:id])
+    if assignment.DownloadStatus && assignment.update(review_params)
       flash[:success] = "Рецензия добавлена"
       redirect_to assignment_period_path(Period.find(@assignment.period_id))
     else
@@ -84,12 +82,9 @@ class AssignmentsController < ApplicationController
   end
 
   def create
-    @assignment = Assignment.new(assignment_params)
-    $file = params[:assignment][:homework]
-    $lesson_id = params[:assignment][:lesson_id]
-    @assignment.lesson_id = $lesson_id
-    if @assignment.save
-      flash[:success] = "Домашняя работа #{@assignment.name} успешно загружена!"
+    assignment = Assignment.new(assignment_params)
+    if assignment.save
+      flash[:success] = "Домашняя работа успешно загружена!"
       redirect_to :back
     else
       flash[:alert] = "Вы можете прикрепить только zip, pdf, txt, doc"
@@ -98,10 +93,8 @@ class AssignmentsController < ApplicationController
   end
 
   def update
-    @assignment_update = Assignment.find_by_user_id_and_period_id(params[:id], params[:assignment][:period_id])
-    $lesson_id = params[:assignment][:lesson_id]
-    @assignment_update.lesson_id = $lesson_id
-    if @assignment_update.DownloadStatus? && @assignment_update.update(assignment_params)
+    assignment_update = Assignment.find(params[:id])
+    if assignment_update.DownloadStatus.nil? || assignment_update.DownloadStatus && assignment_update.update(assignment_params)
       flash[:success] = 'Домашнее задание успешно заменено'
       redirect_to :back
     else
@@ -130,7 +123,7 @@ class AssignmentsController < ApplicationController
   private
 
   def assignment_params
-    params.require(:assignment).permit(:user_id, :period_id, :name, :homework, :lesson_id)
+    params.require(:assignment).permit(:user_id, :period_id, :file_version, :homework, :lesson_id)
   end
 
   def grade_params
