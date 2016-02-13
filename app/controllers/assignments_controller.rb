@@ -74,7 +74,7 @@ class AssignmentsController < ApplicationController
     assignment = Assignment.find(params[:id])
     if assignment.DownloadStatus && assignment.update(review_params)
       flash[:success] = "Рецензия добавлена"
-      redirect_to assignment_period_path(Period.find(@assignment.period_id))
+      redirect_to assignment_period_path(Period.find(assignment.period_id))
     else
       flash[:alert] = "Не удалось добавить рецензию"
       redirect_to :back
