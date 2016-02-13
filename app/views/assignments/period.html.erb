@@ -12,63 +12,62 @@
   </tr>
 
   <% @hw_table.each do |row| %>
-      <tr>
-        <td><%= row[:user] %></td>
-        <% if row[:assigment].empty? %>
-            <td>
-              не присланно
-            </td>
-            <td>
-                -
-            </td>
-            <td>
-              оценка
-            </td>
-            <td>
-              комментарий
-            </td>
-        <% else %>
-            <td>
-              <% row[:assigment].each do|e| %>
-                  <%= link_to e.homework_file_name, download_hw_path(e.id) %>
-              <% end %>
-            </td>
-            <td>
-              <% row[:assigment].each do|e| %>
-                  <%= e.created_at.strftime("%H:%M %d %b %Y") %>
-              <% end %>
-            </td>
-            <td>
-              <% row[:assigment].each do|e| %>
-                  <% if e.grade.nil? %>
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#grade_<%= e.id %>">
-                        Оценить
-                      </button>
-                      <%= render partial: 'assignments/grade_form', locals:{assignment: e, grade: e.id} %>
-                  <% else%>
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#grade_<%= e.id %>">
-                        <%= e.grade %>
-                      </button>
-                      <%= render partial: 'assignments/grade_form', locals:{assignment: e, grade: e.id} %>
-                  <% end %>
-              <% end %>
-            </td>
-            <td>
-              <% row[:assigment].each do|e| %>
-                  <% if e.review.nil? %>
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#review_<%= e.id %>">
-                        Оставить комментарий
-                      </button>
-                      <%= render partial: 'assignments/review_form', locals:{assignment: e, review: e.id} %>
-                  <% else%>
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#review_<%= e.id %>">
-                        Просмотреть комментарий
-                      </button>
-                      <%= render partial: 'assignments/review_form', locals:{assignment: e, review: e.id} %>
-                  <% end %>
-              <% end %>
-            </td>
-        <%	end %>
-      </tr>
+    <% if row[:assigment].empty? %>
+        <tr>
+          <td><%= row[:user] %></td>
+          <td>
+            не присланно
+          </td>
+          <td>
+            -
+          </td>
+          <td>
+            оценка
+          </td>
+          <td>
+            комментарий
+          </td>
+        </tr>
+    <% else %>
+        <% row[:assigment].each do|e| %>
+            <tr>
+              <td><%= row[:user] %></td>
+              <td>
+                <%= link_to e.homework_file_name, download_hw_path(e.id) %>
+                <br>
+              </td>
+              <td>
+
+                <%= e.created_at.strftime("%H:%M %d %b %Y") %>
+                <br>
+              </td>
+              <td>
+                <% if e.grade.nil? %>
+                    <%= render partial: 'assignments/grade_form', locals:{assignment: e,
+                                                                          grade_id: e.id,
+                                                                          text: 'Оценить'} %>
+                <% else%>
+                    <%= render partial: 'assignments/grade_form', locals:{assignment: e,
+                                                                          grade_id: e.id,
+                                                                          text: e.grade} %>
+                <% end %>
+
+                <br>
+              </td>
+              <td>
+                <% if e.review.nil? %>
+                    <%= render partial: 'assignments/review_form', locals:{assignment: e,
+                                                                           review_id: e.id,
+                                                                           text: 'Оставить комментарий'} %>
+                <% else%>
+                    <%= render partial: 'assignments/review_form', locals:{assignment: e,
+                                                                           review_id: e.id,
+                                                                           text: 'Просмотреть комментарий'} %>
+                <% end %>
+                <br>
+              </td>
+            </tr>
+        <% end %>
+    <%	end %>
   <% end %>
 </table>

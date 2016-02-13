@@ -1,4 +1,8 @@
-<div class="modal fade" id="review_<%= review %>" tabindex="-1" role="dialog"
+<button class="btn btn-primary" data-toggle="modal" data-target="#review_<%= review_id %>">
+  <%= text %>
+</button>
+
+<div class="modal fade" id="review_<%= review_id %>" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -16,7 +20,7 @@
       <!-- Modal Body -->
       <div class="modal-body">
         <%= form_for assignment, url: assignment_review_path(assignment.id),method: :PUT, html: { id: "assignment_for_#{assignment.id}" } do |f| %>
-            <%= f.text_area :review,{ class: 'ckeditor'} %>
+            <%= f.text_area :review,{ class: 'ckeditor', id: "#{assignment.id}"} %>
             <button type="button" class="btn btn-danger"
                     data-dismiss="modal">
               Отмена
