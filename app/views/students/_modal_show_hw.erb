@@ -1,0 +1,83 @@
+<div class="modal fade" id="homework_<%= assignment.id %>" tabindex="-1" role="dialog" aria-labelledby="homework_<%= assignment.id %>Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="homework_<%= assignment.id %>Label">
+          <% if assignment.nil? %>
+              Загрузить работу
+          <% else %>
+            <%= assignment.homework_file_name %>
+          <% end %>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <%	if assignment.nil?  %>
+            <%= form_for assignment, path: path, method: request_method, html: { id: "assignment_for_#{period.id}"} do |f| %>
+                <%= f.hidden_field :lesson_id, value: @counter_for_homework, class: 'form-control' %>
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :period_id, value: period.id %>
+                <%= f.hidden_field :file_version, value: assignment.what_number_of_new_version(current_user.id, period.id) %>
+                <%=	 f.label :homework, 'Загрузить работу' %>
+                <%= f.file_field :homework, class: :submit_file %>
+            <% end  %>
+        <%	else  %>
+            <div>
+              <h4>
+                Оценка:
+                <h5>
+                    <%=	 assignment.grade.nil? ? 'Преподователь пока не выставил оценку': assignment.grade %>
+                </h5>
+              </h4>
+            </div>
+            <hr>
+            <div>
+              <h4>
+                Рецензия:
+              </h4>
+              <% if assignment.review.blank? %>
+                Не написана
+              <% else %>
+              <div class='content margin-top20 no-border'>
+                <%= @course_element_material.content.html_safe %>
+              </div>
+              <% end %>
+            </div>
+            <%	if assignment.DownloadStatus  %>
+                <hr>
+                <h4>Данная работа уже в процессе проверки у преподавателя. Вы можете загрузить дополнительную работу.</h4>
+                <%= form_for @assignment_new, path: assignments_path, html: { id: "assignment_for_#{period.id}"} do |f| %>
+                    <%= f.hidden_field :lesson_id, value: @counter_for_homework%>
+                    <%= f.hidden_field :user_id, value: current_user.id %>
+                    <%= f.hidden_field :period_id, value: period.id %>
+                    <%= f.hidden_field :file_version, value: assignment.what_number_of_new_version(current_user.id, period.id) %>
+                    <%=	 f.label :homework, 'Загрузить еще?' %>
+                    <%= f.file_field :homework, class: :submit_file %>
+                <% end  %>
+            <%	else  %>
+                <h3>Вы все еще можете обновить работу.</h3>
+                <%= form_for assignment, path: path, method: request_method, html: { id: "assignment_for_#{period.id}"} do |f| %>
+                    <%= f.hidden_field :lesson_id, value: @counter_for_homework %>
+                    <%= f.hidden_field :user_id, value: current_user.id %>
+                    <%= f.hidden_field :period_id, value: period.id %>
+                    <%= f.hidden_field :file_version, value: assignment.what_number_of_new_version(current_user.id,period.id) %>
+                    <%=	 f.label :homework, 'Обновить работу' %>
+                    <%= f.file_field :homework, class: :submit_file %>
+                <% end  %>
+            <%	end  %>
+        <%	end  %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Отмена
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

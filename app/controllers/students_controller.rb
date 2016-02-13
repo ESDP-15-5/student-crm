@@ -10,8 +10,7 @@ class StudentsController < ApplicationController
     @course_elements = @course.course_elements.order(row_order: :ASC)
     @periods = Period.where(group_id: @group, deadline: true).where('commence_datetime <= ?', Date.tomorrow).order(commence_datetime: :ASC)
 
-    @assignment = Assignment.new
-    @assignment_update = Assignment.find_by_user_id_and_period_id(current_user, @periods)
+    @assignment_new = Assignment.new
   end
 
   def calendar_group
