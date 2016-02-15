@@ -19,7 +19,8 @@ class Assignment < ActiveRecord::Base
 
 
   def normalized_file_name
-    extension = File.extname($file.original_filename)
+
+    extension = File.extname(self.homework.original_filename)
     student = User.find(self.user_id)
     period = Period.find(self.period_id)
     lesson = self.lesson_id
