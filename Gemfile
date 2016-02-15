@@ -40,6 +40,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :production do
   gem 'passenger'
+  gem 'mysql2', '~> 0.3.20'
 end
 
 group :development, :test do
