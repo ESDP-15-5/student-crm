@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20160211101950) do
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id"
 
   create_table "attendances", force: :cascade do |t|
-    t.integer  "student_id"
+    t.integer  "user_id"
     t.integer  "period_id"
     t.boolean  "attended"
     t.datetime "created_at", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20160211101950) do
   end
 
   add_index "attendances", ["period_id"], name: "index_attendances_on_period_id"
-  add_index "attendances", ["student_id"], name: "index_attendances_on_student_id"
+  add_index "attendances", ["user_id"], name: "index_attendances_on_user_id"
 
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
