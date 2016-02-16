@@ -1,4 +1,4 @@
-<div class="modal fade" id="homework_<%= assignment.id %>" tabindex="-1" role="dialog" aria-labelledby="homework_<%= assignment.id %>Label" aria-hidden="true">
+<div class="modal fade" id="homework_<%= modal_id %>" tabindex="-1" role="dialog" aria-labelledby="homework_<%= assignment.id %>Label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Modal Header -->
@@ -18,7 +18,7 @@
       <!-- Modal Body -->
       <div class="modal-body">
         <%	if assignment.nil?  %>
-            <%= form_for assignment, path: path, method: request_method, html: { id: "assignment_for_#{period.id}"} do |f| %>
+            <%= form_for assignment, path: path, method: request_method, html: { id: "assignment_for_#{assignment.id}"} do |f| %>
                 <%= f.hidden_field :lesson_id, value: @counter_for_homework, class: 'form-control' %>
                 <%= f.hidden_field :user_id, value: current_user.id %>
                 <%= f.hidden_field :period_id, value: period.id %>
@@ -51,7 +51,7 @@
             <%	if assignment.DownloadStatus  %>
                 <hr>
                 <h4>Данная работа уже в процессе проверки у преподавателя. Вы можете загрузить дополнительную работу.</h4>
-                <%= form_for @assignment_new, path: assignments_path, html: { id: "assignment_for_#{period.id}"} do |f| %>
+                <%= form_for @assignment_new, path: assignments_path, html: { id: "assignment_for_#{assignment.id}"} do |f| %>
                     <%= f.hidden_field :lesson_id, value: @counter_for_homework%>
                     <%= f.hidden_field :user_id, value: current_user.id %>
                     <%= f.hidden_field :period_id, value: period.id %>
@@ -61,7 +61,7 @@
                 <% end  %>
             <%	else  %>
                 <h3>Вы все еще можете обновить работу.</h3>
-                <%= form_for assignment, path: path, method: request_method, html: { id: "assignment_for_#{period.id}"} do |f| %>
+                <%= form_for assignment, path: path, method: request_method, html: { id: "assignment_for_#{assignment.id}"} do |f| %>
                     <%= f.hidden_field :lesson_id, value: @counter_for_homework %>
                     <%= f.hidden_field :user_id, value: current_user.id %>
                     <%= f.hidden_field :period_id, value: period.id %>

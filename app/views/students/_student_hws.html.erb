@@ -18,12 +18,13 @@
             <td>
               <% @have_assignment = Assignment.where(period_id: period.id,user_id: current_user.id)  %>
               <% if @have_assignment.blank? %>
-                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#homework_<%= @assignment_new.id %>">
+                  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#homework_<%= period.id %>">
                     <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
                     Загрузить домашнюю работу
                   </button>
                   <%= render partial: 'students/modal_show_hw', locals:{assignment: @assignment_new,
                                                                         path: assignments_path,
+                                                                        modal_id: period.id,
                                                                         request_method: :POST, period: period} %>
               <% end  %>
               <% @have_assignment.each do|assignment|%>
@@ -33,6 +34,7 @@
                   </button>
                   <%= render partial: 'students/modal_show_hw', locals:{assignment: assignment,
                                                                         path: assignment_path(assignment.id),
+                                                                        modal_id: assignment.id,
                                                                         request_method: :PUT, period: period} %>
               <% end %>
             </td>
