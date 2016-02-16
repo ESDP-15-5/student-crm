@@ -1,16 +1,25 @@
 $(document).bind('page:change', function() {
 
-    var page = ($(".periods").length == 0)
+    var page = ($(".periods").length == 0);
     if (page) {
         return;
     }
 
+    var flashed_form = function(){
+        if (window.location.href.indexOf('edit')> -1) {
+            for (i = 0; i < 2; i++) {
+                $('.flash').effect("highlight", {}, 1000);
+            }
+        }
+    };
+
+    flashed_form();
+
     $('#period_deadline').on("change",function(){
-        console.log('1')
         if(this.checked){
-            $('#hidden_deadline_time').css("display", "block");;
+            $('#hidden_deadline_time').css("display", "block");
         }else{
-            $('#hidden_deadline_time').css("display", "none");;
+            $('#hidden_deadline_time').css("display", "none");
         }
     });
 
@@ -120,7 +129,6 @@ $(document).bind('page:change', function() {
             })
         },
         eventClick: function(calEvent, jsEvent, view) {
-
         },
         dayClick: function(date, jsEvent, view) {
             date = date.format();
@@ -130,6 +138,7 @@ $(document).bind('page:change', function() {
             var year = parseInt(date_array[0]);
             var hours = 19;
             var minutes = '00';
+            $('.flash-date').effect("highlight", {}, 1000);
             $("#period_commence_datetime_3i").val(day);
             $("#period_commence_datetime_2i").val(month);
             $("#period_commence_datetime_1i").val(year);
