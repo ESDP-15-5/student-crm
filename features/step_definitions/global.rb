@@ -72,10 +72,8 @@ end
 
 # --------------------------------------course_element.feature
 When(/^пользователь заходит в курс "([^"]*)"$/) do |course_name|
-  # find(course_name).click
-  visit('/courses')
   click_link(course_name)
-  sleep(1)
+  
 end
 
 When(/^он видит список элементов курса "([^"]*)"$/) do |course_name|
@@ -86,9 +84,8 @@ When(/^он видит список элементов курса "([^"]*)"$/) d
 end
 
 When(/^пользователь нажимает на "([^"]*)"$/) do |button_name|
-  sleep(50)
   click_link(button_name)
-  sleep(2)
+  
 end
 
 
@@ -136,12 +133,12 @@ end
 # --------------------------------------
 When(/^пользователь переходит в курс (.*)$/) do |course|
   click_link(course)
-  sleep(1)
+  
 end
 
 When(/^пользователь переходит в элемент курса (.*)$/) do |course_element|
   click_link(course_element)
-  sleep(1)
+  
 end
 
 When(/^пользователь заходит в элемент курса "([^"]*)"$/) do |course_element|
@@ -149,15 +146,14 @@ When(/^пользователь заходит в элемент курса "([^
 end
 
 When(/^он видит кнопку "([^"]*)"$/) do |button_name|
-  sleep(1)
+  
   find_link(button_name, :visible => :all).visible?
 end
 
 
 When(/^выбирает файл с локального ПК$/) do
-  sleep(1)
   attach_file('course_element_file_file', Rails.root.join('features', 'upload-files', 'test_file.jpg'))
-  sleep(1)
+  
 end
 
 
@@ -181,7 +177,7 @@ When(/^заполняет поле Заголовок материала "([^"]*
   within('#new_course_element_material') do
     fill_in 'course_element_material[title]', :with => title
   end
-  sleep(1)
+  
 end
 
 
@@ -192,7 +188,7 @@ end
 
 When(/^отображается список с добавленным материалом "([^"]*)"$/) do |title|
   expect(page).to have_content(title)
-  sleep(1)
+  
 end
 
 
@@ -210,10 +206,8 @@ When(/^заполняет поле "([^"]*)"$/) do |text|
     SCRIPT
   end
 
-# Example:
   fill_in_ckeditor 'email_body', :with => 'This is my message!'
-
-  sleep(1)
+  
 end
 
 When(/^пользователь нажимает на button "([^"]*)"$/) do |button|
@@ -222,7 +216,7 @@ end
 
 When(/^пользователь на странице редактирования материала "([^"]*)"$/) do |title|
   visit('/courses/3/course_elements/1/course_element_materials/1/edit')
-  sleep(1)
+  
 end
 
 When(/^он меняет содержимое поля "([^"]*)" => с "([^"]*)" на "([^"]*)"$/) do |title1, title2, title3|
@@ -267,23 +261,23 @@ end
 
 When(/^он находится на странице элемента курса "([^"]*)"$/) do |course_element_name|
   visit('/courses/3/course_elements/1/')
-  sleep(1)
+  
 end
 
 When(/^пользователь нажал на кнопку "([^"]*)" материала "([^"]*)"$/) do |button_name, material_name|
   element = "//td//*[contains(text(), '" + material_name + "')]/ancestor::tr//*[contains(text(), '#{button_name}')]"
   find(:xpath, element).click
-  sleep(1)
+  
 end
 
 When(/^его перекидывает на форму изменения материала$/) do
   expect(page).to have_css('.edit_course_element_material')
-  sleep(1)
+  
 end
 
 When(/^пользователь видит измененное имя материала в таблице$/) do
   visit('/courses/3/course_elements/1')
-  sleep(1)
+  
 end
 
 When(/^он видит Выберите файл$/) do
@@ -297,7 +291,7 @@ When(/^он видит список групп курса "([^"]*)"$/) do |cours
   expect(page).to have_content(course_string)
   expect(page).to have_selector('#course_groups')
   expect(page).to have_content('Группа')
-  sleep(1)
+  
 end
 
 
@@ -305,25 +299,25 @@ When(/^вводит в название группы "([^"]*)"$/) do |group_name
   within('#new_group') do
     fill_in 'group[name]', :with => group_name
   end
-  sleep(2)
+  
 end
 
 When(/^"([^"]*)" появляется в списке групп$/) do |group_name|
   expect(page).to have_content(group_name)
   expect(page).to have_selector('table')
-  sleep(2)
+  
 end
 
 When(/^пользователь удаляет группу с названием "([^"]*)"$/) do |group_name|
   group = "//td//*[contains(text(), '" + group_name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
   find(:xpath, group).click
   page.driver.browser.switch_to.alert.accept
-  sleep(2)
+  
 end
 
 When(/^группа "([^"]*)" пропадет из списка групп$/) do |group_name|
   page.should have_no_content(group_name)
-  sleep(2)
+  
 end
 
 When(/^пользователь редактирует группу с названием "([^"]*)" на "([^"]*)"$/) do |old_group_name, new_group_name|
@@ -333,13 +327,13 @@ When(/^пользователь редактирует группу с назв�
     fill_in 'group[name]', :with => new_group_name
   end
   click_button('Редактировать группу')
-  sleep(2)
+  
 end
 
 
 When(/^пользователь заходит в группу "([^"]*)"$/) do |group_name|
   visit('/courses/3/groups/1')
-  sleep(2)
+  
 end
 
 # User
@@ -347,23 +341,23 @@ end
 When(/^он видит список студентов группы "([^"]*)"$/) do |group_name|
   expect(page).to have_selector('#student_table')
   expect(page).to have_content('Студент')
-  sleep(2)
+  
 end
 
 When(/^пользователь заходит на страницу со студентами$/) do
   visit('/users/students')
-  sleep(1)
+  
 end
 
 When(/^он видит таблицу со студентами$/) do
   expect(page).to have_selector('#student_table')
   expect(page).to have_content('Студент')
-  sleep(1)
+  
 end
 
 When(/^попадает на страницу создание студента$/) do
   visit('/manage/users/new')
-  sleep(1)
+  
 end
 
 
@@ -371,14 +365,14 @@ When(/^вводит в поле "([^"]*)" данные "([^"]*)"$/) do |label, t
   within('#new_user') do
     fill_in label, :with => text
   end
-  sleep(1)
+  
 end
 
 When(/^выбирает Пол "([^"]*)"$/) do |gender|
   within('#new_user') do
    choose('man')
   end
-  sleep(1)
+  
 end
 
 When(/^заполняю "([^"]*)" данными "([^"]*)"$/) do |field_name, date_components|
@@ -389,20 +383,20 @@ When(/^заполняю "([^"]*)" данными "([^"]*)"$/) do |field_name, da
       select value.strip, from: "#{select_base_id}_#{index+1}i"
     end
   end
-  sleep(1)
+  
 end
 
 When(/^выбирает фотографию с локального ПК$/) do
   within('#new_user') do
     attach_file('user_image', Rails.root.join('features', 'upload-files', 'test_file.jpg'))
   end
-  sleep(1)
+  
 end
 
 When(/^выбирает группу "([^"]*)"$/) do |field_name|
   within('#new_user') do
     check('user_group_ids_2')
-    sleep(2)
+    
   end
 end
 
@@ -410,8 +404,7 @@ end
 When(/^нажимает на кнопку "([^"]*)" у пользователя "([^"]*)"$/) do |button, fullname|
   student = "//td//*[contains(text(), '" + fullname + "')]/ancestor::tr//*[contains(text(), '#{button}')]"
   find(:xpath, student).click
-
-  sleep(5)
+  
 end
 
 
@@ -419,19 +412,19 @@ When(/^меняет email "([^"]*)" на "([^"]*)"$/) do |old_email, new_email|
   within('.edit_user') do
     fill_in 'user[email]', :with => new_email
   end
-  sleep(2)
+  
 end
 
 When(/^пользователь удаляет пользователя с именем "([^"]*)"$/) do |name|
   student = "//td//*[contains(text(), '" + name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
   find(:xpath, student).click
   page.driver.browser.switch_to.alert.accept
-  sleep(2)
+  
 end
 
 When(/^пользователь "([^"]*)" пропадает из списка студентов$/) do |name|
     page.should have_no_content(name)
-    sleep(2)
+    
 end
 
 When(/^он видит данные студента "([^"]*)"$/) do |name|
@@ -451,7 +444,7 @@ When(/^пользователь заполняет поля формы$/) do |ta
   for row in table.hashes
     fill_in row[:field], :with => row[:value]
   end
-  sleep(1)
+  
 end
 
 When(/^он видит таблицу с данными аккаунта "([^"]*)"$/) do |name|
@@ -466,19 +459,19 @@ end
 When(/^пользователь редактирует данные у "([^"]*)"$/) do |name|
   account = "//td//*[contains(text(), '" + name + "')]/ancestor::tr//*[contains(text(), 'Редактировать')]"
   find(:xpath, account).click
-  sleep(1)
+  
 end
 
 When(/^пользователь удаляет аккаунт "([^"]*)"$/) do |name|
   account = "//td//*[contains(text(), '" + name + "')]/ancestor::tr//*[contains(text(), 'Удалить')]"
   find(:xpath, account).click
   page.driver.browser.switch_to.alert.accept
-  sleep(1)
+  
 end
 
 When(/^аккаунт "([^"]*)" пропадает из таблицу$/) do |account|
   page.should have_no_content(account)
-  sleep(1)
+  
 end
 
 
@@ -490,12 +483,12 @@ When(/^заполняет поле Название "([^"]*)"$/) do |title|
   within('#new_contact_list') do
     fill_in 'contact_list[title]', :with => title
   end
-  sleep(1)
+  sleep(2)
 end
 
 When(/^выбирает студента "([^"]*)"$/) do |full_name|
     find('label', :text => full_name ).click
-  sleep(1)
+  
 end
 
 When(/^он видит таблицу получателей с названием "([^"]*)"$/) do |title|
@@ -506,7 +499,7 @@ end
 When(/^пользователь редактирует лист получателей "([^"]*)"$/) do |title|
   account = "//td//*[contains(text(), '" + title + "')]/ancestor::tr//*[@id='edit_contact_list']"
   find(:xpath, account).click
-  sleep(2)
+  
 end
 
 When(/^пользователь удаляет лист получателей "([^"]*)"$/) do |title|
@@ -517,7 +510,7 @@ end
 
 When(/^лист получателей с названием "([^"]*)" пропадает из списка таблиц$/) do |title|
   page.should have_no_content(title)
-  sleep(1)
+  
 end
 
 When(/^он видит список пользователей кому будет отослана смс$/) do
