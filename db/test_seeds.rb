@@ -109,6 +109,7 @@ GroupMembership.create!(group: groups[0], user_id: student2.id);
 
 # Sms Service Accounts
 login_nikita = SmsServiceAccount.create!(login: 'Nurlan', password: 'rubyonrails')
+login = SmsServiceAccount.create!(login: 'faridbabazov', password: 'eAswyztN')
 sender = Sender.create!(name: '996772421100',sms_service_account_id:login_nikita.id)
 
 
