@@ -22,10 +22,10 @@
             -
           </td>
           <td>
-            оценка
+            -
           </td>
           <td>
-            комментарий
+            -
           </td>
         </tr>
     <% else %>
@@ -42,27 +42,34 @@
                 <br>
               </td>
               <td>
-                <% if e.grade.nil? %>
-                    <%= render partial: 'assignments/grade_form', locals:{assignment: e,
-                                                                          grade_id: e.id,
-                                                                          text: 'Оценить'} %>
-                <% else%>
-                    <%= render partial: 'assignments/grade_form', locals:{assignment: e,
-                                                                          grade_id: e.id,
-                                                                          text: e.grade} %>
+                <% if e.DownloadStatus %>
+                    <% if e.grade.nil? %>
+                        <%= render partial: 'assignments/grade_form', locals:{assignment: e,
+                                                                              grade_id: e.id,
+                                                                              text: 'Оценить'} %>
+                    <% else%>
+                        <%= render partial: 'assignments/grade_form', locals:{assignment: e,
+                                                                              grade_id: e.id,
+                                                                              text: e.grade} %>
+                    <% end %>
+                <% else %>
+                    <%= link_to 'Скачайте работу', download_hw_path(e.id) %>
                 <% end %>
-
                 <br>
               </td>
               <td>
-                <% if e.review.nil? %>
-                    <%= render partial: 'assignments/review_form', locals:{assignment: e,
-                                                                           review_id: e.id,
-                                                                           text: 'Оставить комментарий'} %>
-                <% else%>
-                    <%= render partial: 'assignments/review_form', locals:{assignment: e,
-                                                                           review_id: e.id,
-                                                                           text: 'Просмотреть комментарий'} %>
+                <% if e.DownloadStatus %>
+                    <% if e.review.nil? %>
+                        <%= render partial: 'assignments/review_form', locals:{assignment: e,
+                                                                               review_id: e.id,
+                                                                               text: 'Оставить комментарий'} %>
+                    <% else%>
+                        <%= render partial: 'assignments/review_form', locals:{assignment: e,
+                                                                               review_id: e.id,
+                                                                               text: 'Просмотреть комментарий'} %>
+                    <% end %>
+                <% else %>
+                    <%= link_to 'Скачайте работу', download_hw_path(e.id) %>
                 <% end %>
                 <br>
               </td>

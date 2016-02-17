@@ -62,23 +62,35 @@ class AssignmentsController < ApplicationController
 
   def rate
     assignment = Assignment.find(params[:id])
-    if assignment.DownloadStatus && assignment.update(grade_params)
-      flash[:success] = "Вы поставили #{@assignment.grade}"
-      redirect_to assignment_period_path(Period.find(@assignment.period_id))
+    if assignment.DownloadStatus
+      if assignment.update(grade_params)
+        flash[:success] = "Вы поставили #{assignment.grade}"
+        redirect_to assignment_period_path(Period.find(assignment.period_id))
+      else
+        flash[:alert] = "Оценка не входит в диапазон от 0 до 100"
+        redirect_to :back
+      end
     else
-      flash[:alert] = "Оценка не входит в диапазон от 0 до 100"
+      flash[:alert] = "Скачайте, пожалуйста, выбранную работу"
       redirect_to :back
     end
+
   end
   def review
     assignment = Assignment.find(params[:id])
-    if assignment.DownloadStatus && assignment.update(review_params)
-      flash[:success] = "Рецензия добавлена"
-      redirect_to assignment_period_path(Period.find(assignment.period_id))
+    if assignment.DownloadStatus
+      if assignment.update(review_params)
+        flash[:success] = "Рецензия добавлена"
+        redirect_to assignment_period_path(Period.find(assignment.period_id))
+      else
+        flash[:alert] = "Не удалось добавить рецензию"
+        redirect_to :back
+      end
     else
-      flash[:alert] = "Не удалось добавить рецензию"
+      flash[:alert] = "Скачайте, пожалуйста, выбранную работу"
       redirect_to :back
     end
+
   end
 
   def create
