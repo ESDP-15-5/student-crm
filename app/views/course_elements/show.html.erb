@@ -57,10 +57,11 @@
             <td><%=link_to file.file_file_name, course_course_element_download_path( Course.find(CourseElement.find(file.course_element_id).course_id),file.course_element_id,file.id) %></td>
             <td><%= number_to_human_size(file.file_file_size)  %></td>
             <td>
-
+            <% unless current_user.has_role? :student %>
               <%= link_to 'Удалить', course_course_element_course_element_file_path( Course.find(CourseElement.find(file.course_element_id).course_id),file.course_element_id,file.id),
                           method: :delete,
                           data: {confirm: 'Вы действительно хотите удалить этот файл?'}, :class => 'btn btn-default pull-right' %>
+              <% end  %>
             </td>
           </tr>
       <% end %>
