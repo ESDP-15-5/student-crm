@@ -491,9 +491,9 @@ When(/^выбирает студента "([^"]*)"$/) do |full_name|
   
 end
 
-When(/^он видит таблицу получателей с названием "([^"]*)"$/) do |title|
-  expect(page).to have_selector('.table-striped')
-  expect(page).to have_content(title)
+  When(/^он видит таблицу получателей с названием "([^"]*)"$/) do |title|
+    expect(page).to have_selector('.table-striped')
+    expect(page).to have_content(title)
 end
 
 When(/^пользователь редактирует лист получателей "([^"]*)"$/) do |title|
@@ -521,4 +521,13 @@ end
 When(/^пользователь нажимает у "([^"]*)" иконку "([^"]*)"$/) do |title, arg2|
   account = "//td//*[contains(text(), '" + title + "')]/ancestor::tr//*[@id='send_sms']"
   find(:xpath, account).click
+end
+
+When(/^пользователь находится на странице смс\-рассылки$/) do
+  visit('/sms_deliveries')
+end
+
+When(/^он видит таблицу с данными рассылки "([^"]*)"$/) do |sms|
+  expect(page).to have_selector('.table-striped')
+  expect(page).to have_content(sms)
 end

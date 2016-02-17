@@ -70,7 +70,6 @@ class SmsDeliveriesController < ApplicationController
 
   def update
     @sms_delivery = SmsDelivery.find(params[:id])
-    @sms_delivery.update_attribute(:delivery_time, Time.now + 3.minutes)
     if @sms_delivery.update(sms_delivery_params)
       @sms_delivery.updated_at + 3.minutes
       redirect_to sms_deliveries_url
@@ -108,6 +107,8 @@ class SmsDeliveriesController < ApplicationController
       when '0'
         @sms_delivery.update_attribute(:status, true)
         redirect_to sms_deliveries_url(resource_id: 1)
+        flash[:success] = 'Сообщение Отправлено'
+
       when '1'
         flash[:danger] = 'Ошибка в формате запроса'
 
@@ -171,7 +172,6 @@ class SmsDeliveriesController < ApplicationController
         xml.id(rand_string)
         xml.sender(object.sender.name)
         xml.text_ object.content
-        xml.time object.delivery_time
         xml.phones {
 
           if object.contact_list.custom_lists.any?
