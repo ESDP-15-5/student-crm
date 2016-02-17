@@ -29,7 +29,15 @@
               <% end  %>
               <% @have_assignment.each do|assignment|%>
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#homework_<%= assignment.id%>">
-                    <span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span>
+                    <% if assignment.DownloadStatus %>
+                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                    <% end %>
+                    <% unless assignment.grade.nil? %>
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                    <% end %>
+                    <% unless assignment.review.nil? %>
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                    <% end %>
                     <%= assignment.homework_file_name %>
                   </button>
                   <%= render partial: 'students/modal_show_hw', locals:{assignment: assignment,
