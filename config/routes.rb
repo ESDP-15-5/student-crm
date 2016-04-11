@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       resources :course_element_materials, except: :index
     end
   end
-
+  get 'periods'=>'periods#calendar', :as => :calendar
   devise_for :users
 
   scope :manage do

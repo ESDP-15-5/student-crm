@@ -2,7 +2,7 @@ class PeriodsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :admin?
 
-def get_initial_crumbs()
+  def get_initial_crumbs()
     {
         "Курсы"=> courses_path
     }
@@ -58,12 +58,13 @@ def get_initial_crumbs()
     @course_elements = @course.course_elements.order(:row_order)
     @groups = @course.groups
     @button_text = 'Обновить занятие'
-    render 'index'
 
     hash_crumbs = {
         "Обновление занятия #{@period.title}" => {}
     }
     @bread_crumbs = add_bread_crumbs(hash_crumbs)
+
+    render 'index'
   end
 
   def update
@@ -75,6 +76,20 @@ def get_initial_crumbs()
     else
       render 'edit'
     end
+  end
+
+  def calendar
+    if params[:course].nil? || params[:course][0].blank?
+      @periods = Period.all
+      @course = Course.all
+    else
+      @course = Course.find(params[:course])
+      @periods = Period.where(course: @course)
+    end
+    hash_crumbs = {
+        'Календарь'=>{}
+    }
+    @bread_crumbs = add_bread_crumbs(hash_crumbs)
   end
 
 

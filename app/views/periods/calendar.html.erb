@@ -1,0 +1,16 @@
+<%= form_tag calendar_path, method: 'get', id: 'filter_calendar' do %>
+    <div class="form-group col-md-2 col-md-offset-5">
+      <label for="course">Курс</label>
+      <%= collection_select :course,
+                            params[:course_id],
+                            Course.all,
+                            :id,
+                            :name,
+                            class: 'form-control',
+                            selected: params[:course],
+                            include_blank: true %>
+    </div>
+<% end %>
+<div class="row">
+  <div id="calendar"  data-request-url="<%=calendar_path%>" class="col-md-8 col-md-offset-2"> </div>
+</div>

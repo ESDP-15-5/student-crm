@@ -24,11 +24,16 @@ $(document).bind('page:change', function() {
     });
 
     var url = $("#calendar").attr('data-request-url');
-    //console.log(url);
+    var url_with_get =  window.location.search.substr(1);
+    //console.log(url + '.json?' + url_with_get);
+
+    $('#course_').change(function(){
+        $('#filter_calendar').submit();
+    });
 
     $('#calendar').fullCalendar({
         firstDay: 1,
-        events: url + '.json',
+        events: url + '.json?'+ url_with_get,
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -124,7 +129,7 @@ $(document).bind('page:change', function() {
             });
 
             element.on('click', function(){
-                var redirect_url = url+'/'+event.id+'/edit';
+                var redirect_url = '/courses/'+event.course_id+'/periods/'+event.id+'/edit';
                 $(location).attr('href',redirect_url);
             })
         },
@@ -154,7 +159,7 @@ $(document).bind('page:change', function() {
             $('.removeEvent').on('click',function(){
                 var doDelete = confirm('Вы действительно хотите удалить?');
                 if (doDelete) {
-                    var source = url +'/' + calEvent.id;
+                    var source = '/courses/'+event.course_id +'/periods/' + calEvent.id;
                     $('#calendar').fullCalendar('removeEvents', calEvent._id);
                     $.ajax({
                         url: source,
@@ -164,7 +169,7 @@ $(document).bind('page:change', function() {
                             console.log('ajax request completed');
                         }
                     });
-                    var redirect_url = url+'/';
+                    var redirect_url = '/courses/'+event.course_id +'/periods/';
                     $(location).attr('href',redirect_url);
                 }
             });

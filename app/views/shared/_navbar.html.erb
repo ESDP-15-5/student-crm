@@ -17,6 +17,7 @@
 
         <% if current_user.has_role? :admin  %>
             <li><%= link_to 'Курсы', courses_path , class: 'glyphicon glyphicon-education' %></li>
+            <li><%= link_to 'Календарь', calendar_path , class: 'glyphicon glyphicon-calendar' %></li>
             <li><%= link_to 'Присланные работы', assignments_path , class: 'glyphicon glyphicon-home' %></li>
         <% elsif current_user.has_role? :student %>
 
